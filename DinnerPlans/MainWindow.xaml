@@ -4,9 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DinnerPlans"
+        xmlns:viewmodels="clr-namespace:DinnerPlans.ViewModels"
+        xmlns:views="clr-namespace:DinnerPlans.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Name="RecipesTemplate" DataType="{x:Type viewmodels:RecipesViewModel}">
+            <views:RecipesView DataContext="{Binding}"></views:RecipesView>
+        </DataTemplate>
+        <DataTemplate x:Name="MenusTemplate" DataType="{x:Type viewmodels:MenusViewModel}">
+            <views:MenusView DataContext="{Binding}"></views:MenusView>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="6">
+
+            <StackPanel DockPanel.Dock="Left" Background="Black">
+
+                <Button Margin="10" Padding="10,10,10,10" Click="Recipes_Clicked">Manage Recipes</Button>
+                <Button Margin="10" Padding="10,10,10,10" Click="Menus_Clicked">Manage Menus</Button>
+            </StackPanel>
+        </DockPanel>
+
+        <ContentControl x:Name="MainContent" Grid.Row="0" Grid.Column="2" Grid.RowSpan="6" Grid.ColumnSpan="4" Content="{Binding}" />
     </Grid>
 </Window>
