@@ -25,10 +25,12 @@
         </Style>
     </UserControl.Resources>
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition />
         </Grid.RowDefinitions>
+
         <DockPanel Grid.Row="0">
             <StackPanel DockPanel.Dock="Top"
                         Background="LightGray"
