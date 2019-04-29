@@ -6,7 +6,25 @@
              xmlns:local="clr-namespace:DinnerPlans.Views.RecipesViews"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label>In Edit Recipe View</Label>
+    <Grid Background="White">
+        <StackPanel Orientation="Vertical">
+
+            <Label>In Edit Recipe View</Label>
+
+            <StackPanel Orientation="Horizontal">
+
+                <StackPanel Orientation="Vertical">
+                    <Label>Title</Label>
+                    <RichTextBox></RichTextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <Label>Origin</Label>
+                    <RichTextBox></RichTextBox>
+                </StackPanel>
+            </StackPanel>
+
+            <Label>Ingredients</Label>
+        </StackPanel>
     </Grid>
 </UserControl>

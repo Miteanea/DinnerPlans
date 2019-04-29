@@ -10,6 +10,7 @@
         <DataGrid x:Name="Recipes" ItemsSource="{Binding Path=Recipes}"
             SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" AlternatingRowBackground="LightBlue"
                   AutoGenerateColumns="False">
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Origin" Binding="{Binding Path=Origin}"></DataGridTextColumn>
