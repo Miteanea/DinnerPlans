@@ -1,4 +1,6 @@
-﻿using DinnerPlans.ViewModels;
+﻿using DinnerPlans.Models;
+using DinnerPlans.Services;
+using DinnerPlans.ViewModels;
 using DinnerPlans.Views.RecipesViews;
 using System;
 using System.Collections.Generic;
@@ -25,7 +27,7 @@ namespace DinnerPlans.Views
         public RecipesView()
         {
             InitializeComponent();
-            RecipesViewContent.AddHandler(RecipesListView.EditEvent, new RoutedEventHandler(ChangeContentToEditView));
+            RecipesViewContent.AddHandler(RecipesListView.EditExistingRecipe, new RoutedEventHandler(EditExistingRecipe));
             DataContext = null;
         }
 
@@ -36,12 +38,21 @@ namespace DinnerPlans.Views
 
         private void AddModify_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new EditRecipeViewModel();
+            DataContext = new EditRecipeViewModel(null);
         }
 
-        private void ChangeContentToEditView(object sender, RoutedEventArgs e)
+        private void EditExistingRecipe(object sender, RoutedEventArgs e)
         {
-            DataContext = new EditRecipeViewModel();
+            var recipe = GetRecipeFromEventArgs(e);
+
+            DataContext = new EditRecipeViewModel(recipe);
+        }
+
+        private Recipe GetRecipeFromEventArgs(RoutedEventArgs e)
+        {
+            var recipeID = (((e.OriginalSource as Button).DataContext) as Recipe).ID;
+
+            return DataHandler.GetRecipe(recipeID);
         }
     }
 }

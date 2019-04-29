@@ -30,19 +30,22 @@ namespace DinnerPlans.Views.RecipesViews
 
         private void EditButton_Clicked(object sender, RoutedEventArgs e)
         {
-            RaiseEvent(new RoutedEventArgs(RecipesListView.EditEvent, this));
+            var btn = sender as Button;
+            var data = btn.DataContext;
+
+            RaiseEvent(new RoutedEventArgs(EditExistingRecipe, btn));
         }
 
-        public static readonly RoutedEvent EditEvent = EventManager.RegisterRoutedEvent(
-
-           "Edit", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(RecipesListView));
+        public static readonly RoutedEvent EditExistingRecipe = EventManager.RegisterRoutedEvent(
+                       "Edit",
+                       RoutingStrategy.Bubble,
+                       typeof(RoutedEventHandler),
+                       typeof(RecipesListView));
 
         public event RoutedEventHandler Edit
-
         {
-            add { AddHandler(RecipesListView.EditEvent, value); }
-
-            remove { RemoveHandler(RecipesListView.EditEvent, value); }
+            add { AddHandler(EditExistingRecipe, value); }
+            remove { RemoveHandler(EditExistingRecipe, value); }
         }
     }
 }

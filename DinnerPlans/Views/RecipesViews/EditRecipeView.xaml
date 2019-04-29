@@ -15,12 +15,12 @@
 
                 <StackPanel Orientation="Vertical">
                     <Label>Title</Label>
-                    <RichTextBox></RichTextBox>
+                    <TextBox Text="{Binding Path=Recipe.Title}"></TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
                     <Label>Origin</Label>
-                    <RichTextBox></RichTextBox>
+                    <TextBox Text="{Binding Path=Recipe.Origin}"></TextBox>
                 </StackPanel>
             </StackPanel>
 
