@@ -9,26 +9,40 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <DataTemplate x:Name="RecipesListTemplate" DataType="{x:Type viewmodels:RecipesListViewModel}">
+        <DataTemplate x:Name="RecipesListTemplate"
+                      DataType="{x:Type viewmodels:RecipesListViewModel}">
             <views:RecipesListView DataContext="{Binding}"></views:RecipesListView>
         </DataTemplate>
-        <DataTemplate x:Name="EditRecipeTemplate" DataType="{x:Type viewmodels:EditRecipeViewModel}">
+        <DataTemplate x:Name="EditRecipeTemplate"
+                      DataType="{x:Type viewmodels:EditRecipeViewModel}">
             <views:EditRecipeView DataContext="{Binding}"></views:EditRecipeView>
         </DataTemplate>
+
+        <Style x:Key="navigationButton" TargetType="Button">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="10,0,10,0" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <StackPanel DockPanel.Dock="Top" Background="LightGray" Orientation="Horizontal">
-                <Button Height="25" Padding="10,0,10,0" Margin="10" Click="AllRecipes_Clicked">All Recipes</Button>
-                <Button Height="25" Padding="10,0,10,0" Margin="10" Click="AddModify_Click">Add/Modify Recipes</Button>
+            <StackPanel DockPanel.Dock="Top"
+                        Background="LightGray"
+                        Orientation="Horizontal">
+                <Button Style="{StaticResource navigationButton}"
+                        Click="AllRecipes_Clicked">All Recipes</Button>
+                <Button Style="{StaticResource navigationButton}"
+                        Click="AddModify_Click">Add/Modify Recipes</Button>
             </StackPanel>
         </DockPanel>
 
         <!--View for recipe Header-->
-        <ContentControl x:Name="RecipesViewContent"  Grid.Row="1" Content="{Binding }" />
+        <ContentControl x:Name="RecipesViewContent"
+                        Grid.Row="1"
+                        Content="{Binding}" />
     </Grid>
 </UserControl>

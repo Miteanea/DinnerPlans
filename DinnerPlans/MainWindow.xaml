@@ -45,7 +45,10 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="6">
+        <DockPanel Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="0"
+                   Grid.RowSpan="6">
 
             <StackPanel DockPanel.Dock="Left" Background="Black">
                 <Button Style="{StaticResource navigationButtons}"
