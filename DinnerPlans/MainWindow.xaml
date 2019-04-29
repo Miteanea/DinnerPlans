@@ -10,13 +10,23 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Window.Resources>
-        <DataTemplate x:Name="RecipesTemplate" DataType="{x:Type viewmodels:RecipesViewModel}">
+
+        <DataTemplate x:Name="RecipesTemplate"
+                      DataType="{x:Type viewmodels:RecipesViewModel}">
             <views:RecipesView DataContext="{Binding}"></views:RecipesView>
         </DataTemplate>
-        <DataTemplate x:Name="MenusTemplate" DataType="{x:Type viewmodels:MenusViewModel}">
+
+        <DataTemplate x:Name="MenusTemplate"
+                      DataType="{x:Type viewmodels:MenusViewModel}">
             <views:MenusView DataContext="{Binding}"></views:MenusView>
         </DataTemplate>
+
+        <Style x:Key="navigationButtons" TargetType="Button">
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="10" />
+        </Style>
     </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -38,12 +48,18 @@
         <DockPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="6">
 
             <StackPanel DockPanel.Dock="Left" Background="Black">
-
-                <Button Margin="10" Padding="10,10,10,10" Click="Recipes_Clicked">Manage Recipes</Button>
-                <Button Margin="10" Padding="10,10,10,10" Click="Menus_Clicked">Manage Menus</Button>
+                <Button Style="{StaticResource navigationButtons}"
+                        Click="Recipes_Clicked">Manage Recipes</Button>
+                <Button Style="{StaticResource navigationButtons}"
+                        Click="Menus_Clicked">Manage Menus</Button>
             </StackPanel>
         </DockPanel>
 
-        <ContentControl x:Name="MainContent" Grid.Row="0" Grid.Column="2" Grid.RowSpan="6" Grid.ColumnSpan="4" Content="{Binding}" />
+        <ContentControl x:Name="MainContent"
+                        Grid.Row="0"
+                        Grid.RowSpan="6"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="4"
+                        Content="{Binding}" />
     </Grid>
 </Window>
