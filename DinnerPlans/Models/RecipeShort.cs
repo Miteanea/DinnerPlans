@@ -6,27 +6,17 @@ using System.Threading.Tasks;
 
 namespace DinnerPlans.Models
 {
-    internal class Recipe
+    internal class RecipeShort
     {
-        public Recipe()
+        public RecipeShort(Recipe recipe)
         {
-            ID = GetID();
-        }
-
-        private RecipeID GetID()
-        {
-            return new RecipeID();
+            ID = recipe.ID;
+            Title = recipe.Title;
+            Origin = recipe.Origin;
         }
 
         public RecipeID ID { get; set; }
         public string Title { get; set; }
         public Origin Origin { get; set; }
-    }
-
-    internal enum Origin
-    {
-        Italian,
-        Thai,
-        Russian
     }
 }
