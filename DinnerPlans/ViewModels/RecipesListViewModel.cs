@@ -1,4 +1,5 @@
 ﻿using DinnerPlans.Models;
+using DinnerPlans.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +12,11 @@ namespace DinnerPlans.ViewModels
     {
         public RecipesListViewModel()
         {
-            Recipes = GetRecipes();
+            Recipes = DataHandler.GetRecipes(_pageSize);
         }
 
-        public List<Recipe> Recipes { get; set; }
+        public List<RecipeShort> Recipes { get; set; }
 
-        private List<Recipe> GetRecipes()
-        {
-            return new List<Recipe>
-            {
-                new Recipe{ Title = "Recipe 1 ", Origin = Origin.Thai },
-                new Recipe{ Title = "Recipe 2 ", Origin = Origin.Italian },
-                new Recipe{ Title = "Recipe 3" , Origin = Origin.Russian}
-            };
-        }
+        private int _pageSize;
     }
 }
