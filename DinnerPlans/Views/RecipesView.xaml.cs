@@ -1,4 +1,5 @@
 ﻿using DinnerPlans.ViewModels;
+using DinnerPlans.Views.RecipesViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace DinnerPlans.Views
         public RecipesView()
         {
             InitializeComponent();
+            RecipesViewContent.AddHandler(RecipesListView.EditEvent, new RoutedEventHandler(ChangeContentToEditView));
             DataContext = null;
         }
 
@@ -33,6 +35,11 @@ namespace DinnerPlans.Views
         }
 
         private void AddModify_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new EditRecipeViewModel();
+        }
+
+        private void ChangeContentToEditView(object sender, RoutedEventArgs e)
         {
             DataContext = new EditRecipeViewModel();
         }
