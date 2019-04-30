@@ -15,7 +15,11 @@ namespace DinnerPlans.Services
 
         public static Recipe GetRecipe(RecipeID id)
         {
-            return new Recipe();
+            var recipe = MockRecipes.
+                            Where(longRecipe => longRecipe.ID == id).
+                            FirstOrDefault();
+
+            return recipe;
         }
 
         internal static List<RecipeShort> GetShortRecipes()
