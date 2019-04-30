@@ -30,6 +30,7 @@ namespace DinnerPlans.Models
 
     internal enum Origin
     {
+        None = 0,
         Italian,
         Thai,
         Russian
