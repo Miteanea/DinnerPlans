@@ -21,6 +21,11 @@ namespace DinnerPlans.Models
         public RecipeID ID { get; set; }
         public string Title { get; set; }
         public Origin Origin { get; set; }
+
+        public List<Ingredient> Ingredients { get; set; }
+        public string Instruction { get; set; }
+
+        public NutritionData NutritionData { get; }
     }
 
     internal enum Origin
