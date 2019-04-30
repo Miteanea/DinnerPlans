@@ -37,7 +37,7 @@
                 <Button Style="{StaticResource navigationButton}"
                         Click="AllRecipes_Clicked">All Recipes</Button>
                 <Button Style="{StaticResource navigationButton}"
-                        Click="AddModify_Click">Add/Modify Recipes</Button>
+                        Click="AddModify_Click">Add New Recipe</Button>
             </StackPanel>
         </DockPanel>
 
