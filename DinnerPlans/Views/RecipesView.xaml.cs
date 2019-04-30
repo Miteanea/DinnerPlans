@@ -50,8 +50,13 @@ namespace DinnerPlans.Views
 
         private Recipe GetRecipeFromEventArgs(RoutedEventArgs e)
         {
-            var recipeID = (((e.OriginalSource as Button).DataContext) as Recipe).ID;
+            var sourceObject = e.OriginalSource as Button;
 
+            var sourceObjectDataContext = sourceObject.DataContext;
+
+            var recipeShort = sourceObjectDataContext as RecipeShort;
+
+            var recipeID = recipeShort.ID;
             return DataHandler.GetRecipe(recipeID);
         }
     }
