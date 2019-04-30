@@ -12,11 +12,9 @@ namespace DinnerPlans.ViewModels
     {
         public RecipesListViewModel()
         {
-            Recipes = DataHandler.GetRecipes(_pageSize);
+            Recipes = DataHandler.GetShortRecipes();
         }
 
         public List<RecipeShort> Recipes { get; set; }
-
-        private int _pageSize;
     }
 }
