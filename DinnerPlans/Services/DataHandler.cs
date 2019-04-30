@@ -18,9 +18,9 @@ namespace DinnerPlans.Services
         {
             return new List<RecipeShort>
             {
-                new RecipeShort( new Recipe { Title = "Recipe 1 ", Origin = Origin.Thai } ),
-                new RecipeShort( new Recipe { Title = "Recipe 2 ", Origin = Origin.Italian } ),
-                new RecipeShort( new Recipe { Title = "Recipe 3", Origin = Origin.Russian } )
+                new RecipeShort( new Recipe { ID = new RecipeID(), Title = "Recipe 1 ", Origin = Origin.Thai } ),
+                new RecipeShort( new Recipe { ID = new RecipeID(), Title = "Recipe 2 ", Origin = Origin.Italian } ),
+                new RecipeShort( new Recipe { ID = new RecipeID(), Title = "Recipe 3", Origin = Origin.Russian } )
             };
         }
     }

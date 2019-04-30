@@ -55,7 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\NutritionData.cs" />
     <Compile Include="Models\Recipe.cs" />
+    <Compile Include="Models\RecipeShort.cs" />
+    <Compile Include="Models\RecipeID.cs" />
+    <Compile Include="Services\DataHandler.cs" />
     <Compile Include="ViewModels\EditRecipeViewModel.cs" />
     <Compile Include="ViewModels\MenusViewModel.cs" />
     <Compile Include="ViewModels\RecipesListViewModel.cs" />
