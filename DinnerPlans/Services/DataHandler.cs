@@ -9,19 +9,32 @@ namespace DinnerPlans.Services
 {
     internal static class DataHandler
     {
+        static DataHandler()
+        {
+        }
+
         public static Recipe GetRecipe(RecipeID id)
         {
             return new Recipe();
         }
 
-        internal static List<RecipeShort> GetRecipes(int pageSize)
+        internal static List<RecipeShort> GetShortRecipes()
         {
-            return new List<RecipeShort>
+            var shortRecipeList = new List<RecipeShort>();
+
+            foreach (var longRecipe in MockRecipes)
             {
-                new RecipeShort( new Recipe { ID = new RecipeID(), Title = "Recipe 1 ", Origin = Origin.Thai } ),
-                new RecipeShort( new Recipe { ID = new RecipeID(), Title = "Recipe 2 ", Origin = Origin.Italian } ),
-                new RecipeShort( new Recipe { ID = new RecipeID(), Title = "Recipe 3", Origin = Origin.Russian } )
-            };
+                var shortRecipe = new RecipeShort(longRecipe);
+                shortRecipeList.Add(shortRecipe);
+            }
+            return shortRecipeList;
         }
+
+        private static List<Recipe> MockRecipes = new List<Recipe>
+            {
+                 new Recipe { ID = new RecipeID(), Title = "Recipe 1 ", Origin = Origin.Thai } ,
+                 new Recipe { ID = new RecipeID(), Title = "Recipe 2 ", Origin = Origin.Italian } ,
+                 new Recipe { ID = new RecipeID(), Title = "Recipe 3", Origin = Origin.Russian }
+            };
     }
 }
