@@ -36,9 +36,9 @@ namespace DinnerPlans.Services
 
         private static List<Recipe> MockRecipes = new List<Recipe>
             {
-                 new Recipe { ID = new RecipeID(), Title = "Recipe 1 ", Origin = Origin.Thai } ,
-                 new Recipe { ID = new RecipeID(), Title = "Recipe 2 ", Origin = Origin.Italian } ,
-                 new Recipe { ID = new RecipeID(), Title = "Recipe 3", Origin = Origin.Russian }
+                 new Recipe { ID = new RecipeID(), Title = "Recipe 1 ", Origin = Origin.Thai   , Instruction = "Instruction 1", Ingredients = new List<Ingredient> { new Ingredient{ Name = "Ing1" , Quantity = 1 } } },
+                 new Recipe { ID = new RecipeID(), Title = "Recipe 2 ", Origin = Origin.Italian, Instruction = "Instruction 2", Ingredients = new List<Ingredient> { new Ingredient{ Name = "Ing2" , Quantity = 2 } } },
+                 new Recipe { ID = new RecipeID(), Title = "Recipe 3", Origin = Origin.Russian , Instruction = "Instruction 3", Ingredients = new List<Ingredient> { new Ingredient{ Name = "Ing3" , Quantity = 3 } } }
             };
     }
 }
