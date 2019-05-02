@@ -1,4 +1,5 @@
-﻿using DinnerPlans.ViewModels;
+﻿using DinnerPlans.Models;
+using DinnerPlans.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace DinnerPlans.Views.RecipesViews
         public EditRecipeView()
         {
             InitializeComponent();
+
+            OriginSelector.ItemsSource = Enum.GetValues(typeof(Origin)).Cast<Origin>();
         }
     }
 }

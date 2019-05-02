@@ -26,9 +26,13 @@
         <Style TargetType="Label">
             <Setter Property="Margin" Value="10,0,5,0" />
         </Style>
+
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="WhiteSmoke" />
+        </Style>
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Background="White">
+        <Grid>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -52,18 +56,32 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                             <Label>Title</Label>
-                            <TextBox Text="{Binding Path=Recipe.Title}"></TextBox>
+                            <TextBox Text="{Binding Path=Recipe.Title}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical">
                             <Label>Origin</Label>
-                            <TextBox Text="{Binding Path=Recipe.Origin}"></TextBox>
+                            <ComboBox x:Name="OriginSelector" SelectedItem="{Binding Path=Recipe.Origin}" />
                         </StackPanel>
                     </StackPanel>
 
                     <Label>Ingredients</Label>
                     <StackPanel Orientation="Vertical">
-                        <ListBox></ListBox>
+
+                        <DataGrid x:Name="Recipes"
+                                  ItemsSource="{Binding Path=Recipe.Ingredients}"
+                                  SelectionMode="Single"
+                                  SelectionUnit="FullRow"
+                                  IsReadOnly="True"
+                                  AlternatingRowBackground="LightBlue"
+                                    AutoGenerateColumns="False">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button>Add</Button>
                             <Button>Remove</Button>
@@ -73,7 +91,7 @@
                 <StackPanel Grid.Column="1">
 
                     <Label>Instructions</Label>
-                    <TextBox Height="160" Width="260"></TextBox>
+                    <TextBox Height="160" Width="260" Text="{Binding Path=Recipe.Instruction, Mode=TwoWay}"></TextBox>
                 </StackPanel>
             </StackPanel>
         </Grid>
