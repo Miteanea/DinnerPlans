@@ -40,5 +40,10 @@ namespace DinnerPlans.Services
                  new Recipe { ID = new RecipeID(), Title = "Recipe 2 ", Origin = Origin.Italian, Instruction = "Instruction 2", Ingredients = new List<Ingredient> { new Ingredient{ Name = "Ing2" , Quantity = 2 } } },
                  new Recipe { ID = new RecipeID(), Title = "Recipe 3", Origin = Origin.Russian , Instruction = "Instruction 3", Ingredients = new List<Ingredient> { new Ingredient{ Name = "Ing3" , Quantity = 3 } } }
             };
+
+        internal static void SaveRecipe(RecipeID iD)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

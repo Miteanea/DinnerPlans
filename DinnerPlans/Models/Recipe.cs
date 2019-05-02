@@ -35,4 +35,11 @@ namespace DinnerPlans.Models
         Thai,
         Russian
     }
+
+    internal enum DishType
+    {
+        None = 0,
+        Meat,
+        Fish
+    }
 }

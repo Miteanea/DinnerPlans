@@ -9,13 +9,19 @@
 
     <UserControl.Resources>
         <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="10" />
-            <Setter Property="MinWidth" Value="50" />
+            <Setter Property="Margin" Value="10, 5, 5, 5" />
+            <Setter Property="MinWidth" Value="75" />
+            <Setter Property="Padding" Value="2" />
         </Style>
 
-        <Style TargetType="ListBox">
-            <Setter Property="MinHeight" Value="75" />
-            <Setter Property="Margin" Value="5" />
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="10, 5, 5, 5" />
+            <Setter Property="MinWidth" Value="75" />
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="MinHeight" Value="15" />
+            <Setter Property="Margin" Value="10, 5, 5, 5" />
         </Style>
 
         <Style TargetType="Button">
@@ -25,6 +31,7 @@
 
         <Style TargetType="Label">
             <Setter Property="Margin" Value="10,0,5,0" />
+            <Setter Property="FontWeight" Value="ExtraBold" />
         </Style>
 
         <Style TargetType="Grid">
@@ -36,7 +43,6 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Vertical"
@@ -45,23 +51,23 @@
                         Grid.Column="0">
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button>Save</Button>
-                    <Button>Reset</Button>
+                    <Button x:Name="SaveRecipeBtn" Content="Save" Click="SaveRecipeBtn_Click" />
+                    <Button x:Name="ResetRecipeBtn" Content="Reset" />
                 </StackPanel>
 
-                <Label>In Edit Recipe View</Label>
-
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical"
+                            Margin="5,15,5,5">
 
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                             <Label>Title</Label>
-                            <TextBox Text="{Binding Path=Recipe.Title}" />
+                            <TextBox Text="{Binding Path=Recipe.Title, Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical">
                             <Label>Origin</Label>
-                            <ComboBox x:Name="OriginSelector" SelectedItem="{Binding Path=Recipe.Origin}" />
+                            <ComboBox x:Name="OriginSelector"
+                                      SelectedItem="{Binding Path=Recipe.Origin, Mode=TwoWay}" />
                         </StackPanel>
                     </StackPanel>
 
@@ -69,16 +75,16 @@
                     <StackPanel Orientation="Vertical">
 
                         <DataGrid x:Name="Recipes"
-                                  ItemsSource="{Binding Path=Recipe.Ingredients}"
+                                  ItemsSource="{Binding Path=Recipe.Ingredients, Mode=TwoWay}"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
-                                  IsReadOnly="True"
+                                  IsReadOnly="False"
                                   AlternatingRowBackground="LightBlue"
-                                    AutoGenerateColumns="False">
+                                  AutoGenerateColumns="False">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
-                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay}" />
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity, Mode=TwoWay}" />
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -91,7 +97,7 @@
                 <StackPanel Grid.Column="1">
 
                     <Label>Instructions</Label>
-                    <TextBox Height="160" Width="260" Text="{Binding Path=Recipe.Instruction, Mode=TwoWay}"></TextBox>
+                    <TextBox Height="160" Width="Auto" Text="{Binding Path=Recipe.Instruction}" />
                 </StackPanel>
             </StackPanel>
         </Grid>

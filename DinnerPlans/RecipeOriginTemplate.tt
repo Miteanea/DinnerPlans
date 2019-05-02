@@ -1,0 +1,33 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ assembly name="Newtonsoft.Json" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ output extension=".cs" #>
+
+
+
+
+<#
+	string originJson = "";
+
+	string directory = @"C:\Users\caragheaur\Desktop\Learning Resources\dinnerplans\DinnerPlans\" ;
+
+	using(StreamReader reader = new StreamReader(directory + @"\Origin.json"))
+	{
+		originJson = reader.ReadToEnd();
+	}
+
+
+	
+#>
+namespace DinnerPlans.Models
+{
+	public enum Origin
+	{
+		
+	}
+}
