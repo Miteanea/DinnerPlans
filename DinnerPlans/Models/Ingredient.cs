@@ -2,12 +2,30 @@
 {
     public class Ingredient
     {
+        public Ingredient()
+        {
+            // get ingredient ID
+
+            // Set Nutrition Data
+
+            // Calculate Nutrition Data
+        }
+
         // ID
 
-        public string Name { get; set; }
+        public string Name
+        {
+            get; set;
+        }
 
-        public int Quantity { get; set; }
+        public int QuantityGr
+        {
+            get; set;
+        }
 
-        public NutritionData NutritionData { get; }
+        public NutritionData NutritionData
+        {
+            get;
+        }
     }
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DinnerPlans.Models
 {
@@ -11,7 +7,7 @@ namespace DinnerPlans.Models
         public RecipeID()
         {
             Random rnd = new Random();
-            ID = rnd.Next(1000);
+            ID = rnd.Next( 1000 );
         }
 
         private int ID { get; set; }
@@ -19,6 +15,12 @@ namespace DinnerPlans.Models
         public override string ToString()
         {
             return ID.ToString();
+        }
+
+        internal void SetStringValue( string value )
+        {
+            // Convert The string to whatever type ID Property is.
+            throw new NotImplementedException();
         }
     }
 }

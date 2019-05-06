@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DinnerPlans.Models
 {
@@ -18,14 +14,47 @@ namespace DinnerPlans.Models
             return new RecipeID();
         }
 
-        public RecipeID ID { get; set; }
-        public string Title { get; set; }
-        public Origin Origin { get; set; }
+        public RecipeID ID
+        {
+            get; set;
+        }
 
-        public List<Ingredient> Ingredients { get; set; }
-        public string Instruction { get; set; }
+        public string Title
+        {
+            get; set;
+        }
 
-        public NutritionData NutritionData { get; }
+        public Origin Origin
+        {
+            get; set;
+        }
+
+        public List<Ingredient> Ingredients
+        {
+            get; set;
+        }
+
+        public string Instruction
+        {
+            get; set;
+        }
+
+        public int QuantityGr
+        {
+            get; set;
+        }
+
+        public NutritionData NutritionData
+        {
+            get
+            {
+                return _nutritionData;
+            }
+        }
+
+        private NutritionData _nutritionData;
+
+        // When the Ingredients list is modified Recalculate _nutritionData of a Recipe
     }
 
     internal enum Origin
@@ -34,12 +63,5 @@ namespace DinnerPlans.Models
         Italian,
         Thai,
         Russian
-    }
-
-    internal enum DishType
-    {
-        None = 0,
-        Meat,
-        Fish
     }
 }
