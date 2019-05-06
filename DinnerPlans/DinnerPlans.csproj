@@ -58,17 +58,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\HelperClasses.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\NutritionData.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeShort.cs" />
     <Compile Include="Models\RecipeID.cs" />
-    <Compile Include="RecipeOriginTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RecipeOriginTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Include="Services\DataHandler.cs" />
     <Compile Include="ViewModels\EditRecipeViewModel.cs" />
     <Compile Include="ViewModels\MenusViewModel.cs" />
@@ -141,12 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="RecipeOriginTemplate.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RecipeOriginTemplate.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

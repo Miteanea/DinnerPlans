@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DinnerPlans.ViewModels
+﻿namespace DinnerPlans.ViewModels
 {
-    class MenusViewModel
+    internal class MenusViewModel
     {
     }
 }

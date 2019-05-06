@@ -1,4 +1,5 @@
-﻿using DinnerPlans.ViewModels;
+﻿using DinnerPlans.Services;
+using DinnerPlans.ViewModels;
 using System.Windows;
 
 namespace DinnerPlans
@@ -8,14 +9,15 @@ namespace DinnerPlans
         public MainWindow()
         {
             InitializeComponent();
+            DataHandler.CheckRecipeLibrary();
         }
 
-        private void Recipes_Clicked(object sender, RoutedEventArgs e)
+        private void Recipes_Clicked( object sender , RoutedEventArgs e )
         {
             DataContext = new RecipesViewModel();
         }
 
-        private void Menus_Clicked(object sender, RoutedEventArgs e)
+        private void Menus_Clicked( object sender , RoutedEventArgs e )
         {
             DataContext = new MenusViewModel();
         }
