@@ -12,8 +12,7 @@
         <DataTemplate x:Name="RecipesListTemplate" DataType="{x:Type viewmodels:RecipesListViewModel}">
             <views:RecipesListView DataContext="{Binding}"></views:RecipesListView>
         </DataTemplate>
-        <DataTemplate x:Name="EditRecipeTemplate"
-                      DataType="{x:Type viewmodels:EditRecipeViewModel}">
+        <DataTemplate x:Name="EditRecipeTemplate" DataType="{x:Type viewmodels:EditRecipeViewModel}">
             <views:EditRecipeView DataContext="{Binding}"></views:EditRecipeView>
         </DataTemplate>
 
@@ -37,7 +36,7 @@
                 <Button Style="{StaticResource navigationButton}"
                         Click="AllRecipes_Clicked">All Recipes</Button>
                 <Button Style="{StaticResource navigationButton}"
-                        Click="AddModify_Click">Add New Recipe</Button>
+                        Click="AddRecipe_Click">Add New Recipe</Button>
             </StackPanel>
         </DockPanel>
 

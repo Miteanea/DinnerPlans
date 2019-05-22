@@ -24,9 +24,9 @@ namespace DinnerPlans.Views
             DataContext = new RecipesListViewModel();
         }
 
-        private void AddModify_Click( object sender , RoutedEventArgs e )
+        private void AddRecipe_Click( object sender , RoutedEventArgs e )
         {
-            DataContext = new EditRecipeViewModel( null );
+            DataContext = new EditRecipeViewModel( new Recipe() );
         }
 
         private void EditExistingRecipe( object sender , RoutedEventArgs e )
