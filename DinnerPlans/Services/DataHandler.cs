@@ -1,7 +1,10 @@
 ﻿using DinnerPlans.Models;
 using Microsoft.Win32;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 
@@ -13,36 +16,27 @@ namespace DinnerPlans.Services
         {
             int startIndex = AppDomain.CurrentDomain.BaseDirectory.IndexOf( "bin" );
             _defaultRepositoryFolder = AppDomain.CurrentDomain.BaseDirectory.Remove( startIndex );
+            _repoName = "RecipeRepo.json";
         }
-
-        public static List<Recipe> RecipeRepository { get; private set; }
 
         public static void CheckRecipeLibrary()
         {
             // Check if the Recipe Library is Present in the default Folder
-
             if(LibraryIsInFolder( _defaultRepositoryFolder ))
             {
                 _repositoryFolderPath = _defaultRepositoryFolder;
             }
             else
             {
-                MessageBox.Show(
-                    "The Recipe Library Was Not Found! Find Recipe Browser Manually!" ,
-                    "The Recipe Library Was Not Found!" ,
-                    MessageBoxButton.OK ,
-                    MessageBoxImage.Warning ,
-                    MessageBoxResult.OK ,
-                    MessageBoxOptions.DefaultDesktopOnly );
+                ShowRepoNotFoundInDefaultFolderMessage();
 
-                // create PopUp Window That Prompts User To Find the File on the FileSystem or Create New Recipe DataBase
                 _repositoryFolderPath = GetFilePath();
             }
 
             // Load Recipes Into Memory
             if(_repositoryFolderPath != null)
             {
-                RecipeRepository = LoadRecipeLibrary( _repositoryFolderPath );
+                RecipeRepository = LoadRecipeLibrary( _repositoryFolderPath + _repoName );
             }
             else
             {
@@ -51,10 +45,20 @@ namespace DinnerPlans.Services
             }
         }
 
+        private static void ShowRepoNotFoundInDefaultFolderMessage()
+        {
+            MessageBox.Show(
+                                "The Recipe Library Was Not Found! Find Recipe Browser Manually!" ,
+                                "The Recipe Library Was Not Found!" ,
+                                MessageBoxButton.OK ,
+                                MessageBoxImage.Warning ,
+                                MessageBoxResult.OK ,
+                                MessageBoxOptions.DefaultDesktopOnly );
+        }
+
         private static bool LibraryIsInFolder( string defaultRepositoryFolder )
         {
-            return false;
-            // throw new NotImplementedException();
+            return File.Exists( defaultRepositoryFolder + @"\RecipeRepo.json" );
         }
 
         private static string GetFilePath()
@@ -67,14 +71,27 @@ namespace DinnerPlans.Services
             return null;
         }
 
-        private static List<Recipe> LoadRecipeLibrary( object repositoryFolderPath )
+        private static RecipeRpository LoadRecipeLibrary( string path )
         {
-            throw new NotImplementedException();
+            var list = new RecipeRpository();
+            var jsonString = File.ReadAllText( path );
+
+            list = JsonConvert.DeserializeObject<RecipeRpository>( jsonString );
+
+            return list;
+        }
+
+        private static void UpdateRecipeLibrary( string path )
+        {
+            var list = RecipeRepository;
+            var jsonString = JsonConvert.SerializeObject( list );
+
+            File.WriteAllText( path , jsonString );
         }
 
         public static Recipe GetRecipe( RecipeID id )
         {
-            var recipe = RecipeRepository.
+            var recipe = RecipeRepository.Recipes.
                             Where( longRecipe => longRecipe.ID == id ).
                             FirstOrDefault();
 
@@ -85,7 +102,7 @@ namespace DinnerPlans.Services
         {
             var shortRecipeList = new List<RecipeShort>();
 
-            foreach(var longRecipe in RecipeRepository)
+            foreach(var longRecipe in RecipeRepository.Recipes)
             {
                 var shortRecipe = new RecipeShort( longRecipe );
                 shortRecipeList.Add( shortRecipe );
@@ -93,17 +110,22 @@ namespace DinnerPlans.Services
             return shortRecipeList;
         }
 
-        public static void SaveRecipe( RecipeID iD )
+        public static void SaveRecipe( Recipe recipeToSave )
         {
-            // If the recipe ID is in the library
-            // Overwrite the data
-            // Else
-            // create a new Entry in the library
+            var recipes = RecipeRepository.Recipes;
 
-            throw new NotImplementedException();
+            if(recipes.Where( recipe => recipe.ID == recipeToSave.ID ).Count() == 0)
+            {
+                recipes.Add( recipeToSave );
+            }
+
+            UpdateRecipeLibrary( _repositoryFolderPath + _repoName );
         }
 
         private static string _defaultRepositoryFolder;
+        private static string _repoName;
         private static object _repositoryFolderPath;
+
+        public static RecipeRpository RecipeRepository { get; private set; }
     }
 }
