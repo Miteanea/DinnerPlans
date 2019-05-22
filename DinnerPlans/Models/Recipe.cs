@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace DinnerPlans.Models
 {
@@ -15,21 +14,42 @@ namespace DinnerPlans.Models
             return new RecipeID();
         }
 
-        public RecipeID ID { get; set; }
+        public RecipeID ID
+        {
+            get; set;
+        }
 
-        public string Title { get; set; }
+        public string Title
+        {
+            get; set;
+        }
 
-        public Origin Origin { get; set; }
+        public Origin Origin
+        {
+            get; set;
+        }
 
-        public ObservableCollection<Ingredient> Ingredients { get; set; }
+        public List<Ingredient> Ingredients
+        {
+            get; set;
+        }
 
-        public string Instruction { get; set; }
+        public string Instruction
+        {
+            get; set;
+        }
 
-        public int QuantityGr { get; set; }
+        public int QuantityGr
+        {
+            get; set;
+        }
 
         public NutritionData NutritionData
         {
-            get { return _nutritionData; }
+            get
+            {
+                return _nutritionData;
+            }
         }
 
         private NutritionData _nutritionData;
