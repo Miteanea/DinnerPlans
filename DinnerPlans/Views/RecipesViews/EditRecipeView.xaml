@@ -25,8 +25,9 @@
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5,2,5,3" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="10,0,10,0" />
+            <Setter Property="Margin" Value="10" />
         </Style>
 
         <Style TargetType="Label">
@@ -38,44 +39,49 @@
             <Setter Property="Background" Value="WhiteSmoke" />
         </Style>
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid>
+    <!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
+    <Grid>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="600" MinWidth="250" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Left"
-                        Width="300"
-                        Grid.Column="0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
+            <Button x:Name="SaveRecipeBtn" Content="Save" Click="SaveRecipeBtn_Click" />
+            <Button x:Name="ResetRecipeBtn" Content="Reset" />
+        </StackPanel>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Button x:Name="SaveRecipeBtn" Content="Save" Click="SaveRecipeBtn_Click" />
-                    <Button x:Name="ResetRecipeBtn" Content="Reset" />
-                </StackPanel>
-
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
                 <StackPanel Orientation="Vertical"
-                            Margin="5,15,5,5">
+                            Margin="5,15,5,5" Grid.Row="0">
 
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                             <Label>Title</Label>
-                            <TextBox Text="{Binding Path=Recipe.Title, Mode=TwoWay}" />
+                            <TextBox Text="{Binding Path=Recipe.Title}" />
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical">
                             <Label>Origin</Label>
                             <ComboBox x:Name="OriginSelector"
-                                      SelectedItem="{Binding Path=Recipe.Origin, Mode=TwoWay}" />
+                                      SelectedItem="{Binding Path=Recipe.Origin}" />
                         </StackPanel>
                     </StackPanel>
 
                     <Label>Ingredients</Label>
                     <StackPanel Orientation="Vertical">
 
-                        <DataGrid x:Name="Recipes"
-                                  ItemsSource="{Binding Path=Recipe.Ingredients, Mode=TwoWay}"
+                        <DataGrid x:Name="RecipesDataGrid"
+                                  ItemsSource="{Binding Path=Recipe.Ingredients}"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   IsReadOnly="False"
@@ -83,23 +89,24 @@
                                   AutoGenerateColumns="False">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay}" />
-                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity, Mode=TwoWay}" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=QuantityGr}" />
                             </DataGrid.Columns>
                         </DataGrid>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button>Add</Button>
-                            <Button>Remove</Button>
+                            <Button Click="Add_Ingredient_Btn_Click">Add</Button>
+                            <Button Click="Remove_Ingredient_Btn_Click">Remove</Button>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Grid.Column="1">
+                <StackPanel Grid.Row="1">
 
                     <Label>Instructions</Label>
-                    <TextBox Height="160" Width="Auto" Text="{Binding Path=Recipe.Instruction}" />
+                    <TextBox Height="160" Width="Auto" Text="{Binding Path=Recipe.Instruction}"
+                             AcceptsReturn="True" TextWrapping="Wrap" />
                 </StackPanel>
-            </StackPanel>
-        </Grid>
-    </ScrollViewer>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
 </UserControl>
