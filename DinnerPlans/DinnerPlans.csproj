@@ -61,6 +61,7 @@
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\NutritionData.cs" />
     <Compile Include="Models\Recipe.cs" />
+    <Compile Include="Models\RecipeRepository.cs" />
     <Compile Include="Models\RecipeShort.cs" />
     <Compile Include="Models\RecipeID.cs" />
     <Compile Include="Services\DataHandler.cs" />
