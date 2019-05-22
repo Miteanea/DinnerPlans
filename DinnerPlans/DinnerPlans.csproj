@@ -58,13 +58,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IngredientWindow.xaml.cs">
+      <DependentUpon>IngredientWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\NutritionData.cs" />
     <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\RecipeRepository.cs" />
     <Compile Include="Models\RecipeShort.cs" />
     <Compile Include="Models\RecipeID.cs" />
+    <Compile Include="Models\RecipeRepository.cs" />
     <Compile Include="Services\DataHandler.cs" />
+    <Compile Include="Models\IngredientRepository.cs" />
     <Compile Include="ViewModels\EditRecipeViewModel.cs" />
     <Compile Include="ViewModels\MenusViewModel.cs" />
     <Compile Include="ViewModels\RecipesListViewModel.cs" />
@@ -81,6 +85,10 @@
     <Compile Include="Views\RecipesViews\RecipesListView.xaml.cs">
       <DependentUpon>RecipesListView.xaml</DependentUpon>
     </Compile>
+    <Page Include="IngredientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

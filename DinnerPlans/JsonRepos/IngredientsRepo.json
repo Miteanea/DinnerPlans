@@ -1,0 +1,23 @@
+
+{
+   "Ingredients": [
+      {
+         
+            "Name": "Spaghettoni",
+            "QuantityGr": 100,
+            "NutritionData": null
+         
+      },
+      {
+                  "Name": "New 3",
+               "QuantityGr": 120,
+               "NutritionData": null
+     
+      },
+      {
+         "Name": "New6",
+         "QuantityGr": 130,
+         "NutritionData": null
+      }
+   ]
+}

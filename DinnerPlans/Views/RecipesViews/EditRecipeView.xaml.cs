@@ -40,8 +40,31 @@ namespace DinnerPlans.Views.RecipesViews
 
         private void Add_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
         {
-            Ingredient newIngredient = new Ingredient { Name = "New Ingredient" , QuantityGr = 0 };
-            _recipe.Ingredients.Add( newIngredient );
+            Ingredient newIngredient = GetIngredientFromUser();
+
+            if(newIngredient != null)
+            {
+                _recipe.Ingredients.Add( newIngredient );
+            }
+        }
+
+        private Ingredient GetIngredientFromUser()
+        {
+            //Open Ingredient Input Window.
+            IngredientWindow window = new IngredientWindow();
+
+            var ingredient = new Ingredient();
+
+            if(window.ShowDialog() == true)
+            {
+                ingredient = window.Ingredient;
+            }
+            else
+            {
+                return null;
+            }
+
+            return ingredient;
         }
 
         private void Remove_Ingredient_Btn_Click( object sender , RoutedEventArgs e )

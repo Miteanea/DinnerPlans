@@ -1,0 +1,56 @@
+{
+   "MetaData": {
+      "Type": 1,
+      "DefaultRepoFolder": "C:\\Users\\caragheaur\\Desktop\\Learning Resources\\dinnerplans\\DinnerPlans\\JsonRepos\\",
+      "RepoName": "RecipeRepo.json",
+      "RepoFolderPath": "C:\\Users\\caragheaur\\Desktop\\Learning Resources\\dinnerplans\\DinnerPlans\\JsonRepos\\"
+   },
+   "Recipes": [
+      {
+         "ID": {},
+         "Title": "Carbonara",
+         "Origin": 1,
+         "Ingredients": [
+            {
+               "Name": "Spaghettoni",
+               "QuantityGr": 100,
+               "NutritionData": null
+            }
+         ],
+         "Instruction": "Step1;\r\nStep2;\r\nStep3;",
+         "NutritionData": null
+      },
+      {
+         "ID": {},
+         "Title": "Insalata",
+         "Origin": 3,
+         "Ingredients": [
+            {
+               "Name": "New 3",
+               "QuantityGr": 120,
+               "NutritionData": null
+            },
+            {
+               "Name": "New6",
+               "QuantityGr": 130,
+               "NutritionData": null
+            },
+            {
+               "Name": "Spaghettoni",
+               "QuantityGr": 100,
+               "NutritionData": null
+            }
+         ],
+         "Instruction": "afsdfasdfadf",
+         "NutritionData": null
+      },
+      {
+         "ID": {},
+         "Title": "Asparagi",
+         "Origin": 1,
+         "Ingredients": null,
+         "Instruction": "Step1;\r\nStep2;",
+         "NutritionData": null
+      }
+   ]
+}

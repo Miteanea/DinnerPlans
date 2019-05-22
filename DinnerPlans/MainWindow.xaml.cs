@@ -9,7 +9,9 @@ namespace DinnerPlans
         public MainWindow()
         {
             InitializeComponent();
+
             DataHandler.CheckRecipeLibrary();
+            DataHandler.CheckIngredientsLibrary();
         }
 
         private void Recipes_Clicked( object sender , RoutedEventArgs e )

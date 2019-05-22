@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
@@ -7,6 +10,8 @@ namespace DinnerPlans.Models
         public Recipe()
         {
             ID = GetID();
+            _ingredients = new ObservableCollection<Ingredient>();
+            ListOfIngredientsChange += HandleIngredientsChange;
         }
 
         private RecipeID GetID()
@@ -14,47 +19,42 @@ namespace DinnerPlans.Models
             return new RecipeID();
         }
 
-        public RecipeID ID
-        {
-            get; set;
-        }
+        public RecipeID ID { get; set; }
 
-        public string Title
-        {
-            get; set;
-        }
+        public string Title { get; set; }
 
-        public Origin Origin
-        {
-            get; set;
-        }
+        public Origin Origin { get; set; }
 
-        public List<Ingredient> Ingredients
-        {
-            get; set;
-        }
-
-        public string Instruction
-        {
-            get; set;
-        }
-
-        public int QuantityGr
-        {
-            get; set;
-        }
-
-        public NutritionData NutritionData
+        public ObservableCollection<Ingredient> Ingredients
         {
             get
             {
-                return _nutritionData;
+                return _ingredients;
+            }
+            set
+            {
+                _ingredients = value;
+                ListOfIngredientsChange?.Invoke( _ingredients );
             }
         }
 
+        private ObservableCollection<Ingredient> _ingredients;
+
+        public string Instruction { get; set; }
+
+        public NutritionData NutritionData { get { return _nutritionData; } }
         private NutritionData _nutritionData;
 
-        // When the Ingredients list is modified Recalculate _nutritionData of a Recipe
+        public event IngredientChangeHandler ListOfIngredientsChange;
+
+        public delegate void IngredientChangeHandler( ObservableCollection<Ingredient> ingredients );
+
+        private void HandleIngredientsChange( ObservableCollection<Ingredient> ingredients )
+        {
+            // calculate and assign a value to _nutritionData (kcalx100g)
+
+            //throw new NotImplementedException();
+        }
     }
 
     internal enum Origin
