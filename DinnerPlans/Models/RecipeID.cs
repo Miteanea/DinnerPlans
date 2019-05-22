@@ -20,6 +20,7 @@ namespace DinnerPlans.Models
         internal void SetStringValue( string value )
         {
             // Convert The string to whatever type ID Property is.
+
             throw new NotImplementedException();
         }
     }
