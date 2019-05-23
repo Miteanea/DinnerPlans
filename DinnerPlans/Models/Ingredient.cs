@@ -7,6 +7,7 @@
             // get ingredient ID
 
             // Set Nutrition Data
+            // Break Nutrition Data into properties
 
             // Calculate Nutrition Data
         }
@@ -18,14 +19,8 @@
             get; set;
         }
 
-        public int QuantityGr
-        {
-            get; set;
-        }
+        public int QuantityGr { get; set; }
 
-        public NutritionData NutritionData
-        {
-            get;
-        }
+        public NutritionData NutritionData { get; }
     }
 }
