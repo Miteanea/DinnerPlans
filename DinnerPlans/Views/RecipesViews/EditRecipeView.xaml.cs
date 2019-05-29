@@ -58,6 +58,7 @@ namespace DinnerPlans.Views.RecipesViews
             if(window.ShowDialog() == true)
             {
                 ingredient = window.Ingredient;
+                DataHandler.SaveIngrediens();
             }
             else
             {

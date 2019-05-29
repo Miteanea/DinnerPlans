@@ -21,6 +21,6 @@
 
         public int QuantityGr { get; set; }
 
-        public NutritionData NutritionData { get; }
+        public NutritionData NutritionData { get; set; }
     }
 }

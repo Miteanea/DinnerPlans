@@ -72,6 +72,11 @@ namespace DinnerPlans.Services
             }
         }
 
+        internal static void SaveIngredient( Ingredient ingredient )
+        {
+            throw new NotImplementedException();
+        }
+
         private static void ShowRepoNotFoundInDefaultFolderMessage( RepositoryType type )
         {
             string typeStr = type.ToString();
@@ -179,6 +184,11 @@ namespace DinnerPlans.Services
             }
 
             UpdateRecipeLibrary( metaData.RepoFolderPath + metaData.RepoName );
+        }
+
+        internal static void SaveIngrediens()
+        {
+            throw new NotImplementedException();
         }
 
         public static RecipeRpository RecipeRepository { get; private set; }

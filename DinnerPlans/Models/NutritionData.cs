@@ -36,6 +36,8 @@
         {
             get; set;
         }
+
+        public int SatFatsGr { get; internal set; }
     }
 
     public enum NutritionDataType
