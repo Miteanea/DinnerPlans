@@ -62,12 +62,14 @@
       <DependentUpon>IngredientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\IngredientID.cs" />
     <Compile Include="Models\MeasureUnits.cs" />
     <Compile Include="Models\NutritionData.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeShort.cs" />
     <Compile Include="Models\RecipeID.cs" />
     <Compile Include="Models\RecipeRepository.cs" />
+    <Compile Include="Models\UnitType.cs" />
     <Compile Include="Services\DataHandler.cs" />
     <Compile Include="Models\IngredientRepository.cs" />
     <Compile Include="ViewModels\EditRecipeViewModel.cs" />

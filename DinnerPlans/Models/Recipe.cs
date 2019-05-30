@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
 
 namespace DinnerPlans.Models
 {
     internal class Recipe
     {
+        private ObservableCollection<Ingredient> _ingredients;
+
+        private NutritionData _nutritionData;
+
         public Recipe()
         {
             ID = GetID();
@@ -14,14 +15,11 @@ namespace DinnerPlans.Models
             ListOfIngredientsChanged += HandleIngredientsChange;
         }
 
-        private RecipeID GetID()
-        {
-            return new RecipeID();
-        }
+        public delegate void IngredientChangeHandler( ObservableCollection<Ingredient> ingredients );
+
+        public event IngredientChangeHandler ListOfIngredientsChanged;
 
         public RecipeID ID { get; set; }
-
-        public string Title { get; set; }
 
         public ObservableCollection<Ingredient> Ingredients
         {
@@ -29,39 +27,39 @@ namespace DinnerPlans.Models
             set { _ingredients = value; ListOfIngredientsChanged?.Invoke( _ingredients ); }
         }
 
-        private ObservableCollection<Ingredient> _ingredients;
-
         public string Instruction { get; set; }
 
         public NutritionData NutritionData { get { return _nutritionData; } set { _nutritionData = value; } }
-        private NutritionData _nutritionData;
 
-        public event IngredientChangeHandler ListOfIngredientsChanged;
+        public string Title { get; set; }
 
-        public delegate void IngredientChangeHandler( ObservableCollection<Ingredient> ingredients );
+        private RecipeID GetID()
+        {
+            return new RecipeID();
+        }
 
         private void HandleIngredientsChange( ObservableCollection<Ingredient> ingredients )
         {
             // calculate and assign a value to _nutritionData (kcalx100g)
-            var calculatedNutritionData = new NutritionData();
+            NutritionData nutritionData = new NutritionData();
             if(_ingredients != null)
             {
                 foreach(var ingredient in ingredients)
                 {
-                    var data = ingredient.NutritionData;
-                    var quantityRatio = ingredient.Quantity / 100;
+                    NutritionData data = ingredient.NutritionData;
                     if(data != null)
                     {
-                        calculatedNutritionData.Calories += data.Calories * quantityRatio;
-                        calculatedNutritionData.CarbsGr += data.CarbsGr * quantityRatio;
-                        calculatedNutritionData.FatsGr += data.FatsGr * quantityRatio;
-                        calculatedNutritionData.ProteinsGr += data.ProteinsGr * quantityRatio;
-                        calculatedNutritionData.SaltsGr += data.SaltsGr * quantityRatio;
-                        calculatedNutritionData.SugarsGr += data.SugarsGr * quantityRatio;
+                        var quantityRatio = ingredient.Quantity / 100;
+                        nutritionData.Calories += data.Calories * quantityRatio;
+                        nutritionData.CarbsGr += data.CarbsGr * quantityRatio;
+                        nutritionData.FatsGr += data.FatsGr * quantityRatio;
+                        nutritionData.ProteinsGr += data.ProteinsGr * quantityRatio;
+                        nutritionData.SaltsGr += data.SaltsGr * quantityRatio;
+                        nutritionData.SugarsGr += data.SugarsGr * quantityRatio;
                     }
                 }
             }
-            _nutritionData = calculatedNutritionData;
+            _nutritionData = nutritionData;
         }
     }
 }

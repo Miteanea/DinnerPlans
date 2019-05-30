@@ -1,8 +1,6 @@
 ﻿using DinnerPlans.Models;
 using DinnerPlans.Services;
 using DinnerPlans.ViewModels;
-using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 

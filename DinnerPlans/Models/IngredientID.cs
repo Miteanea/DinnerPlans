@@ -2,9 +2,10 @@
 
 namespace DinnerPlans.Models
 {
-    internal class RecipeID
+
+    public class IngredientID
     {
-        public RecipeID()
+        public IngredientID()
         {
             Random rnd = new Random();
             ID = rnd.Next( 1000 );
