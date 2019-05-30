@@ -72,11 +72,6 @@ namespace DinnerPlans.Services
             }
         }
 
-        internal static void SaveIngredient( Ingredient ingredient )
-        {
-            throw new NotImplementedException();
-        }
-
         private static void ShowRepoNotFoundInDefaultFolderMessage( RepositoryType type )
         {
             string typeStr = type.ToString();
@@ -144,10 +139,9 @@ namespace DinnerPlans.Services
             }
         }
 
-        private static void UpdateRecipeLibrary( string path )
+        private static void UpdateLibrary( string path , object repo )
         {
-            var list = RecipeRepository;
-            var jsonString = JsonConvert.SerializeObject( list );
+            var jsonString = JsonConvert.SerializeObject( repo );
 
             File.WriteAllText( path , jsonString );
         }
@@ -183,12 +177,20 @@ namespace DinnerPlans.Services
                 recipes.Add( recipeToSave );
             }
 
-            UpdateRecipeLibrary( metaData.RepoFolderPath + metaData.RepoName );
+            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , RecipeRepository );
         }
 
-        internal static void SaveIngrediens()
+        internal static void SaveIngredient( Ingredient ingredientToSave )
         {
-            throw new NotImplementedException();
+            var metaData = IngredientsRepository.MetaData;
+            var ingredients = IngredientsRepository.Ingredients;
+
+            if(ingredients.Where( ingredient => ingredient.ID == ingredientToSave.ID ).Count() == 0)
+            {
+                ingredients.Add( ingredientToSave );
+            }
+
+            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , IngredientsRepository );
         }
 
         public static RecipeRpository RecipeRepository { get; private set; }

@@ -4,23 +4,24 @@
     {
         public Ingredient()
         {
-            // get ingredient ID
-
-            // Set Nutrition Data
-            // Break Nutrition Data into properties
-
-            // Calculate Nutrition Data
+            ID = GetID();
         }
 
-        // ID
+        // Public
+        public IngredientID ID { get; set; }
 
-        public string Name
-        {
-            get; set;
-        }
+        public string Name { get; set; }
 
-        public int QuantityGr { get; set; }
+        public int Quantity { get; set; }
+
+        public UnitType Unit { get; set; }
 
         public NutritionData NutritionData { get; set; }
+
+        // Private
+        private IngredientID GetID()
+        {
+            return new IngredientID();
+        }
     }
 }

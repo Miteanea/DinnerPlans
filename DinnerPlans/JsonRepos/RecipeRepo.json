@@ -9,48 +9,109 @@
       {
          "ID": {},
          "Title": "Carbonara",
-         "Origin": 1,
          "Ingredients": [
             {
+               "ID": {"ID":1},
                "Name": "Spaghettoni",
-               "QuantityGr": 100,
-               "NutritionData": null
+               "Quantity": 0,
+               "Unit": 0,
+               "NutritionData": {
+                  "Calories": 120,
+                  "CarbsGr": 0,
+                  "ProteinsGr": 0,
+                  "SugarsGr": 0,
+                  "FatsGr": 0,
+                  "SaltsGr": 0,
+                  "SatFatsGr": 0
+               }
+            },
+            {
+               "ID": {"ID":6},
+               "Name": "Parmigiano",
+               "Quantity": 0,
+               "Unit": 0,
+               "NutritionData": {
+                  "Calories": 0,
+                  "CarbsGr": 0,
+                  "ProteinsGr": 0,
+                  "SugarsGr": 0,
+                  "FatsGr": 0,
+                  "SaltsGr": 0,
+                  "SatFatsGr": 0
+               }
+            },
+            {
+               "ID": {"ID":7},
+               "Name": "Pancetta",
+               "Quantity": 0,
+               "Unit": 0,
+               "NutritionData": {
+                  "Calories": 0,
+                  "CarbsGr": 0,
+                  "ProteinsGr": 0,
+                  "SugarsGr": 0,
+                  "FatsGr": 0,
+                  "SaltsGr": 0,
+                  "SatFatsGr": 0
+               }
             }
          ],
          "Instruction": "Step1;\r\nStep2;\r\nStep3;",
-         "NutritionData": null
+         "NutritionData": {
+            "Calories": 120,
+            "CarbsGr": 0,
+            "ProteinsGr": 0,
+            "SugarsGr": 0,
+            "FatsGr": 0,
+            "SaltsGr": 0,
+            "SatFatsGr": 0
+         }
       },
       {
          "ID": {},
          "Title": "Insalata",
-         "Origin": 3,
          "Ingredients": [
             {
-               "Name": "New 3",
-               "QuantityGr": 120,
-               "NutritionData": null
-            },
-            {
-               "Name": "New6",
-               "QuantityGr": 130,
-               "NutritionData": null
-            },
-            {
-               "Name": "Spaghettoni",
-               "QuantityGr": 100,
-               "NutritionData": null
+               "ID": {"ID":5},
+               "Name": "Pomodoro",
+               "Quantity": 100,
+               "Unit": 1,
+               "NutritionData": {
+                  "Calories": 123,
+                  "CarbsGr": 0,
+                  "ProteinsGr": 0,
+                  "SugarsGr": 0,
+                  "FatsGr": 0,
+                  "SaltsGr": 0,
+                  "SatFatsGr": 0
+               }
             }
          ],
-         "Instruction": "afsdfasdfadf",
-         "NutritionData": null
+         "Instruction": "Insalata",
+         "NutritionData": {
+            "Calories": 120,
+            "CarbsGr": 0,
+            "ProteinsGr": 0,
+            "SugarsGr": 0,
+            "FatsGr": 0,
+            "SaltsGr": 0,
+            "SatFatsGr": 0
+         }
       },
       {
          "ID": {},
          "Title": "Asparagi",
-         "Origin": 1,
-         "Ingredients": null,
+         "Ingredients": [],
          "Instruction": "Step1;\r\nStep2;",
-         "NutritionData": null
+         "NutritionData": {
+            "Calories": 120,
+            "CarbsGr": 0,
+            "ProteinsGr": 0,
+            "SugarsGr": 0,
+            "FatsGr": 0,
+            "SaltsGr": 0,
+            "SatFatsGr": 0
+         }
       }
    ]
 }

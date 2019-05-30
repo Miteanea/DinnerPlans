@@ -11,7 +11,7 @@ namespace DinnerPlans.Models
         {
             ID = GetID();
             _ingredients = new ObservableCollection<Ingredient>();
-            ListOfIngredientsChange += HandleIngredientsChange;
+            ListOfIngredientsChanged += HandleIngredientsChange;
         }
 
         private RecipeID GetID()
@@ -23,45 +23,45 @@ namespace DinnerPlans.Models
 
         public string Title { get; set; }
 
-        public Origin Origin { get; set; }
-
         public ObservableCollection<Ingredient> Ingredients
         {
-            get
-            {
-                return _ingredients;
-            }
-            set
-            {
-                _ingredients = value;
-                ListOfIngredientsChange?.Invoke( _ingredients );
-            }
+            get { return _ingredients; }
+            set { _ingredients = value; ListOfIngredientsChanged?.Invoke( _ingredients ); }
         }
 
         private ObservableCollection<Ingredient> _ingredients;
 
         public string Instruction { get; set; }
 
-        public NutritionData NutritionData { get { return _nutritionData; } }
+        public NutritionData NutritionData { get { return _nutritionData; } set { _nutritionData = value; } }
         private NutritionData _nutritionData;
 
-        public event IngredientChangeHandler ListOfIngredientsChange;
+        public event IngredientChangeHandler ListOfIngredientsChanged;
 
         public delegate void IngredientChangeHandler( ObservableCollection<Ingredient> ingredients );
 
         private void HandleIngredientsChange( ObservableCollection<Ingredient> ingredients )
         {
             // calculate and assign a value to _nutritionData (kcalx100g)
-
-            //throw new NotImplementedException();
+            var calculatedNutritionData = new NutritionData();
+            if(_ingredients != null)
+            {
+                foreach(var ingredient in ingredients)
+                {
+                    var data = ingredient.NutritionData;
+                    var quantityRatio = ingredient.Quantity / 100;
+                    if(data != null)
+                    {
+                        calculatedNutritionData.Calories += data.Calories * quantityRatio;
+                        calculatedNutritionData.CarbsGr += data.CarbsGr * quantityRatio;
+                        calculatedNutritionData.FatsGr += data.FatsGr * quantityRatio;
+                        calculatedNutritionData.ProteinsGr += data.ProteinsGr * quantityRatio;
+                        calculatedNutritionData.SaltsGr += data.SaltsGr * quantityRatio;
+                        calculatedNutritionData.SugarsGr += data.SugarsGr * quantityRatio;
+                    }
+                }
+            }
+            _nutritionData = calculatedNutritionData;
         }
-    }
-
-    internal enum Origin
-    {
-        None = 0,
-        Italian,
-        Thai,
-        Russian
     }
 }

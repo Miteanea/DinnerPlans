@@ -62,6 +62,7 @@
       <DependentUpon>IngredientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Ingredient.cs" />
+    <Compile Include="Models\MeasureUnits.cs" />
     <Compile Include="Models\NutritionData.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\RecipeShort.cs" />

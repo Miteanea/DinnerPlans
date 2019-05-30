@@ -6,14 +6,10 @@
         xmlns:local="clr-namespace:DinnerPlans"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="DinnerPlans.IngredientWindow"
         mc:Ignorable="d"
-        Title="IngredientWindow" Height="450" Width="800">
+        Title="IngredientWindow" Height="450" MinWidth="800">
 
     <Grid>
-        <Grid.Resources>
-            <Style TargetType="{x:Type TextBox}">
-                <Setter Property="Foreground" Value="White" />
-            </Style>
-        </Grid.Resources>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -25,12 +21,12 @@
                 <Button x:Name="SaveChangesBtn" Content="Save" Click="SaveIngredientChanges" />
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Search By Text" />
-                    <TextBox x:Name="TextFilter" Width="100" Background="Black" Margin="5" TextChanged="TextBox_TextChanged" />
+                    <TextBox x:Name="TextFilter" Width="100"   Margin="5" TextChanged="TextBox_TextChanged" />
                 </StackPanel>
 
                 <DataGrid x:Name="ExistingIngridients"
                           SelectionMode="Single" SelectionUnit="FullRow"
-                          IsReadOnly="False"  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue">
+                          IsReadOnly="True"  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                         <DataGridTextColumn Header="Calories" Binding="{Binding Path=NutritionData.Calories}" />
@@ -78,38 +74,41 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <!--Add Ingredient Details:
-                description of ingredient -->
+
                 <Label Grid.Column="0" Grid.Row="0" Content="Name" />
-                <TextBox Name="NameNewIngredient" Grid.Column="1" Grid.ColumnSpan="3" Background="Black" Margin="5" />
+                <TextBox  Name="NameNewIngredient" Grid.Column="1" Grid.ColumnSpan="3"   Margin="5" />
 
-                <!--calories -->
                 <Label Grid.Column="0" Grid.Row="1" Content="Calories" />
-                <TextBox Name="CaloriesNewIngredient" Grid.Column="1" Grid.Row="1" Background="Black" Margin="5" />
+                <TextBox Text="0" Name="CaloriesNewIngredient" Grid.Column="1" Grid.Row="1"   Margin="5" />
 
-                <!--nutrition data-->
+                <StackPanel Orientation="Horizontal" Grid.Column="5" Grid.Row="0">
+                    <Label>Unit</Label>
+                    <ComboBox x:Name="UnitSelector" Width="50" />
+                </StackPanel>
+
+                <Label Grid.Column="4" Grid.Row="1" Content="Quantity" />
+                <TextBox Text="0" Name="QuantityNewIngredient" Grid.Column="5" Grid.Row="1"   Margin="5" />
+
                 <Label Grid.Column="1" Grid.Row="3" Content="Proteins" />
-                <TextBox Name="ProteinsNewIngredient" Grid.Column="2" Grid.Row="3" Background="Black" Margin="5" />
+                <TextBox Text="0" Name="ProteinsNewIngredient" Grid.Column="2" Grid.Row="3"   Margin="5" />
 
                 <Label Grid.Column="1" Grid.Row="4" Content="Carbs" />
-                <TextBox Name="CarbsNewIngredient" Grid.Column="2" Grid.Row="4" Background="Black" Margin="5" />
+                <TextBox Text="0" Name="CarbsNewIngredient" Grid.Column="2" Grid.Row="4"   Margin="5" />
 
                 <Label Grid.Column="1" Grid.Row="5" Content="Sugars" />
-                <TextBox Name="SugarsNewIngredient" Grid.Column="2" Grid.Row="5" Background="Black" Margin="5" />
+                <TextBox Text="0" Name="SugarsNewIngredient" Grid.Column="2" Grid.Row="5"   Margin="5" />
 
                 <Label Grid.Column="3" Grid.Row="3" Content="Fats" />
-                <TextBox Name="FatsNewIngredient" Grid.Column="4" Grid.Row="3" Background="Black" Margin="5" />
+                <TextBox Text="0" Name="FatsNewIngredient" Grid.Column="4" Grid.Row="3"   Margin="5" />
 
                 <Label Grid.Column="3" Grid.Row="4" Content="Satured Fats" />
-                <TextBox Name="SatFatsNewIngredient" Grid.Column="4" Grid.Row="4" Background="Black" Margin="5" />
+                <TextBox Text="0" Name="SatFatsNewIngredient" Grid.Column="4" Grid.Row="4"   Margin="5" />
 
                 <Label Grid.Column="5" Grid.Row="3" Content="Salts" />
-                <TextBox Name="SaltsNewIngredient" Grid.Column="6" Grid.Row="3" Background="Black" Margin="5" />
+                <TextBox Text="0" Name="SaltsNewIngredient" Grid.Column="6" Grid.Row="3"   Margin="5" />
 
                 <!-- "Add Button" => closes the window and sends the ingredient to caller.-->
-                <Button Click="Add_Ingredient_Clicked"
-                        Grid.Column="5" Grid.ColumnSpan="2"
-                        Grid.Row="6" Content="Add Ingredient" />
+                <Button Click="Add_Ingredient_Clicked" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="6" Content="Add Ingredient" />
             </Grid>
 
             <Grid x:Name="InputNewIngredient" Grid.Row="1">
@@ -118,8 +117,7 @@
                 description of ingredient
                 calories
                 nutrition data
-                "Add & Save" Button" => 1) Saves the ingredient to ingredient collection
-                                        2)closes the window and sends the ingredient to caller.
+
                 Validate Ingredient Input
                 -->
             </Grid>

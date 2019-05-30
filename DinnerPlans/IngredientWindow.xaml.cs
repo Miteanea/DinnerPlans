@@ -27,7 +27,9 @@ namespace DinnerPlans
         {
             InitializeComponent();
 
-            _ingredients = GetIngredientsCollection();
+            _ingredients = DataHandler.IngredientsRepository.Ingredients;
+
+            UnitSelector.ItemsSource = Enum.GetValues( typeof( UnitType ) ).Cast<UnitType>();
 
             ExistingIngridients.Items.Clear();
             ExistingIngridients.ItemsSource = _ingredients;
@@ -36,13 +38,10 @@ namespace DinnerPlans
         public Ingredient Ingredient { get; set; }
         private ObservableCollection<Ingredient> _ingredients { get; set; }
 
-        private ObservableCollection<Ingredient> GetIngredientsCollection()
-        {
-            return DataHandler.IngredientsRepository.Ingredients;
-        }
-
         private void Add_Ingredient_Clicked( object sender , RoutedEventArgs e )
         {
+            //"Add & Save" Button" => 1) Saves the ingredient to ingredient collection
+            //                            2)closes the window and sends the ingredient to caller.
             if(ExistingIngridients.SelectedItem != null)
             {
                 Ingredient = ExistingIngridients.SelectedItem as Ingredient;
@@ -50,7 +49,6 @@ namespace DinnerPlans
             else
             {
                 Ingredient = MapUserInputToIngredient();
-                DataHandler.SaveIngredient( Ingredient );
             }
 
             this.DialogResult = true;
@@ -65,17 +63,23 @@ namespace DinnerPlans
             int sugars;
             int fats;
             int satfats;
+            int quantity;
+            UnitType unit;
 
             if(int.TryParse( CaloriesNewIngredient.Text , out calories ) &&
                 int.TryParse( CarbsNewIngredient.Text , out carbs ) &&
                 int.TryParse( ProteinsNewIngredient.Text , out proteins ) &&
                 int.TryParse( SugarsNewIngredient.Text , out sugars ) &&
                 int.TryParse( FatsNewIngredient.Text , out fats ) &&
-                int.TryParse( SatFatsNewIngredient.Text , out satfats ))
+                int.TryParse( SatFatsNewIngredient.Text , out satfats ) &&
+                int.TryParse( QuantityNewIngredient.Text , out quantity ) &&
+                Enum.TryParse( UnitSelector.Text , out unit ))
             {
                 return new Ingredient
                 {
                     Name = NameNewIngredient.Text ,
+                    Unit = unit ,
+                    Quantity = quantity ,
                     NutritionData = new NutritionData
                     {
                         Calories = calories ,

@@ -12,6 +12,7 @@ namespace DinnerPlans.Services
         }
 
         public ObservableCollection<Ingredient> Ingredients { get; internal set; }
+
         public RepositoryData MetaData { get; private set; }
     }
 }

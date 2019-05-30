@@ -18,8 +18,6 @@ namespace DinnerPlans.Views.RecipesViews
             InitializeComponent();
 
             DataContextChanged += new DependencyPropertyChangedEventHandler( EditRecipeView_DataContextChanged );
-
-            OriginSelector.ItemsSource = Enum.GetValues( typeof( Origin ) ).Cast<Origin>();
         }
 
         private Recipe _recipe;
@@ -58,7 +56,7 @@ namespace DinnerPlans.Views.RecipesViews
             if(window.ShowDialog() == true)
             {
                 ingredient = window.Ingredient;
-                DataHandler.SaveIngrediens();
+                DataHandler.SaveIngredient( ingredient );
             }
             else
             {

@@ -8,36 +8,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="10, 5, 5, 5" />
-            <Setter Property="MinWidth" Value="75" />
-            <Setter Property="Padding" Value="2" />
-        </Style>
-
-        <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="10, 5, 5, 5" />
-            <Setter Property="MinWidth" Value="75" />
-        </Style>
-
-        <Style TargetType="DataGrid">
-            <Setter Property="MinHeight" Value="15" />
-            <Setter Property="Margin" Value="10, 5, 5, 5" />
-        </Style>
-
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="25" />
-            <Setter Property="Padding" Value="10,0,10,0" />
-            <Setter Property="Margin" Value="10" />
-        </Style>
-
-        <Style TargetType="Label">
-            <Setter Property="Margin" Value="10,0,5,0" />
-            <Setter Property="FontWeight" Value="ExtraBold" />
-        </Style>
-
-        <Style TargetType="Grid">
-            <Setter Property="Background" Value="WhiteSmoke" />
-        </Style>
     </UserControl.Resources>
     <!--<ScrollViewer VerticalScrollBarVisibility="Auto">-->
     <Grid>
@@ -61,19 +31,12 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Vertical"
-                            Margin="5,15,5,5" Grid.Row="0">
+                <StackPanel Orientation="Vertical" Margin="5,15,5,5" Grid.Row="0">
 
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                             <Label>Title</Label>
                             <TextBox Text="{Binding Path=Recipe.Title}" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical">
-                            <Label>Origin</Label>
-                            <ComboBox x:Name="OriginSelector"
-                                      SelectedItem="{Binding Path=Recipe.Origin}" />
                         </StackPanel>
                     </StackPanel>
 
@@ -89,8 +52,9 @@
                                   AutoGenerateColumns="False">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Name}" />
                                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=QuantityGr}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Unit" Binding="{Binding Path=Unit}" />
                             </DataGrid.Columns>
                         </DataGrid>
 
