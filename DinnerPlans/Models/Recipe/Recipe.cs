@@ -55,6 +55,12 @@ namespace DinnerPlans.Models
         //Private
         private NutritionData _nutritionData;
 
+        private void UpdateRecipe()
+        {
+            UpdateNutritionData();
+            UpdateRecipeWeight();
+        }
+
         private void UpdateNutritionData()
         {
             // calculate and assign a value to _nutritionData (kcalx100g)
@@ -113,12 +119,6 @@ namespace DinnerPlans.Models
         public void OnCollectionChanged( object sender , NotifyCollectionChangedEventArgs e )
         {
             UpdateRecipe();
-        }
-
-        private void UpdateRecipe()
-        {
-            UpdateNutritionData();
-            UpdateRecipeWeight();
         }
 
         public void IngredientEntryChanges( object sender , PropertyChangedEventArgs e )
