@@ -18,8 +18,7 @@ namespace DinnerPlans.Models
         {
             IngredientEntries = ingredientEntries;
 
-            UpdateNutritionData();
-            UpdateRecipeWeight();
+            UpdateRecipe();
 
             foreach(IngredientEntry entry in IngredientEntries)
             {
@@ -102,7 +101,7 @@ namespace DinnerPlans.Models
             foreach(var entry in IngredientEntries)
             {
                 // For each type of ingredient
-                // calculate the weigth
+                // calculate the weight
                 //add to recipe weight
             }
             throw new NotImplementedException();
@@ -113,14 +112,18 @@ namespace DinnerPlans.Models
 
         public void OnCollectionChanged( object sender , NotifyCollectionChangedEventArgs e )
         {
+            UpdateRecipe();
+        }
+
+        private void UpdateRecipe()
+        {
             UpdateNutritionData();
             UpdateRecipeWeight();
         }
 
         public void IngredientEntryChanges( object sender , PropertyChangedEventArgs e )
         {
-            UpdateNutritionData();
-            UpdateRecipeWeight();
+            UpdateRecipe();
         }
     }
 }
