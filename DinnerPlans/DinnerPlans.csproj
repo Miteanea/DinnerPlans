@@ -61,21 +61,27 @@
     <Compile Include="IngredientWindow.xaml.cs">
       <DependentUpon>IngredientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ingredient.cs" />
-    <Compile Include="Models\IngredientID.cs" />
-    <Compile Include="Models\MeasureUnits.cs" />
-    <Compile Include="Models\NutritionData.cs" />
-    <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\RecipeShort.cs" />
-    <Compile Include="Models\RecipeID.cs" />
-    <Compile Include="Models\RecipeRepository.cs" />
-    <Compile Include="Models\UnitType.cs" />
+    <Compile Include="Models\Ingredient\IIngredient.cs" />
+    <Compile Include="Models\Ingredient\IIngredientRepository.cs" />
+    <Compile Include="Models\Ingredient\Ingredient.cs" />
+    <Compile Include="Models\Ingredient\IngredientID.cs" />
+    <Compile Include="Models\Recipe\IRecipe.cs" />
+    <Compile Include="Models\Ingredient\MeasureUnits.cs" />
+    <Compile Include="Models\NutritionData\NutritionData.cs" />
+    <Compile Include="Models\Recipe\IRecipeRpository.cs" />
+    <Compile Include="Models\Recipe\Recipe.cs" />
+    <Compile Include="Models\Recipe\RecipeID.cs" />
+    <Compile Include="Models\Recipe\RecipeRepository.cs" />
+    <Compile Include="Models\Enums\UnitType.cs" />
     <Compile Include="Services\DataHandler.cs" />
-    <Compile Include="Models\IngredientRepository.cs" />
+    <Compile Include="Models\Ingredient\IngredientRepository.cs" />
+    <Compile Include="Services\RepositoryData.cs" />
+    <Compile Include="Models\Enums\RepositoryType.cs" />
     <Compile Include="ViewModels\EditRecipeViewModel.cs" />
     <Compile Include="ViewModels\MenusViewModel.cs" />
     <Compile Include="ViewModels\RecipesListViewModel.cs" />
     <Compile Include="ViewModels\RecipesViewModel.cs" />
+    <Compile Include="Models\Recipe\RecipeViewModel.cs" />
     <Compile Include="Views\MenusView.xaml.cs">
       <DependentUpon>MenusView.xaml</DependentUpon>
     </Compile>
@@ -151,5 +157,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

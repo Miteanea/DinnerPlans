@@ -1,6 +1,6 @@
 ﻿namespace DinnerPlans.Models
 {
-    public class Ingredient
+    public class Ingredient : IIngredient
     {
         public Ingredient()
         {

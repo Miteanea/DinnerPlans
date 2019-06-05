@@ -1,6 +1,6 @@
 ﻿using DinnerPlans.Models;
 using DinnerPlans.Services;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace DinnerPlans.ViewModels
 {
@@ -8,9 +8,9 @@ namespace DinnerPlans.ViewModels
     {
         public RecipesListViewModel()
         {
-            Recipes = DataHandler.GetShortRecipes();
+            Recipes = DataHandler.RecipeRepository.Recipes;
         }
 
-        public List<RecipeShort> Recipes { get; set; }
+        public ObservableCollection<Recipe> Recipes { get; set; }
     }
 }

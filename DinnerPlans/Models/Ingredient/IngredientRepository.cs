@@ -1,17 +1,17 @@
 ﻿using System.Collections.ObjectModel;
 using DinnerPlans.Models;
+using Newtonsoft.Json;
 
 namespace DinnerPlans.Services
 {
-    internal class IngredientRepository
+    internal class IngredientRepository : IIngredientRepository
     {
         public IngredientRepository()
         {
-            Ingredients = new ObservableCollection<Ingredient>();
             MetaData = new RepositoryData();
         }
 
-        public ObservableCollection<Ingredient> Ingredients { get; internal set; }
+        public ObservableCollection<Ingredient> Ingredients { get; set; }
 
         public RepositoryData MetaData { get; private set; }
     }

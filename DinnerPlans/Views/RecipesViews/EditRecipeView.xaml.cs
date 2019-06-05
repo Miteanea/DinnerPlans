@@ -1,6 +1,7 @@
 ﻿using DinnerPlans.Models;
 using DinnerPlans.Services;
 using DinnerPlans.ViewModels;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -23,6 +24,7 @@ namespace DinnerPlans.Views.RecipesViews
         private void EditRecipeView_DataContextChanged( object sender , DependencyPropertyChangedEventArgs e )
         {
             _recipe = ( e.NewValue as EditRecipeViewModel ).Recipe;
+            ListOfIngredientsChanged += _recipe.HandleIngredientsChange;
         }
 
         private void SaveRecipeBtn_Click( object sender , RoutedEventArgs e )
@@ -41,6 +43,7 @@ namespace DinnerPlans.Views.RecipesViews
             if(newIngredient != null)
             {
                 _recipe.Ingredients.Add( newIngredient );
+                ListOfIngredientsChanged.Invoke( _recipe.Ingredients );
             }
         }
 
@@ -74,7 +77,12 @@ namespace DinnerPlans.Views.RecipesViews
             else
             {
                 _recipe.Ingredients.Remove( selectedIngredient );
+                ListOfIngredientsChanged.Invoke( _recipe.Ingredients );
             }
         }
+
+        public delegate void IngredientChangeHandler( ObservableCollection<Ingredient> ingredients );
+
+        public event IngredientChangeHandler ListOfIngredientsChanged;
     }
 }

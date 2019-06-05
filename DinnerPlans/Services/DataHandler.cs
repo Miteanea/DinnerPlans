@@ -2,7 +2,6 @@
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -17,7 +16,7 @@ namespace DinnerPlans.Services
             InitializeRepositoryMetadata();
         }
 
-        internal static void CheckIngredientsLibrary()
+        public static void CheckIngredientsLibrary()
         {
             // Check if the Recipe Library is Present in the default Folder
             var metaData = IngredientsRepository.MetaData;
@@ -71,6 +70,51 @@ namespace DinnerPlans.Services
             }
         }
 
+        public static Recipe GetRecipe( RecipeID id )
+        {
+            var recipe = RecipeRepository.Recipes.
+                            Where( longRecipe => longRecipe.ID == id ).
+                            FirstOrDefault();
+
+            return recipe;
+        }
+
+        public static void SaveRecipe( Recipe recipeToSave )
+        {
+            var metaData = RecipeRepository.MetaData;
+            var recipes = RecipeRepository.Recipes;
+
+            if(recipes.Where( recipe => recipe.ID == recipeToSave.ID ).Count() == 0)
+            {
+                recipes.Add( recipeToSave );
+            }
+
+            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , RecipeRepository.Recipes );
+        }
+
+        public static void SaveIngredient( Ingredient ingredientToSave )
+        {
+            var metaData = IngredientsRepository.MetaData;
+            var ingredients = IngredientsRepository.Ingredients;
+
+            if(ingredients.Where( ingredient => ingredient.ID == ingredientToSave.ID ).Count() == 0)
+            {
+                ingredients.Add( ingredientToSave );
+            }
+
+            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , IngredientsRepository.Ingredients );
+        }
+
+        public static void SaveIngredientChanges()
+        {
+            var metaData = IngredientsRepository.MetaData;
+            var ingredients = IngredientsRepository.Ingredients;
+            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , IngredientsRepository.Ingredients );
+        }
+
+        public static IRecipeRpository RecipeRepository { get; private set; }
+        public static IIngredientRepository IngredientsRepository { get; private set; }
+
         private static void ShowRepoNotFoundInDefaultFolderMessage( RepositoryType type )
         {
             string typeStr = type.ToString();
@@ -121,7 +165,7 @@ namespace DinnerPlans.Services
                     RecipeRpository recipeRepo = new RecipeRpository();
                     jsonString = File.ReadAllText( path );
 
-                    recipeRepo = JsonConvert.DeserializeObject<RecipeRpository>( jsonString );
+                    recipeRepo.Recipes = JsonConvert.DeserializeObject<ObservableCollection<Recipe>>( jsonString );
 
                     return recipeRepo.Recipes;
 
@@ -129,7 +173,7 @@ namespace DinnerPlans.Services
                     IngredientRepository ingredientsRepo = new IngredientRepository();
                     jsonString = File.ReadAllText( path );
 
-                    ingredientsRepo = JsonConvert.DeserializeObject<IngredientRepository>( jsonString );
+                    ingredientsRepo.Ingredients = JsonConvert.DeserializeObject<ObservableCollection<Ingredient>>( jsonString );
 
                     return ingredientsRepo.Ingredients;
 
@@ -145,56 +189,6 @@ namespace DinnerPlans.Services
             File.WriteAllText( path , jsonString );
         }
 
-        public static Recipe GetRecipe( RecipeID id )
-        {
-            var recipe = RecipeRepository.Recipes.
-                            Where( longRecipe => longRecipe.ID == id ).
-                            FirstOrDefault();
-
-            return recipe;
-        }
-
-        public static List<RecipeShort> GetShortRecipes()
-        {
-            var shortRecipeList = new List<RecipeShort>();
-
-            foreach(var longRecipe in RecipeRepository.Recipes)
-            {
-                var shortRecipe = new RecipeShort( longRecipe );
-                shortRecipeList.Add( shortRecipe );
-            }
-            return shortRecipeList;
-        }
-
-        public static void SaveRecipe( Recipe recipeToSave )
-        {
-            var metaData = RecipeRepository.MetaData;
-            var recipes = RecipeRepository.Recipes;
-
-            if(recipes.Where( recipe => recipe.ID == recipeToSave.ID ).Count() == 0)
-            {
-                recipes.Add( recipeToSave );
-            }
-
-            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , RecipeRepository );
-        }
-
-        internal static void SaveIngredient( Ingredient ingredientToSave )
-        {
-            var metaData = IngredientsRepository.MetaData;
-            var ingredients = IngredientsRepository.Ingredients;
-
-            if(ingredients.Where( ingredient => ingredient.ID == ingredientToSave.ID ).Count() == 0)
-            {
-                ingredients.Add( ingredientToSave );
-            }
-
-            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , IngredientsRepository );
-        }
-
-        public static RecipeRpository RecipeRepository { get; private set; }
-        public static IngredientRepository IngredientsRepository { get; private set; }
-
         private static void InitializeRepositoryMetadata()
         {
             int startIndex = AppDomain.CurrentDomain.BaseDirectory.IndexOf( "bin" );
@@ -209,20 +203,5 @@ namespace DinnerPlans.Services
             IngredientsRepository.MetaData.RepoName = "IngredientsRepo.json";
             IngredientsRepository.MetaData.Type = RepositoryType.Ingredients;
         }
-    }
-
-    internal class RepositoryData
-    {
-        public RepositoryType Type;
-        public string DefaultRepoFolder;
-        public string RepoName;
-        public string RepoFolderPath;
-    }
-
-    public enum RepositoryType
-    {
-        None = 0,
-        Recipes,
-        Ingredients
     }
 }

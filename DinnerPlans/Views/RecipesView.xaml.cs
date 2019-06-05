@@ -42,7 +42,7 @@ namespace DinnerPlans.Views
 
             var sourceObjectDataContext = sourceObject.DataContext;
 
-            var recipeShort = sourceObjectDataContext as RecipeShort;
+            var recipeShort = sourceObjectDataContext as Recipe;
 
             var recipeID = recipeShort.ID;
             return DataHandler.GetRecipe( recipeID );

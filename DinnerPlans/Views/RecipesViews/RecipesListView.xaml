@@ -13,11 +13,12 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Origin" Binding="{Binding Path=Origin}"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="EditButton_Clicked">Edit</Button>
+                            <Button Click="EditButton_Clicked">
+                                Edit
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

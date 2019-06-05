@@ -56,9 +56,13 @@
 
             <StackPanel DockPanel.Dock="Left" Background="Black">
                 <Button Style="{StaticResource navigationButtons}"
-                        Click="Recipes_Clicked">Manage Recipes</Button>
+                        Click="Recipes_Clicked">
+                    <AccessText>Manage _Recipes</AccessText>
+                </Button>
                 <Button Style="{StaticResource navigationButtons}"
-                        Click="Menus_Clicked">Manage Menus</Button>
+                        Click="Menus_Clicked">
+                    <AccessText>Manage _Menus</AccessText>
+                </Button>
             </StackPanel>
         </DockPanel>
 

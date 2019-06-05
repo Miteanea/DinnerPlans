@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace DinnerPlans
 {
@@ -21,7 +22,7 @@ namespace DinnerPlans
 
             UnitSelector.ItemsSource = Enum.GetValues( typeof( UnitType ) ).Cast<UnitType>();
 
-            ExistingIngridients.Items.Clear();
+            // ExistingIngridients.Items.Clear();
             ExistingIngridients.ItemsSource = _ingredients;
         }
 
@@ -89,12 +90,18 @@ namespace DinnerPlans
 
         private void SaveIngredientChanges( object sender , RoutedEventArgs e )
         {
-            throw new NotImplementedException();
+            DataHandler.SaveIngredientChanges();
         }
 
         private void TextBox_TextChanged( object sender , TextChangedEventArgs e )
         {
-            throw new NotFiniteNumberException();
+            // throw new NotFiniteNumberException();
+        }
+
+        private void TextBox_GotKeyboardFocus( object sender , KeyboardFocusChangedEventArgs e )
+        {
+            if(e.KeyboardDevice.IsKeyDown( Key.Tab ))
+                ( (TextBox)sender ).SelectAll();
         }
     }
 }

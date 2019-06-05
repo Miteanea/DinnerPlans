@@ -6,32 +6,42 @@
     <Application.Resources>
 
         <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="10, 5, 5, 5" />
-            <Setter Property="MinWidth" Value="75" />
+            <Setter Property="Margin" Value="10, 2, 2, 2" />
+
+            <Setter Property="Width" Value="75" />
+            <Setter Property="Height" Value="20" />
         </Style>
 
         <Style TargetType="DataGrid">
-            <Setter Property="MinHeight" Value="15" />
             <Setter Property="Margin" Value="10, 5, 5, 5" />
+
+            <Setter Property="FontSize" Value="10" />
         </Style>
 
         <Style TargetType="Button">
             <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="75" />
+
             <Setter Property="Padding" Value="10,0,10,0" />
             <Setter Property="Margin" Value="10" />
         </Style>
 
         <Style TargetType="Label">
-            <Setter Property="Margin" Value="10,2,5,0" />
-            <Setter Property="MinWidth" Value="30" />
-            <Setter Property="FontWeight" Value="ExtraBold" />
+            <Setter Property="Margin" Value="10,2,2,0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Height" Value="25" />
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5, 5, 5, 5" />
-            <Setter Property="MinWidth" Value="75" />
-            <Setter Property="MinHeight" Value="30" />
-            <Setter Property="Padding" Value="2, 2, 2, 4" />
+
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Padding" Value="2" />
+
+            <Setter Property="Width" Value="75" />
+            <Setter Property="Height" Value="20" />
+
+            <Setter Property="FontSize" Value="10" />
         </Style>
     </Application.Resources>
 </Application>

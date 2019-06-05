@@ -34,9 +34,13 @@
                         Background="LightGray"
                         Orientation="Horizontal">
                 <Button Style="{StaticResource navigationButton}"
-                        Click="AllRecipes_Clicked">All Recipes</Button>
+                        Click="AllRecipes_Clicked">
+                    <AccessText>_All Recipes</AccessText>
+                </Button>
                 <Button Style="{StaticResource navigationButton}"
-                        Click="AddRecipe_Click">Add New Recipe</Button>
+                        Click="AddRecipe_Click">
+                    <AccessText>Add _New Recipe</AccessText>
+                </Button>
             </StackPanel>
         </DockPanel>
 
