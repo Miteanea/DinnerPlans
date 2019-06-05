@@ -54,7 +54,6 @@ namespace DinnerPlans
             int sugars;
             int fats;
             int satfats;
-            int quantity;
             UnitType unit;
 
             if(int.TryParse( CaloriesNewIngredient.Text , out calories ) &&
@@ -63,22 +62,20 @@ namespace DinnerPlans
                 int.TryParse( SugarsNewIngredient.Text , out sugars ) &&
                 int.TryParse( FatsNewIngredient.Text , out fats ) &&
                 int.TryParse( SatFatsNewIngredient.Text , out satfats ) &&
-                int.TryParse( QuantityNewIngredient.Text , out quantity ) &&
                 Enum.TryParse( UnitSelector.Text , out unit ))
             {
                 return new Ingredient
                 {
                     Name = NameNewIngredient.Text ,
                     Unit = unit ,
-                    Quantity = quantity ,
-                    NutritionData = new NutritionData
+                    NutritionData = new NutritionData( NutritionDataType.Ingredient )
                     {
                         Calories = calories ,
                         CarbsGr = carbs ,
                         ProteinsGr = proteins ,
                         FatsGr = fats ,
                         SatFatsGr = satfats ,
-                        SugarsGr = sugars ,
+                        SugarsGr = sugars
                     }
                 };
             }

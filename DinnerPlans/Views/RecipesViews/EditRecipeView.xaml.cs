@@ -1,7 +1,6 @@
 ﻿using DinnerPlans.Models;
 using DinnerPlans.Services;
 using DinnerPlans.ViewModels;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -24,7 +23,6 @@ namespace DinnerPlans.Views.RecipesViews
         private void EditRecipeView_DataContextChanged( object sender , DependencyPropertyChangedEventArgs e )
         {
             _recipe = ( e.NewValue as EditRecipeViewModel ).Recipe;
-            ListOfIngredientsChanged += _recipe.HandleIngredientsChange;
         }
 
         private void SaveRecipeBtn_Click( object sender , RoutedEventArgs e )
@@ -38,18 +36,29 @@ namespace DinnerPlans.Views.RecipesViews
 
         private void Add_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
         {
-            Ingredient newIngredient = GetIngredientFromUser();
+            IngredientEntry newIngredientEntry = DataHandler.CreateEntry( GetIngredientFromUser() , _recipe );
 
-            if(newIngredient != null)
+            if(newIngredientEntry != null)
             {
-                _recipe.Ingredients.Add( newIngredient );
-                ListOfIngredientsChanged.Invoke( _recipe.Ingredients );
+                _recipe.IngredientEntries.Add( newIngredientEntry );
+            }
+        }
+
+        private void Remove_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
+        {
+            var selectedIngredientEntry = RecipesDataGrid.SelectedItem as IngredientEntry;
+            if(selectedIngredientEntry == null)
+            {
+                MessageBox.Show( "No Item is Selected" );
+            }
+            else
+            {
+                _recipe.IngredientEntries.Remove( selectedIngredientEntry );
             }
         }
 
         private Ingredient GetIngredientFromUser()
         {
-            //Open Ingredient Input Window.
             IngredientWindow window = new IngredientWindow();
 
             var ingredient = new Ingredient();
@@ -66,23 +75,5 @@ namespace DinnerPlans.Views.RecipesViews
 
             return ingredient;
         }
-
-        private void Remove_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
-        {
-            var selectedIngredient = RecipesDataGrid.SelectedItem as Ingredient;
-            if(selectedIngredient == null)
-            {
-                MessageBox.Show( "No Item is Selected" );
-            }
-            else
-            {
-                _recipe.Ingredients.Remove( selectedIngredient );
-                ListOfIngredientsChanged.Invoke( _recipe.Ingredients );
-            }
-        }
-
-        public delegate void IngredientChangeHandler( ObservableCollection<Ingredient> ingredients );
-
-        public event IngredientChangeHandler ListOfIngredientsChanged;
     }
 }

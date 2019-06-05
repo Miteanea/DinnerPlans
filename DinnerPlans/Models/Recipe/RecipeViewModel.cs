@@ -11,7 +11,7 @@ namespace DinnerPlans.ViewModels
             Instruction = recipe.Instruction;
             NutritionData = recipe.NutritionData;
             Title = recipe.Title;
-            Ingredients = recipe.Ingredients;
+            Ingredients = recipe.IngredientEntries;
         }
 
         public RecipeID ID { get; set; }
@@ -22,6 +22,6 @@ namespace DinnerPlans.ViewModels
 
         public string Title { get; set; }
 
-        public ObservableCollection<Ingredient> Ingredients { get; set; }
+        public ObservableCollection<IngredientEntry> Ingredients { get; set; }
     }
 }

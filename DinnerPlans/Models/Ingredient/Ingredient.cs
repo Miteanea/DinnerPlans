@@ -1,18 +1,31 @@
-﻿namespace DinnerPlans.Models
+﻿using DinnerPlans.Services;
+using Newtonsoft.Json;
+using System.ComponentModel;
+
+namespace DinnerPlans.Models
 {
-    public class Ingredient : IIngredient
+    [JsonObject]
+    public class Ingredient : IIngredient, INotifyPropertyChanged
     {
         public Ingredient()
         {
             ID = GetID();
+            NutritionData = new NutritionData(NutritionDataType.Ingredient);
+        }
+
+        [JsonConstructor]
+        public Ingredient( IngredientID iD , NutritionData nutritionData )
+        {
+            ID = iD;
+            NutritionData = nutritionData;
+
+            NutritionData.PropertyChanged += OnNutritionDataChange;
         }
 
         // Public
         public IngredientID ID { get; set; }
 
         public string Name { get; set; }
-
-        public int Quantity { get; set; }
 
         public UnitType Unit { get; set; }
 
@@ -22,6 +35,15 @@
         private IngredientID GetID()
         {
             return new IngredientID();
+        }
+
+        // Events and Handlers
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnNutritionDataChange( object sender , PropertyChangedEventArgs e )
+        {
+            PropertyChanged.Invoke( this , null );
+            DataHandler.SaveIngredient( this );
         }
     }
 }

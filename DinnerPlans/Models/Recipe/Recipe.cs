@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 
 namespace DinnerPlans.Models
@@ -12,11 +14,21 @@ namespace DinnerPlans.Models
         }
 
         [JsonConstructor]
-        public Recipe( ObservableCollection<Ingredient> ingredients )
+        public Recipe( ObservableCollection<IngredientEntry> ingredientEntries )
         {
-            Ingredients = ingredients;
+            IngredientEntries = ingredientEntries;
+
+            UpdateNutritionData();
+            UpdateRecipeWeight();
+
+            foreach(IngredientEntry entry in IngredientEntries)
+            {
+                entry.PropertyChanged += IngredientEntryChanges;
+            }
+            IngredientEntries.CollectionChanged += this.OnCollectionChanged;
         }
 
+        // Public
         [JsonProperty]
         public RecipeID ID { get; set; }
 
@@ -24,48 +36,91 @@ namespace DinnerPlans.Models
         public string Instruction { get; set; }
 
         [JsonProperty]
-        public NutritionData NutritionData { get { return _nutritionData; } set { _nutritionData = value; OnPropertyChanged( "NutritionData" ); } }
+        public NutritionData NutritionData
+        {
+            get { return _nutritionData; }
+            set
+            {
+                _nutritionData = value;
+                PropertyChanged?.Invoke( this , new PropertyChangedEventArgs( nameof( NutritionData ) ) );
+            }
+        }
 
-        private NutritionData _nutritionData;
+        public int TotalWeight { get; private set; }
 
         [JsonProperty]
         public string Title { get; set; }
 
-        public ObservableCollection<Ingredient> Ingredients { get; set; }
+        public ObservableCollection<IngredientEntry> IngredientEntries { get; set; }
 
-        public void HandleIngredientsChange( ObservableCollection<Ingredient> ingredients )
+        //Private
+        private NutritionData _nutritionData;
+
+        private void UpdateNutritionData()
         {
             // calculate and assign a value to _nutritionData (kcalx100g)
-            NutritionData nutritionData = new NutritionData();
-            if(Ingredients != null)
+            NutritionData nutritionData = new NutritionData( NutritionDataType.Recipe );
+            if(IngredientEntries != null)
             {
-                foreach(var ingredient in ingredients)
+                foreach(var entry in IngredientEntries)
                 {
-                    NutritionData data = ingredient.NutritionData;
-                    if(data != null)
+                    NutritionData ingredientData = entry.Ingredient.NutritionData;
+                    if(ingredientData != null)
                     {
-                        var quantityRatio = ingredient.Quantity / 100;
-                        nutritionData.Calories += data.Calories * quantityRatio;
-                        nutritionData.CarbsGr += data.CarbsGr * quantityRatio;
-                        nutritionData.FatsGr += data.FatsGr * quantityRatio;
-                        nutritionData.ProteinsGr += data.ProteinsGr * quantityRatio;
-                        nutritionData.SaltsGr += data.SaltsGr * quantityRatio;
-                        nutritionData.SugarsGr += data.SugarsGr * quantityRatio;
+                        decimal quantityMultiplier = 0;
+
+                        switch(entry.Ingredient.Unit)
+                        {
+                            case UnitType.None:
+                                throw new Exception( "Unit Type missing from Ingredient" );
+                            case UnitType.Grams:
+                            case UnitType.Milliliters:
+                                quantityMultiplier = entry.Quantity / 100;
+                                break;
+
+                            case UnitType.Pieces:
+                                quantityMultiplier = entry.Quantity;
+                                break;
+                        }
+
+                        nutritionData.Calories += (int)Math.Round( ingredientData.Calories * quantityMultiplier );
+                        nutritionData.CarbsGr += (int)Math.Round( ingredientData.CarbsGr * quantityMultiplier );
+                        nutritionData.FatsGr += (int)Math.Round( ingredientData.FatsGr * quantityMultiplier );
+                        nutritionData.ProteinsGr += (int)Math.Round( ingredientData.ProteinsGr * quantityMultiplier );
+                        nutritionData.SaltsGr += (int)Math.Round( ingredientData.SaltsGr * quantityMultiplier );
+                        nutritionData.SugarsGr += (int)Math.Round( ingredientData.SugarsGr * quantityMultiplier );
                     }
                 }
             }
             NutritionData = nutritionData;
         }
 
+        private void UpdateRecipeWeight()
+        {
+            TotalWeight = 0;
+
+            foreach(var entry in IngredientEntries)
+            {
+                // For each type of ingredient
+                // calculate the weigth
+                //add to recipe weight
+            }
+            throw new NotImplementedException();
+        }
+
+        // Events And Handlers
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged( string name )
+        public void OnCollectionChanged( object sender , NotifyCollectionChangedEventArgs e )
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if(handler != null)
-            {
-                handler( this , new PropertyChangedEventArgs( name ) );
-            }
+            UpdateNutritionData();
+            UpdateRecipeWeight();
+        }
+
+        public void IngredientEntryChanges( object sender , PropertyChangedEventArgs e )
+        {
+            UpdateNutritionData();
+            UpdateRecipeWeight();
         }
     }
 }

@@ -79,6 +79,20 @@ namespace DinnerPlans.Services
             return recipe;
         }
 
+        public static Ingredient GetIngredient()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IngredientEntry CreateEntry( Ingredient ingredient , Recipe recipe , int quantity = 0 )
+        {
+            var entry = new IngredientEntry();
+            entry.PropertyChanged += recipe.IngredientEntryChanges;
+            entry.Ingredient = ingredient;
+            entry.Quantity = quantity;
+            return entry;
+        }
+
         public static void SaveRecipe( Recipe recipeToSave )
         {
             var metaData = RecipeRepository.MetaData;
@@ -113,6 +127,7 @@ namespace DinnerPlans.Services
         }
 
         public static IRecipeRpository RecipeRepository { get; private set; }
+
         public static IIngredientRepository IngredientsRepository { get; private set; }
 
         private static void ShowRepoNotFoundInDefaultFolderMessage( RepositoryType type )

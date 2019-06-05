@@ -39,7 +39,7 @@
                             <TextBox Text="{Binding Path=Recipe.Title}" />
                         </StackPanel>
                         <StackPanel>
-                            <Label>Calories / 100g</Label>
+                            <Label>Calories</Label>
                             <TextBox Text="{Binding Path=Recipe.NutritionData.Calories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
@@ -48,7 +48,7 @@
                     <StackPanel Orientation="Vertical">
 
                         <DataGrid x:Name="RecipesDataGrid"
-                                  ItemsSource="{Binding Path=Recipe.Ingredients}"
+                                  ItemsSource="{Binding Path=Recipe.IngredientEntries}"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   IsReadOnly="False"
@@ -57,9 +57,9 @@
                                   AutoGenerateColumns="False">
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Name}" />
-                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" />
-                                <DataGridTextColumn IsReadOnly="True" Header="Unit" Binding="{Binding Path=Unit}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Ingredient.Name}" />
+                                <DataGridTextColumn Header="Quantity"  Binding="{Binding Path=Quantity, Mode=TwoWay, UpdateSourceTrigger=Default}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Unit" Binding="{Binding Path=Ingredient.Unit}" />
                                 <DataGridTemplateColumn Header="Actions">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
