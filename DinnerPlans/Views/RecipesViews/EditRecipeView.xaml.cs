@@ -36,10 +36,11 @@ namespace DinnerPlans.Views.RecipesViews
 
         private void Add_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
         {
-            IngredientEntry newIngredientEntry = DataHandler.CreateEntry( GetIngredientFromUser() , _recipe );
+            var ingredient = GetIngredientFromUser();
 
-            if(newIngredientEntry != null)
+            if(ingredient != null)
             {
+                IngredientEntry newIngredientEntry = DataHandler.CreateEntry( ingredient , _recipe );
                 _recipe.IngredientEntries.Add( newIngredientEntry );
             }
         }

@@ -31,8 +31,6 @@ namespace DinnerPlans
 
         private void Add_Ingredient_Clicked( object sender , RoutedEventArgs e )
         {
-            //"Add & Save" Button" => 1) Saves the ingredient to ingredient collection
-            //                            2)closes the window and sends the ingredient to caller.
             if(ExistingIngridients.SelectedItem != null)
             {
                 Ingredient = ExistingIngridients.SelectedItem as Ingredient;
@@ -48,35 +46,34 @@ namespace DinnerPlans
 
         private Ingredient MapUserInputToIngredient()
         {
-            int calories;
-            int carbs;
-            int proteins;
-            int sugars;
-            int fats;
-            int satfats;
+            decimal calories;
+            decimal carbs;
+            decimal proteins;
+            decimal sugars;
+            decimal fats;
+            decimal satfats;
             UnitType unit;
 
-            if(int.TryParse( CaloriesNewIngredient.Text , out calories ) &&
-                int.TryParse( CarbsNewIngredient.Text , out carbs ) &&
-                int.TryParse( ProteinsNewIngredient.Text , out proteins ) &&
-                int.TryParse( SugarsNewIngredient.Text , out sugars ) &&
-                int.TryParse( FatsNewIngredient.Text , out fats ) &&
-                int.TryParse( SatFatsNewIngredient.Text , out satfats ) &&
-                Enum.TryParse( UnitSelector.Text , out unit ))
+            if(decimal.TryParse( CaloriesNewIngredient.Text , out calories )
+                && decimal.TryParse( CarbsNewIngredient.Text , out carbs )
+                && decimal.TryParse( ProteinsNewIngredient.Text , out proteins )
+                && decimal.TryParse( SugarsNewIngredient.Text , out sugars )
+                && decimal.TryParse( FatsNewIngredient.Text , out fats )
+                && decimal.TryParse( SatFatsNewIngredient.Text , out satfats )
+                && Enum.TryParse( UnitSelector.Text , out unit ))
             {
                 return new Ingredient
                 {
                     Name = NameNewIngredient.Text ,
                     Unit = unit ,
-                    NutritionData = new NutritionData( NutritionDataType.Ingredient )
-                    {
-                        Calories = calories ,
-                        CarbsGr = carbs ,
-                        ProteinsGr = proteins ,
-                        FatsGr = fats ,
-                        SatFatsGr = satfats ,
-                        SugarsGr = sugars
-                    }
+                    NutritionData = new NutritionData(
+                        NutritionDataType.Ingredient ,
+                        calories ,
+                        carbs ,
+                        proteins ,
+                        fats ,
+                        satfats ,
+                        sugars )
                 };
             }
             else

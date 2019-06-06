@@ -6,10 +6,9 @@ namespace DinnerPlans.Models
     [JsonObject( MemberSerialization.OptIn )]
     public class RecipeID
     {
-        public RecipeID()
+        public RecipeID( int id )
         {
-            Random rnd = new Random();
-            _id = rnd.Next(int.MinValue, int.MaxValue );
+            _id = id;
         }
 
         [JsonProperty( PropertyName = "ID" )]

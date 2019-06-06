@@ -10,7 +10,7 @@ namespace DinnerPlans.Models
         public Ingredient()
         {
             ID = GetID();
-            NutritionData = new NutritionData(NutritionDataType.Ingredient);
+            NutritionData = new NutritionData( NutritionDataType.Ingredient );
         }
 
         [JsonConstructor]
@@ -34,7 +34,7 @@ namespace DinnerPlans.Models
         // Private
         private IngredientID GetID()
         {
-            return new IngredientID();
+            return new IngredientID( DataHandler.GenerateUniqueRandomID() );
         }
 
         // Events and Handlers

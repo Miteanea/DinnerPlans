@@ -70,6 +70,20 @@ namespace DinnerPlans.Services
             }
         }
 
+        public static int GenerateUniqueRandomID()
+        {
+            bool exists;
+            int id;
+            Random rnd = new Random();
+            do
+            {
+                id = rnd.Next( int.MinValue , int.MaxValue );
+                exists = RecipeRepository.Recipes.Where( recipe => recipe.ID.Value == id ).Count() > 0;
+            } while(exists);
+
+            return id;
+        }
+
         public static Recipe GetRecipe( RecipeID id )
         {
             var recipe = RecipeRepository.Recipes.

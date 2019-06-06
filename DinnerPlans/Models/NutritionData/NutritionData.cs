@@ -6,49 +6,61 @@ namespace DinnerPlans.Models
     [JsonObject( MemberSerialization.OptIn )]
     public class NutritionData : INotifyPropertyChanged
     {
-        public NutritionData( NutritionDataType nutrtitionDataType )
+        public NutritionData( NutritionDataType nutrtitionDataType ,
+            decimal calories = 0 ,
+            decimal carbs = 0 ,
+            decimal proteins = 0 ,
+            decimal fats = 0 ,
+            decimal sugars = 0 ,
+            decimal satfats = 0 )
         {
             Type = nutrtitionDataType;
+            _calories = calories;
+            _carbsGr = carbs;
+            _proteinsGr = proteins;
+            _fatsGr = fats;
+            _satFatsGr = satfats;
+            _sugarsGr = sugars;
         }
 
         // Public
-        public int Calories { get { return _calories; } set { _calories = value; OnPropertyChanged( "Calories" ); } }
+        public decimal Calories { get { return _calories; } set { _calories = value; OnPropertyChanged( "Calories" ); } }
 
-        public int CarbsGr { get { return _carbsGr; } set { _carbsGr = value; OnPropertyChanged( "CarbsGr" ); } }
+        public decimal CarbsGr { get { return _carbsGr; } set { _carbsGr = value; OnPropertyChanged( "CarbsGr" ); } }
 
-        public int ProteinsGr { get { return _proteinsGr; } set { _proteinsGr = value; OnPropertyChanged( "ProteinsGr" ); } }
+        public decimal ProteinsGr { get { return _proteinsGr; } set { _proteinsGr = value; OnPropertyChanged( "ProteinsGr" ); } }
 
-        public int SugarsGr { get { return _sugarsGr; } set { _sugarsGr = value; OnPropertyChanged( "SugarsGr" ); } }
+        public decimal SugarsGr { get { return _sugarsGr; } set { _sugarsGr = value; OnPropertyChanged( "SugarsGr" ); } }
 
-        public int FatsGr { get { return _fatsGr; } set { _fatsGr = value; OnPropertyChanged( "FatsGr" ); } }
+        public decimal FatsGr { get { return _fatsGr; } set { _fatsGr = value; OnPropertyChanged( "FatsGr" ); } }
 
-        public int SaltsGr { get { return _saltsGr; } set { _saltsGr = value; OnPropertyChanged( "SaltsGr" ); } }
+        public decimal SaltsGr { get { return _saltsGr; } set { _saltsGr = value; OnPropertyChanged( "SaltsGr" ); } }
 
-        public int SatFatsGr { get { return _satFatsGr; } set { _satFatsGr = value; OnPropertyChanged( "SatFatsGr" ); } }
+        public decimal SatFatsGr { get { return _satFatsGr; } set { _satFatsGr = value; OnPropertyChanged( "SatFatsGr" ); } }
 
         public NutritionDataType Type { get; set; }
 
         // Private
         [JsonProperty( nameof( Calories ) )]
-        private int _calories;
+        private decimal _calories;
 
         [JsonProperty( nameof( CarbsGr ) )]
-        private int _carbsGr;
+        private decimal _carbsGr;
 
         [JsonProperty( nameof( ProteinsGr ) )]
-        private int _proteinsGr;
+        private decimal _proteinsGr;
 
         [JsonProperty( nameof( SugarsGr ) )]
-        private int _sugarsGr;
+        private decimal _sugarsGr;
 
         [JsonProperty( nameof( FatsGr ) )]
-        private int _fatsGr;
+        private decimal _fatsGr;
 
         [JsonProperty( nameof( SaltsGr ) )]
-        private int _saltsGr;
+        private decimal _saltsGr;
 
         [JsonProperty( nameof( SatFatsGr ) )]
-        private int _satFatsGr;
+        private decimal _satFatsGr;
 
         // Events and Handlers
         public event PropertyChangedEventHandler PropertyChanged;

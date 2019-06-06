@@ -21,7 +21,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0">
-            <Button x:Name="SaveRecipeBtn" Content="Save" Click="SaveRecipeBtn_Click" />
+            <Button x:Name="SaveRecipeBtn" Click="SaveRecipeBtn_Click">
+                <AccessText>_Save</AccessText>
+            </Button>
             <Button x:Name="ResetRecipeBtn" Content="Reset" />
         </StackPanel>
 
@@ -40,7 +42,7 @@
                         </StackPanel>
                         <StackPanel>
                             <Label>Calories</Label>
-                            <TextBox Text="{Binding Path=Recipe.NutritionData.Calories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox IsReadOnly="True" Text="{Binding Path=Recipe.NutritionData.Calories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
 
@@ -57,6 +59,7 @@
                                   AutoGenerateColumns="False">
 
                             <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Ingredient.ID.Value}" />
                                 <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Ingredient.Name}" />
                                 <DataGridTextColumn Header="Quantity"  Binding="{Binding Path=Quantity, Mode=TwoWay, UpdateSourceTrigger=Default}" />
                                 <DataGridTextColumn IsReadOnly="True" Header="Unit" Binding="{Binding Path=Ingredient.Unit}" />

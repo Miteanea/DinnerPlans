@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DinnerPlans.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -11,6 +12,9 @@ namespace DinnerPlans.Models
     {
         public Recipe()
         {
+            ID = new RecipeID( DataHandler.GenerateUniqueRandomID() );
+            NutritionData = new NutritionData( NutritionDataType.Recipe );
+            IngredientEntries = new ObservableCollection<IngredientEntry>();
         }
 
         [JsonConstructor]
@@ -45,7 +49,7 @@ namespace DinnerPlans.Models
             }
         }
 
-        public int TotalWeight { get; private set; }
+        public decimal TotalWeight { get; private set; }
 
         [JsonProperty]
         public string Title { get; set; }
@@ -103,14 +107,33 @@ namespace DinnerPlans.Models
         private void UpdateRecipeWeight()
         {
             TotalWeight = 0;
-
-            foreach(var entry in IngredientEntries)
+            if(IngredientEntries != null)
             {
-                // For each type of ingredient
-                // calculate the weight
-                //add to recipe weight
+                foreach(var entry in IngredientEntries)
+                {
+                    // For each type of ingredient
+                    switch(entry.Ingredient.Unit)
+                    {
+                        case UnitType.None:
+                            break;
+
+                        case UnitType.Grams:
+                            TotalWeight += entry.Quantity;
+                            break;
+
+                        case UnitType.Milliliters:
+                            break;
+
+                        case UnitType.Pieces:
+                            break;
+
+                        default:
+                            break;
+                    }
+                    // calculate the weight
+                    //add to recipe weight
+                }
             }
-            throw new NotImplementedException();
         }
 
         // Events And Handlers

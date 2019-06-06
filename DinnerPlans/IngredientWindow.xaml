@@ -20,17 +20,13 @@
             <Grid x:Name="SelectIngredient" Width="600">
                 <StackPanel HorizontalAlignment="Left">
 
-                    <Button x:Name="SaveChangesBtn"
-                        Content="Save"
-                        Click="SaveIngredientChanges" />
-
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Search By Text" />
                         <TextBox x:Name="TextFilter" Width="100"   Margin="5" />
                     </StackPanel>
 
                     <DataGrid x:Name="ExistingIngridients"
-                          SelectionMode="Single" SelectionUnit="FullRow"
+                          SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False"
                           IsReadOnly="False"  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue"
                           Height="300" Width="512"
                                   VerticalScrollBarVisibility="Auto">
@@ -43,7 +39,7 @@
                             <DataGridTemplateColumn Header="Actions">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Click="Add_Ingredient_Clicked" Content="Add Ingredient" />
+                                        <Button Click="Add_Ingredient_Clicked" Content="Add" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -93,13 +89,9 @@
                         <StackPanel Orientation="Horizontal">
 
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Quantity" />
-                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="QuantityNewIngredient" />
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
                                 <Label>Unit</Label>
-                                <ComboBox x:Name="UnitSelector" />
+                                <ComboBox x:Name="UnitSelector">
+                                </ComboBox>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">

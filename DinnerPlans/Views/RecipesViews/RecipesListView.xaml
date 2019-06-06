@@ -12,7 +12,8 @@
                   AutoGenerateColumns="False">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}"></DataGridTextColumn>
+                <DataGridTextColumn Header="ID"  Binding="{Binding Path=ID.Value}" />
+                <DataGridTextColumn Header="Title"  Binding="{Binding Path=Title}" />
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

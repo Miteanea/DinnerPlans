@@ -21,13 +21,16 @@ namespace DinnerPlans.Models
         }
 
         // Public
-        public Ingredient Ingredient { get; set; }
 
-        public int Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged( nameof( Quantity ) ); } }
+        public Ingredient Ingredient { get { return _ingredient; } set { _ingredient = value; } }
+        public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged( nameof( Quantity ) ); } }
 
         // Private
         [JsonProperty( nameof( Quantity ) )]
-        private int _quantity;
+        private decimal _quantity;
+
+        [JsonProperty( nameof( Ingredient ) )]
+        private Ingredient _ingredient;
 
         // Events and handlers
         public event PropertyChangedEventHandler PropertyChanged;
