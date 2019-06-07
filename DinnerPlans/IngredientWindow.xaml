@@ -9,142 +9,144 @@
         Title="IngredientWindow" Height="512" Width="1000">
     <Window.Resources>
     </Window.Resources>
-    <Grid>
+    <Border>
+        <Grid>
 
-        <!--<Grid.ColumnDefinitions>
+            <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="600" />
             <ColumnDefinition Width="328" />
         </Grid.ColumnDefinitions>-->
 
-        <StackPanel Orientation="Horizontal">
-            <Grid x:Name="SelectIngredient" Width="600">
-                <StackPanel HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <Grid x:Name="SelectIngredient" Width="600">
+                    <StackPanel HorizontalAlignment="Left">
 
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Search By Text" />
-                        <TextBox x:Name="TextFilter" Width="100"   Margin="5" />
-                    </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Search By Text" />
+                            <TextBox x:Name="TextFilter" Width="100"   Margin="5" />
+                        </StackPanel>
 
-                    <DataGrid x:Name="ExistingIngridients"
+                        <DataGrid x:Name="ExistingIngridients"
                           SelectionMode="Single" SelectionUnit="FullRow" CanUserAddRows="False"
                           IsReadOnly="False"  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue"
                           Height="300" Width="512"
                                   VerticalScrollBarVisibility="Auto">
 
-                        <!--Enter columns in standard label Order-->
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Path=ID.Value}" />
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
-                            <DataGridTextColumn Header="Calories" Binding="{Binding Path=NutritionData.Calories}" />
-                            <DataGridTemplateColumn Header="Actions">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Click="Add_Ingredient_Clicked" Content="Add" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Carbs" Binding="{Binding Path=NutritionData.CarbsGr}" />
-                            <DataGridTextColumn Header="Sugars" Binding="{Binding Path=NutritionData.SugarsGr}" />
-                            <DataGridTextColumn Header="Protein" Binding="{Binding Path=NutritionData.ProteinsGr}" />
-                            <DataGridTextColumn Header="Fats" Binding="{Binding Path=NutritionData.FatsGr}" />
-                            <DataGridTextColumn Header="Sat Fats" Binding="{Binding Path=NutritionData.SatFatsGr}" />
-                            <DataGridTextColumn Header="Unit" Binding="{Binding Path=Unit}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </Grid>
+                            <!--Enter columns in standard label Order-->
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Path=ID.Value}" />
+                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                                <DataGridTextColumn Header="Calories" Binding="{Binding Path=NutritionData.Calories}" />
+                                <DataGridTemplateColumn Header="Actions">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="Add_Ingredient_Clicked" Content="Add" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Carbs" Binding="{Binding Path=NutritionData.CarbsGr}" />
+                                <DataGridTextColumn Header="Sugars" Binding="{Binding Path=NutritionData.SugarsGr}" />
+                                <DataGridTextColumn Header="Protein" Binding="{Binding Path=NutritionData.ProteinsGr}" />
+                                <DataGridTextColumn Header="Fats" Binding="{Binding Path=NutritionData.FatsGr}" />
+                                <DataGridTextColumn Header="Sat Fats" Binding="{Binding Path=NutritionData.SatFatsGr}" />
+                                <DataGridTextColumn Header="Unit" Binding="{Binding Path=Unit}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Grid>
 
-            <Grid x:Name="InputIngredient" Width="400">
+                <Grid x:Name="InputIngredient" Width="400">
 
-                <Grid.Resources>
-                    <Style TargetType="TextBox">
-                        <Setter Property="Width" Value="35" />
-                        <Setter Property="Height" Value="20" />
-                        <Setter Property="Background" Value="#e6f7ff" />
-                    </Style>
-                </Grid.Resources>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
-                <Grid x:Name="AddIngredient" Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Width" Value="35" />
+                            <Setter Property="Height" Value="20" />
+                            <Setter Property="Background" Value="#e6f7ff" />
+                        </Style>
+                    </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
-                        <StackPanel Orientation="Horizontal">
-                            <Label  Content="Name" />
-                            <TextBox Name="NameNewIngredient"  Width="175" GotKeyboardFocus="TextBox_GotKeyboardFocus" />
-                        </StackPanel>
+                    <Grid x:Name="AddIngredient" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                        <StackPanel Orientation="Horizontal">
-
+                        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
                             <StackPanel Orientation="Horizontal">
-                                <Label>Unit</Label>
-                                <ComboBox x:Name="UnitSelector">
-                                </ComboBox>
+                                <Label  Content="Name" />
+                                <TextBox Name="NameNewIngredient"  Width="175" GotKeyboardFocus="TextBox_GotKeyboardFocus" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Calories" />
-                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="CaloriesNewIngredient" />
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label>Unit</Label>
+                                    <ComboBox x:Name="UnitSelector">
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Calories" />
+                                    <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="CaloriesNewIngredient" />
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
-                    </StackPanel>
 
-                    <StackPanel Grid.Column="0" Grid.Row="1"
+                        <StackPanel Grid.Column="0" Grid.Row="1"
                             Grid.RowSpan="2">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Proteins" />
-                            <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="ProteinsNewIngredient" />
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Proteins" />
+                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="ProteinsNewIngredient" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Carbs" />
+                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="CarbsNewIngredient" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label  Content="Sugars" />
+                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="SugarsNewIngredient" />
+                            </StackPanel>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Carbs" />
-                            <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="CarbsNewIngredient" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label  Content="Sugars" />
-                            <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="SugarsNewIngredient" />
-                        </StackPanel>
-                    </StackPanel>
-
-                    <StackPanel Grid.Column="1" Grid.Row="1"
+                        <StackPanel Grid.Column="1" Grid.Row="1"
                             Grid.RowSpan="2">
-                        <StackPanel Orientation="Horizontal">
-                            <Label  Content="Fats" />
-                            <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="FatsNewIngredient" />
+                            <StackPanel Orientation="Horizontal">
+                                <Label  Content="Fats" />
+                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="FatsNewIngredient" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Satured Fats" />
+                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="SatFatsNewIngredient" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label  Content="Salts" />
+                                <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="SaltsNewIngredient" />
+                            </StackPanel>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Satured Fats" />
-                            <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="SatFatsNewIngredient" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label  Content="Salts" />
-                            <TextBox GotKeyboardFocus="TextBox_GotKeyboardFocus" TextChanged="TextBox_TextChanged"  Text="0" Name="SaltsNewIngredient" />
-                        </StackPanel>
-                    </StackPanel>
-
-                    <!-- "Add Button" => closes the window and sends the ingredient to caller.-->
-                    <Button Click="Add_Ingredient_Clicked"
+                        <!-- "Add Button" => closes the window and sends the ingredient to caller.-->
+                        <Button Click="Add_Ingredient_Clicked"
                         Grid.Column="1" Grid.Row="2"
                         Grid.ColumnSpan="2"
                         Content="Add Ingredient"
                         Width="125" />
+                    </Grid>
                 </Grid>
-            </Grid>
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
