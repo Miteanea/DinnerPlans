@@ -1,5 +1,6 @@
 ﻿using DinnerPlans.Services;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace DinnerPlans.Models

@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Ingredient\Ingredients.cs" />
     <Compile Include="IngredientWindow.xaml.cs">
       <DependentUpon>IngredientWindow.xaml</DependentUpon>
     </Compile>

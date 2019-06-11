@@ -76,5 +76,9 @@ namespace DinnerPlans.Views.RecipesViews
 
             return ingredient;
         }
+
+        private void UserControl_Loaded( object sender , RoutedEventArgs e )
+        {
+        }
     }
 }
