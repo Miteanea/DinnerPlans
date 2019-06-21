@@ -11,16 +11,6 @@
 
     <Window.Resources>
 
-        <DataTemplate x:Name="RecipesTemplate"
-                      DataType="{x:Type viewmodels:RecipesViewModel}">
-            <views:RecipesView DataContext="{Binding}"></views:RecipesView>
-        </DataTemplate>
-
-        <DataTemplate x:Name="MenusTemplate"
-                      DataType="{x:Type viewmodels:MenusViewModel}">
-            <views:MenusView DataContext="{Binding}"></views:MenusView>
-        </DataTemplate>
-
         <Style x:Key="navigationButtons" TargetType="Button">
             <Setter Property="Margin" Value="10" />
             <Setter Property="Padding" Value="10" />
@@ -70,7 +60,6 @@
                         Grid.Row="0"
                         Grid.RowSpan="6"
                         Grid.Column="2"
-                        Grid.ColumnSpan="4"
-                        Content="{Binding}" />
+                        Grid.ColumnSpan="4" />
     </Grid>
 </Window>

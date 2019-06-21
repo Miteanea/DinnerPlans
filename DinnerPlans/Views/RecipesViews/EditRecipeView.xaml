@@ -40,11 +40,11 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
                             <Label>Title</Label>
-                            <TextBox Text="{Binding Path=Recipe.Title}" />
+                            <TextBox Text="{Binding Path=Title}" />
                         </StackPanel>
                         <StackPanel>
                             <Label>Calories</Label>
-                            <TextBox IsReadOnly="True" Text="{Binding Path=Recipe.NutritionData.Calories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox IsReadOnly="True" Text="{Binding Path=NutritionData.Calories, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                     </StackPanel>
 
@@ -52,7 +52,7 @@
                     <StackPanel Orientation="Vertical">
 
                         <DataGrid x:Name="RecipesDataGrid"
-                                  ItemsSource="{Binding Path=Recipe.IngredientEntries}"
+                                  ItemsSource="{Binding Path=Ingredients}"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   IsReadOnly="False"
@@ -83,7 +83,7 @@
                 <StackPanel Grid.Row="1">
 
                     <Label>Instructions</Label>
-                    <TextBox Height="160" Width="Auto" Text="{Binding Path=Recipe.Instruction}"
+                    <TextBox Height="160" Width="Auto" Text="{Binding Path=Instruction}"
                              AcceptsReturn="True" TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>

@@ -6,7 +6,7 @@ using System.ComponentModel;
 namespace DinnerPlans.Models
 {
     [JsonObject]
-    public class Ingredient : IIngredient, INotifyPropertyChanged
+    public class Ingredient : IIngredient
     {
         public Ingredient()
         {
@@ -19,8 +19,6 @@ namespace DinnerPlans.Models
         {
             ID = iD;
             NutritionData = nutritionData;
-
-            NutritionData.PropertyChanged += OnNutritionDataChange;
         }
 
         // Public
@@ -39,12 +37,6 @@ namespace DinnerPlans.Models
         }
 
         // Events and Handlers
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnNutritionDataChange( object sender , PropertyChangedEventArgs e )
-        {
-            PropertyChanged.Invoke( this , null );
-            DataHandler.SaveIngredient( this );
-        }
+        //public event PropertyChangedEventHandler PropertyChanged;
     }
 }

@@ -11,6 +11,6 @@ namespace DinnerPlans.ViewModels
             Recipes = DataHandler.RecipeRepository.Recipes;
         }
 
-        public ObservableCollection<Recipe> Recipes { get; set; }
+        public ObservableCollection<Models.Recipe> Recipes { get; set; }
     }
 }

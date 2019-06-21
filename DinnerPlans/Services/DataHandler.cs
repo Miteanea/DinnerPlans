@@ -1,4 +1,5 @@
 ﻿using DinnerPlans.Models;
+using DinnerPlans.ViewModels;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
@@ -61,7 +62,7 @@ namespace DinnerPlans.Services
             // Load Recipes Into Memory
             if(metaData.RepoFolderPath != null)
             {
-                RecipeRepository.Recipes = LoadRepo( metaData.RepoFolderPath + metaData.RepoName , metaData.Type ) as ObservableCollection<Recipe>;
+                RecipeRepository.Recipes = LoadRepo( metaData.RepoFolderPath + metaData.RepoName , metaData.Type ) as ObservableCollection<Models.Recipe>;
             }
             else
             {
@@ -78,19 +79,19 @@ namespace DinnerPlans.Services
             do
             {
                 id = rnd.Next( int.MinValue , int.MaxValue );
-                exists = RecipeRepository.Recipes.Where( recipe => recipe.ID.Value == id ).Count() > 0;
+                exists = RecipeRepository.Recipes.Count( recipe => recipe.ID.Value == id ) > 0;
             } while(exists);
 
             return id;
         }
 
-        public static Recipe GetRecipe( RecipeID id )
+        public static RecipeViewModel GetRecipe( RecipeID id )
         {
             var recipe = RecipeRepository.Recipes.
-                            Where( longRecipe => longRecipe.ID == id ).
-                            FirstOrDefault();
+                            FirstOrDefault( longRecipe => longRecipe.ID == id );
+            var viewModel = new RecipeViewModel( recipe );
 
-            return recipe;
+            return viewModel;
         }
 
         public static Ingredient GetIngredient()
@@ -98,39 +99,73 @@ namespace DinnerPlans.Services
             throw new NotImplementedException();
         }
 
-        public static IngredientEntry CreateEntry( Ingredient ingredient , Recipe recipe , int quantity = 0 )
+        public static IngredientEntryViewModel CreateEntry( IngredientViewModel ingredient , RecipeViewModel recipeViewModel , int quantity = 0 )
         {
-            var entry = new IngredientEntry();
-            entry.PropertyChanged += recipe.IngredientEntryChanges;
-            entry.Ingredient = ingredient;
+            var entry = new IngredientEntryViewModel();
+            entry.PropertyChanged += recipeViewModel.IngredientEntryChanges;
+
+            entry.Ingredient.ID = ingredient.ID;
+            entry.Ingredient.Name = ingredient.Name;
+            entry.Ingredient.NutritionData = ingredient.NutritionData;
+            entry.Ingredient.Unit = ingredient.Unit;
+
             entry.Quantity = quantity;
             return entry;
         }
 
-        public static void SaveRecipe( Recipe recipeToSave )
+        public static void SaveRecipe( RecipeViewModel recipeToSave )
         {
             var metaData = RecipeRepository.MetaData;
             var recipes = RecipeRepository.Recipes;
 
-            if(recipes.Where( recipe => recipe.ID == recipeToSave.ID ).Count() == 0)
+            if(recipes.Count( recipe => recipe.ID == recipeToSave.ID ) == 0)
             {
-                recipes.Add( recipeToSave );
+                var recipe = new Recipe()
+                {
+                    ID = recipeToSave.ID ,
+                    IngredientEntries = recipeToSave.Ingredients.Select( ingredient =>
+                        new IngredientEntry( ingredient ) ).ToList() ,
+                    Instruction = recipeToSave.Instruction ,
+                    NutritionData = recipeToSave.NutritionData ,
+                    Title = recipeToSave.Title
+                };
+                recipes.Add( recipe );
             }
 
             UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , RecipeRepository.Recipes );
         }
 
-        public static void SaveIngredient( Ingredient ingredientToSave )
+        public static void SaveIngredient( IngredientViewModel ingredientToSave )
         {
             var metaData = IngredientsRepository.MetaData;
             var ingredients = IngredientsRepository.Ingredients;
 
-            if(ingredients.Where( ingredient => ingredient.ID == ingredientToSave.ID ).Count() == 0)
+            if(ingredients.Count( ingredient => ingredient.ID == ingredientToSave.ID ) == 0)
             {
-                ingredients.Add( ingredientToSave );
-            }
+                var ingredient = new Ingredient()
+                {
+                    ID = ingredientToSave.ID ,
+                    Name = ingredientToSave.Name ,
+                    NutritionData = ingredientToSave.NutritionData ,
+                    Unit = ingredientToSave.Unit
+                };
 
-            UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , IngredientsRepository.Ingredients );
+                ingredients.Add( ingredient );
+                UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , IngredientsRepository.Ingredients );
+            }
+            else
+            {
+                var existingIngr = ingredients.FirstOrDefault( ingredient => ingredient.ID == ingredientToSave.ID );
+                if(
+                    existingIngr.ID != ingredientToSave.ID ||
+                    existingIngr.Name != ingredientToSave.Name ||
+                    existingIngr.NutritionData != ingredientToSave.NutritionData ||
+                    existingIngr.Unit != ingredientToSave.Unit
+                    )
+                {
+                    UpdateLibrary( metaData.RepoFolderPath + metaData.RepoName , IngredientsRepository.Ingredients );
+                }
+            }
         }
 
         public static void SaveIngredientChanges()
@@ -194,7 +229,7 @@ namespace DinnerPlans.Services
                     RecipeRpository recipeRepo = new RecipeRpository();
                     jsonString = File.ReadAllText( path );
 
-                    recipeRepo.Recipes = JsonConvert.DeserializeObject<ObservableCollection<Recipe>>( jsonString );
+                    recipeRepo.Recipes = JsonConvert.DeserializeObject<ObservableCollection<Models.Recipe>>( jsonString );
 
                     return recipeRepo.Recipes;
 

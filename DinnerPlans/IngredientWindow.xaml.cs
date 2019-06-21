@@ -1,5 +1,6 @@
 ﻿using DinnerPlans.Models;
 using DinnerPlans.Services;
+using DinnerPlans.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace DinnerPlans
             InitializeComponent();
         }
 
-        public Ingredient Ingredient { get; set; }
+        public IngredientViewModel Ingredient { get; set; }
 
         private ObservableCollection<Ingredient> _ingredients { get; set; }
 
@@ -28,7 +29,7 @@ namespace DinnerPlans
         {
             if(ExistingIngridients.SelectedItem != null)
             {
-                Ingredient = ExistingIngridients.SelectedItem as Ingredient;
+                Ingredient = ExistingIngridients.SelectedItem as IngredientViewModel;
             }
             else
             {
@@ -39,7 +40,7 @@ namespace DinnerPlans
             this.Close();
         }
 
-        private Ingredient MapUserInputToIngredient()
+        private IngredientViewModel MapUserInputToIngredient()
         {
             decimal calories;
             decimal carbs;
@@ -57,7 +58,7 @@ namespace DinnerPlans
                 && decimal.TryParse( SatFatsNewIngredient.Text , out satfats )
                 && Enum.TryParse( UnitSelector.Text , out unit ))
             {
-                return new Ingredient
+                return new IngredientViewModel
                 {
                     Name = NameNewIngredient.Text ,
                     Unit = unit ,
@@ -108,7 +109,7 @@ namespace DinnerPlans
         {
             Ingredient ingr = ingredient as Ingredient;
             var input = TextFilter.Text.ToLower();
-            return ( ingr.Name.ToLower().Contains( input ) );
+            return ingr.Name.ToLower().Contains( input );
         }
 
         private void TextFilter_TextChanged( object sender , TextChangedEventArgs e )

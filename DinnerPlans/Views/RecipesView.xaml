@@ -9,12 +9,6 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <DataTemplate x:Name="RecipesListTemplate" DataType="{x:Type viewmodels:RecipesListViewModel}">
-            <views:RecipesListView DataContext="{Binding}"></views:RecipesListView>
-        </DataTemplate>
-        <DataTemplate x:Name="EditRecipeTemplate" DataType="{x:Type viewmodels:EditRecipeViewModel}">
-            <views:EditRecipeView DataContext="{Binding}"></views:EditRecipeView>
-        </DataTemplate>
 
         <Style x:Key="navigationButton" TargetType="Button">
             <Setter Property="Height" Value="25" />

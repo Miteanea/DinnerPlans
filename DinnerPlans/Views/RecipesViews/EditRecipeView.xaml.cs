@@ -11,18 +11,27 @@ namespace DinnerPlans.Views.RecipesViews
     /// </summary>
     public partial class EditRecipeView : UserControl
     {
-        public EditRecipeView()
+        public EditRecipeView( RecipeViewModel recipe = null )
         {
             InitializeComponent();
+
+            if(recipe == null)
+            {
+                DataContext = new RecipeViewModel();
+            }
+            else
+            {
+                DataContext = recipe;
+            }
 
             DataContextChanged += new DependencyPropertyChangedEventHandler( EditRecipeView_DataContextChanged );
         }
 
-        private Recipe _recipe;
+        private RecipeViewModel _recipe;
 
         private void EditRecipeView_DataContextChanged( object sender , DependencyPropertyChangedEventArgs e )
         {
-            _recipe = ( e.NewValue as EditRecipeViewModel ).Recipe;
+            _recipe = ( e.NewValue as RecipeViewModel );
         }
 
         private void SaveRecipeBtn_Click( object sender , RoutedEventArgs e )
@@ -40,29 +49,29 @@ namespace DinnerPlans.Views.RecipesViews
 
             if(ingredient != null)
             {
-                IngredientEntry newIngredientEntry = DataHandler.CreateEntry( ingredient , _recipe );
-                _recipe.IngredientEntries.Add( newIngredientEntry );
+                IngredientEntryViewModel newIngredientEntry = DataHandler.CreateEntry( ingredient , _recipe );
+                _recipe.Ingredients.Add( newIngredientEntry );
             }
         }
 
         private void Remove_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
         {
-            var selectedIngredientEntry = RecipesDataGrid.SelectedItem as IngredientEntry;
+            var selectedIngredientEntry = RecipesDataGrid.SelectedItem as IngredientEntryViewModel;
             if(selectedIngredientEntry == null)
             {
                 MessageBox.Show( "No Item is Selected" );
             }
             else
             {
-                _recipe.IngredientEntries.Remove( selectedIngredientEntry );
+                _recipe.Ingredients.Remove( selectedIngredientEntry );
             }
         }
 
-        private Ingredient GetIngredientFromUser()
+        private IngredientViewModel GetIngredientFromUser()
         {
             IngredientWindow window = new IngredientWindow();
 
-            var ingredient = new Ingredient();
+            var ingredient = new IngredientViewModel();
 
             if(window.ShowDialog() == true)
             {

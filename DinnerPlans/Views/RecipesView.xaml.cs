@@ -21,28 +21,28 @@ namespace DinnerPlans.Views
 
         private void AllRecipes_Clicked( object sender , RoutedEventArgs e )
         {
-            DataContext = new RecipesListViewModel();
+            RecipesViewContent.Content = new RecipesListView();
         }
 
         private void AddRecipe_Click( object sender , RoutedEventArgs e )
         {
-            DataContext = new EditRecipeViewModel( new Recipe() );
+            DataContext = new EditRecipeView();
         }
 
         private void EditExistingRecipe( object sender , RoutedEventArgs e )
         {
             var recipe = GetRecipeFromEventArgs( e );
 
-            DataContext = new EditRecipeViewModel( recipe );
+            RecipesViewContent.Content = new EditRecipeView( recipe );
         }
 
-        private Recipe GetRecipeFromEventArgs( RoutedEventArgs e )
+        private RecipeViewModel GetRecipeFromEventArgs( RoutedEventArgs e )
         {
             var sourceObject = e.OriginalSource as Button;
 
             var sourceObjectDataContext = sourceObject.DataContext;
 
-            var recipeShort = sourceObjectDataContext as Recipe;
+            var recipeShort = sourceObjectDataContext as Models.Recipe;
 
             var recipeID = recipeShort.ID;
             return DataHandler.GetRecipe( recipeID );

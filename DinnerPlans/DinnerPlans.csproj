@@ -80,11 +80,11 @@
     <Compile Include="Models\Ingredient\IngredientRepository.cs" />
     <Compile Include="Services\RepositoryData.cs" />
     <Compile Include="Models\Enums\RepositoryType.cs" />
-    <Compile Include="ViewModels\EditRecipeViewModel.cs" />
+    <Compile Include="ViewModels\IngredientEntryViewModel.cs" />
+    <Compile Include="ViewModels\IngredientViewModel.cs" />
     <Compile Include="ViewModels\MenusViewModel.cs" />
     <Compile Include="ViewModels\RecipesListViewModel.cs" />
-    <Compile Include="ViewModels\RecipesViewModel.cs" />
-    <Compile Include="Models\Recipe\RecipeViewModel.cs" />
+    <Compile Include="ViewModels\RecipeViewModel.cs" />
     <Compile Include="Views\MenusView.xaml.cs">
       <DependentUpon>MenusView.xaml</DependentUpon>
     </Compile>

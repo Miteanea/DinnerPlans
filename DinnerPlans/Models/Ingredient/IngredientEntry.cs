@@ -1,29 +1,39 @@
-﻿using Newtonsoft.Json;
+﻿using DinnerPlans.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
     [JsonObject( MemberSerialization.OptIn )]
-    public class IngredientEntry : INotifyPropertyChanged
+    public class IngredientEntry
     {
-        public IngredientEntry()
+        public IngredientEntry( IngredientEntryViewModel ingredientViewModel = null )
         {
+            if(ingredientViewModel != null)
+            {
+                Ingredient = new Ingredient
+                {
+                    ID = ingredientViewModel.Ingredient.ID ,
+                    Name = ingredientViewModel.Ingredient.Name ,
+                    NutritionData = ingredientViewModel.Ingredient.NutritionData ,
+                    Unit = ingredientViewModel.Ingredient.Unit
+                };
+                Quantity = ingredientViewModel.Quantity;
+            }
             Ingredient = new Ingredient();
-            Ingredient.PropertyChanged += OnIngredientEntryChanged;
         }
 
         [JsonConstructor]
         public IngredientEntry( Ingredient ingredient )
         {
             Ingredient = ingredient;
-            Ingredient.PropertyChanged += OnIngredientEntryChanged;
         }
 
         // Public
 
         public Ingredient Ingredient { get { return _ingredient; } set { _ingredient = value; } }
-        public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged( nameof( Quantity ) ); } }
+        public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged(); } }
 
         // Private
         [JsonProperty( nameof( Quantity ) )]
@@ -35,7 +45,7 @@ namespace DinnerPlans.Models
         // Events and handlers
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void QuantityChanged( string name )
+        private void QuantityChanged()
         {
             PropertyChanged.Invoke( this , new PropertyChangedEventArgs( nameof( Quantity ) ) );
         }
