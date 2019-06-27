@@ -20,7 +20,7 @@ namespace DinnerPlans.Models
         }
 
         // Public
-        public IngredientID ID { get; set; }
+        public IId ID { get; set; }
 
         public string Name { get; set; }
 

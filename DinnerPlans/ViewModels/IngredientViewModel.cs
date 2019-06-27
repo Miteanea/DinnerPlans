@@ -13,7 +13,7 @@ namespace DinnerPlans.ViewModels
         }
 
         // Public
-        public IngredientID ID { get; set; }
+        public IId ID { get; set; }
 
         public string Name { get; set; }
 
@@ -28,7 +28,7 @@ namespace DinnerPlans.ViewModels
         }
 
         // Private
-        private IngredientID GetID()
+        private IId GetID()
         {
             return new IngredientID(IngredientDataHandler.GenerateUniqueRandomID());
         }

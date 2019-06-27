@@ -1,4 +1,5 @@
-﻿using DinnerPlans.ViewModels;
+﻿using DinnerPlans.Services;
+using DinnerPlans.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -16,7 +17,7 @@ namespace DinnerPlans.Models
             Ingredients.CollectionChanged += this.OnCollectionChanged;
         }
 
-        public RecipeID ID { get; set; }
+        public IId ID { get; set; }
 
         public string Instruction { get; set; }
 

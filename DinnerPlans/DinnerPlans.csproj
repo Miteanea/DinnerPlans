@@ -75,6 +75,8 @@
     <Compile Include="Models\Recipe\RecipeID.cs" />
     <Compile Include="Models\Recipe\RecipeRepository.cs" />
     <Compile Include="Models\Enums\UnitType.cs" />
+    <Compile Include="Services\IDataHandler.cs" />
+    <Compile Include="Services\IId.cs" />
     <Compile Include="Services\LibraryUpdaters\ILibraryUpdater.cs" />
     <Compile Include="Services\IngredientDataHandler.cs" />
     <Compile Include="Services\LibraryUpdaters\IngredientLibraryUpdater.cs" />

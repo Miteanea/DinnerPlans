@@ -22,7 +22,7 @@ namespace DinnerPlans.Models
 
         // Public
         [JsonProperty]
-        public RecipeID ID { get; set; }
+        public IId ID { get; set; }
 
         [JsonProperty]
         public string Instruction { get; set; }

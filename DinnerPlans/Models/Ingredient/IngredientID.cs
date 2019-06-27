@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using DinnerPlans.Services;
+using Newtonsoft.Json;
 
 namespace DinnerPlans.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class IngredientID
+    public class IngredientID : IId
     {
         public IngredientID(int id)
         {
