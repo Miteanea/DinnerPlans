@@ -65,18 +65,18 @@
     </Compile>
     <Compile Include="Models\Ingredient\IIngredientRepository.cs" />
     <Compile Include="Models\Ingredient\Ingredient.cs" />
-    <Compile Include="Models\Ingredient\IngredientID.cs" />
+    <Compile Include="Models\ID\IngredientID.cs" />
     <Compile Include="Models\Ingredient\IngredientEntry.cs" />
     <Compile Include="Models\NutritionData\NutrtitionDataType.cs" />
     <Compile Include="Models\Ingredient\MeasureUnits.cs" />
     <Compile Include="Models\NutritionData\NutritionData.cs" />
     <Compile Include="Models\Recipe\IRecipeRpository.cs" />
     <Compile Include="Models\Recipe\Recipe.cs" />
-    <Compile Include="Models\Recipe\RecipeID.cs" />
+    <Compile Include="Models\ID\RecipeID.cs" />
     <Compile Include="Models\Recipe\RecipeRepository.cs" />
     <Compile Include="Models\Enums\UnitType.cs" />
     <Compile Include="Services\IDataHandler.cs" />
-    <Compile Include="Services\IId.cs" />
+    <Compile Include="Models\ID\IId.cs" />
     <Compile Include="Services\LibraryUpdaters\ILibraryUpdater.cs" />
     <Compile Include="Services\IngredientDataHandler.cs" />
     <Compile Include="Services\LibraryUpdaters\IngredientLibraryUpdater.cs" />
