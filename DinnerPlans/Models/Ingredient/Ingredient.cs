@@ -1,24 +1,22 @@
 ﻿using DinnerPlans.Services;
 using Newtonsoft.Json;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
     [JsonObject]
-    public class Ingredient : IIngredient
+    public class Ingredient
     {
         public Ingredient()
         {
             ID = GetID();
-            NutritionData = new NutritionData( NutritionDataType.Ingredient );
+            _nutritionData = new NutritionData(NutritionDataType.Ingredient);
         }
 
         [JsonConstructor]
-        public Ingredient( IngredientID iD , NutritionData nutritionData )
+        public Ingredient(IngredientID iD, NutritionData nutritionData)
         {
             ID = iD;
-            NutritionData = nutritionData;
+            _nutritionData = nutritionData;
         }
 
         // Public
@@ -33,10 +31,9 @@ namespace DinnerPlans.Models
         // Private
         private IngredientID GetID()
         {
-            return new IngredientID( DataHandler.GenerateUniqueRandomID() );
+            return new IngredientID(RecipeDataHandler.GenerateUniqueRandomID());
         }
 
-        // Events and Handlers
-        //public event PropertyChangedEventHandler PropertyChanged;
+        private NutritionData _nutritionData;
     }
 }

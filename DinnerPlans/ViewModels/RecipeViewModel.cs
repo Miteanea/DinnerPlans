@@ -1,10 +1,8 @@
-﻿using DinnerPlans.Models;
-using DinnerPlans.ViewModels;
+﻿using DinnerPlans.ViewModels;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 
 namespace DinnerPlans.Models
 {
@@ -12,37 +10,9 @@ namespace DinnerPlans.Models
     {
         private decimal TotalWeight;
 
-        public RecipeViewModel( Recipe recipe = null )
+        public RecipeViewModel(NutritionData nutrData)
         {
-            if(recipe != null)
-            {
-                ID = recipe.ID;
-                Instruction = recipe.Instruction;
-                NutritionData = recipe.NutritionData;
-                Title = recipe.Title;
-                var ingredientsColl = recipe.IngredientEntries.Select( entry => new IngredientEntryViewModel
-                {
-                    Ingredient = new IngredientViewModel
-                    {
-                        ID = entry.Ingredient.ID ,
-                        Name = entry.Ingredient.Name ,
-                        NutritionData = entry.Ingredient.NutritionData ,
-                        Unit = entry.Ingredient.Unit
-                    } ,
-                    Quantity = entry.Quantity
-                } ).ToList();
-
-                foreach(var item in ingredientsColl)
-                {
-                    Ingredients.Add( item );
-                }
-
-                foreach(IngredientEntryViewModel entry in Ingredients)
-                {
-                    entry.PropertyChanged += IngredientEntryChanges;
-                }
-            }
-
+            _nutritionData = nutrData;
             Ingredients.CollectionChanged += this.OnCollectionChanged;
         }
 
@@ -58,7 +28,7 @@ namespace DinnerPlans.Models
             set
             {
                 _nutritionData = value;
-                PropertyChanged?.Invoke( this , new PropertyChangedEventArgs( nameof( NutritionData ) ) );
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NutritionData)));
             }
         }
 
@@ -68,12 +38,12 @@ namespace DinnerPlans.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void IngredientEntryChanges( object sender , PropertyChangedEventArgs e )
+        public void IngredientEntryChanges(object sender, PropertyChangedEventArgs e)
         {
             UpdateRecipe();
         }
 
-        public void OnCollectionChanged( object sender , NotifyCollectionChangedEventArgs e )
+        public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             UpdateRecipe();
         }
@@ -87,20 +57,20 @@ namespace DinnerPlans.Models
         private void UpdateNutritionData()
         {
             // calculate and assign a value to _nutritionData (kcalx100g)
-            NutritionData nutritionData = new NutritionData( NutritionDataType.Recipe );
-            if(Ingredients != null)
+            NutritionData nutritionData = new NutritionData(NutritionDataType.Recipe);
+            if (Ingredients != null)
             {
-                foreach(var entry in Ingredients)
+                foreach (var entry in Ingredients)
                 {
                     NutritionData ingredientData = entry.Ingredient.NutritionData;
-                    if(ingredientData != null)
+                    if (ingredientData != null)
                     {
                         decimal quantityMultiplier = 0;
 
-                        switch(entry.Ingredient.Unit)
+                        switch (entry.Ingredient.Unit)
                         {
                             case UnitType.None:
-                                throw new Exception( "Unit Type missing from Ingredient" );
+                                throw new Exception("Unit Type missing from Ingredient");
                             case UnitType.Grams:
                             case UnitType.Milliliters:
                                 quantityMultiplier = entry.Quantity / 100;
@@ -111,12 +81,12 @@ namespace DinnerPlans.Models
                                 break;
                         }
 
-                        nutritionData.Calories += (int)Math.Round( ingredientData.Calories * quantityMultiplier );
-                        nutritionData.CarbsGr += (int)Math.Round( ingredientData.CarbsGr * quantityMultiplier );
-                        nutritionData.FatsGr += (int)Math.Round( ingredientData.FatsGr * quantityMultiplier );
-                        nutritionData.ProteinsGr += (int)Math.Round( ingredientData.ProteinsGr * quantityMultiplier );
-                        nutritionData.SaltsGr += (int)Math.Round( ingredientData.SaltsGr * quantityMultiplier );
-                        nutritionData.SugarsGr += (int)Math.Round( ingredientData.SugarsGr * quantityMultiplier );
+                        nutritionData.Calories += (int)Math.Round(ingredientData.Calories * quantityMultiplier);
+                        nutritionData.CarbsGr += (int)Math.Round(ingredientData.CarbsGr * quantityMultiplier);
+                        nutritionData.FatsGr += (int)Math.Round(ingredientData.FatsGr * quantityMultiplier);
+                        nutritionData.ProteinsGr += (int)Math.Round(ingredientData.ProteinsGr * quantityMultiplier);
+                        nutritionData.SaltsGr += (int)Math.Round(ingredientData.SaltsGr * quantityMultiplier);
+                        nutritionData.SugarsGr += (int)Math.Round(ingredientData.SugarsGr * quantityMultiplier);
                     }
                 }
             }
@@ -126,12 +96,12 @@ namespace DinnerPlans.Models
         private void UpdateRecipeWeight()
         {
             TotalWeight = 0;
-            if(Ingredients != null)
+            if (Ingredients != null)
             {
-                foreach(var entry in Ingredients)
+                foreach (var entry in Ingredients)
                 {
                     // For each type of ingredient
-                    switch(entry.Ingredient.Unit)
+                    switch (entry.Ingredient.Unit)
                     {
                         case UnitType.None:
                             break;

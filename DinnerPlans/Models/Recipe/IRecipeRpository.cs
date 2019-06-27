@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using DinnerPlans.Services;
+﻿using DinnerPlans.Services;
+using System.Collections.Generic;
 
 namespace DinnerPlans.Models
 {
     internal interface IRecipeRpository
     {
         RepositoryData MetaData { get; }
-        ObservableCollection<Recipe> Recipes { get; set; }
+        List<Recipe> Recipes { get; set; }
     }
 }

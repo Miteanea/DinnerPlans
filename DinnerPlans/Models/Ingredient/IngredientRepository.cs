@@ -1,5 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using DinnerPlans.Models;
+﻿using DinnerPlans.Models;
+using System.Collections.Generic;
 
 namespace DinnerPlans.Services
 {
@@ -10,7 +10,7 @@ namespace DinnerPlans.Services
             MetaData = new RepositoryData();
         }
 
-        public ObservableCollection<Ingredient> Ingredients { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
 
         public RepositoryData MetaData { get; private set; }
     }

@@ -1,22 +1,21 @@
 ﻿using DinnerPlans.ViewModels;
 using Newtonsoft.Json;
-using System;
 using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
-    [JsonObject( MemberSerialization.OptIn )]
+    [JsonObject(MemberSerialization.OptIn)]
     public class IngredientEntry
     {
-        public IngredientEntry( IngredientEntryViewModel ingredientViewModel = null )
+        public IngredientEntry(IngredientEntryViewModel ingredientViewModel = null)
         {
-            if(ingredientViewModel != null)
+            if (ingredientViewModel != null)
             {
                 Ingredient = new Ingredient
                 {
-                    ID = ingredientViewModel.Ingredient.ID ,
-                    Name = ingredientViewModel.Ingredient.Name ,
-                    NutritionData = ingredientViewModel.Ingredient.NutritionData ,
+                    ID = ingredientViewModel.Ingredient.ID,
+                    Name = ingredientViewModel.Ingredient.Name,
+                    NutritionData = ingredientViewModel.Ingredient.NutritionData,
                     Unit = ingredientViewModel.Ingredient.Unit
                 };
                 Quantity = ingredientViewModel.Quantity;
@@ -25,7 +24,7 @@ namespace DinnerPlans.Models
         }
 
         [JsonConstructor]
-        public IngredientEntry( Ingredient ingredient )
+        public IngredientEntry(Ingredient ingredient)
         {
             Ingredient = ingredient;
         }
@@ -36,10 +35,10 @@ namespace DinnerPlans.Models
         public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged(); } }
 
         // Private
-        [JsonProperty( nameof( Quantity ) )]
+        [JsonProperty(nameof(Quantity))]
         private decimal _quantity;
 
-        [JsonProperty( nameof( Ingredient ) )]
+        [JsonProperty(nameof(Ingredient))]
         private Ingredient _ingredient;
 
         // Events and handlers
@@ -47,12 +46,12 @@ namespace DinnerPlans.Models
 
         private void QuantityChanged()
         {
-            PropertyChanged.Invoke( this , new PropertyChangedEventArgs( nameof( Quantity ) ) );
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Quantity)));
         }
 
-        private void OnIngredientEntryChanged( object sender , PropertyChangedEventArgs e )
+        private void OnIngredientEntryChanged(object sender, PropertyChangedEventArgs e)
         {
-            PropertyChanged.Invoke( this , null );
+            PropertyChanged.Invoke(this, null);
         }
     }
 }

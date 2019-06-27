@@ -1,10 +1,6 @@
 ﻿using DinnerPlans.Services;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
@@ -13,13 +9,13 @@ namespace DinnerPlans.Models
     {
         public Recipe()
         {
-            ID = new RecipeID( DataHandler.GenerateUniqueRandomID() );
-            NutritionData = new NutritionData( NutritionDataType.Recipe );
+            ID = new RecipeID(RecipeDataHandler.GenerateUniqueRandomID());
+            NutritionData = new NutritionData(NutritionDataType.Recipe);
             IngredientEntries = new List<IngredientEntry>();
         }
 
         [JsonConstructor]
-        public Recipe( List<IngredientEntry> ingredientEntries )
+        public Recipe(List<IngredientEntry> ingredientEntries)
         {
             IngredientEntries = ingredientEntries;
         }

@@ -11,59 +11,59 @@ namespace DinnerPlans.Views.RecipesViews
     /// </summary>
     public partial class EditRecipeView : UserControl
     {
-        public EditRecipeView( RecipeViewModel recipe = null )
+        public EditRecipeView(RecipeID recipeID = null)
         {
             InitializeComponent();
 
-            if(recipe == null)
+            if (recipeID == null)
             {
-                DataContext = new RecipeViewModel();
+                DataContext = new RecipeViewModel(new NutritionData(NutritionDataType.Recipe));
             }
             else
             {
-                DataContext = recipe;
+                DataContext = RecipeDataHandler.GetRecipe(recipeID);
             }
 
-            DataContextChanged += new DependencyPropertyChangedEventHandler( EditRecipeView_DataContextChanged );
+            DataContextChanged += new DependencyPropertyChangedEventHandler(EditRecipeView_DataContextChanged);
         }
 
         private RecipeViewModel _recipe;
 
-        private void EditRecipeView_DataContextChanged( object sender , DependencyPropertyChangedEventArgs e )
+        private void EditRecipeView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            _recipe = ( e.NewValue as RecipeViewModel );
+            _recipe = (e.NewValue as RecipeViewModel);
         }
 
-        private void SaveRecipeBtn_Click( object sender , RoutedEventArgs e )
+        private void SaveRecipeBtn_Click(object sender, RoutedEventArgs e)
         {
-            DataHandler.SaveRecipe( _recipe );
+            RecipeDataHandler.SaveRecipe(_recipe);
 
-            MessageBox.Show( "Recipe Saved!" );
+            MessageBox.Show("Recipe Saved!");
 
             // Go To Recipe ListView
         }
 
-        private void Add_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
+        private void Add_Ingredient_Btn_Click(object sender, RoutedEventArgs e)
         {
             var ingredient = GetIngredientFromUser();
 
-            if(ingredient != null)
+            if (ingredient != null)
             {
-                IngredientEntryViewModel newIngredientEntry = DataHandler.CreateEntry( ingredient , _recipe );
-                _recipe.Ingredients.Add( newIngredientEntry );
+                IngredientEntryViewModel newIngredientEntry = RecipeDataHandler.CreateEntry(ingredient, _recipe);
+                _recipe.Ingredients.Add(newIngredientEntry);
             }
         }
 
-        private void Remove_Ingredient_Btn_Click( object sender , RoutedEventArgs e )
+        private void Remove_Ingredient_Btn_Click(object sender, RoutedEventArgs e)
         {
             var selectedIngredientEntry = RecipesDataGrid.SelectedItem as IngredientEntryViewModel;
-            if(selectedIngredientEntry == null)
+            if (selectedIngredientEntry == null)
             {
-                MessageBox.Show( "No Item is Selected" );
+                MessageBox.Show("No Item is Selected");
             }
             else
             {
-                _recipe.Ingredients.Remove( selectedIngredientEntry );
+                _recipe.Ingredients.Remove(selectedIngredientEntry);
             }
         }
 
@@ -73,10 +73,10 @@ namespace DinnerPlans.Views.RecipesViews
 
             var ingredient = new IngredientViewModel();
 
-            if(window.ShowDialog() == true)
+            if (window.ShowDialog() == true)
             {
                 ingredient = window.Ingredient;
-                DataHandler.SaveIngredient( ingredient );
+                IngredientDataHandler.SaveIngredient(ingredient);
             }
             else
             {
@@ -86,7 +86,7 @@ namespace DinnerPlans.Views.RecipesViews
             return ingredient;
         }
 
-        private void UserControl_Loaded( object sender , RoutedEventArgs e )
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
         }
     }

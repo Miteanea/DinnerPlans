@@ -1,4 +1,4 @@
-﻿using DinnerPlans.ViewModels;
+﻿using DinnerPlans.Services;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,27 +12,27 @@ namespace DinnerPlans.Views.RecipesViews
         public RecipesListView()
         {
             InitializeComponent();
-            DataContext = new RecipesListViewModel();
+            DataContext = RecipeDataHandler.GetRecipeViewModelsForListView();
         }
 
-        private void EditButton_Clicked( object sender , RoutedEventArgs e )
+        private void EditButton_Clicked(object sender, RoutedEventArgs e)
         {
             var btn = sender as Button;
             var data = btn.DataContext;
 
-            RaiseEvent( new RoutedEventArgs( EditExistingRecipe , btn ) );
+            RaiseEvent(new RoutedEventArgs(EditExistingRecipe, btn));
         }
 
         public static readonly RoutedEvent EditExistingRecipe = EventManager.RegisterRoutedEvent(
-                       "Edit" ,
-                       RoutingStrategy.Bubble ,
-                       typeof( RoutedEventHandler ) ,
-                       typeof( RecipesListView ) );
+                       "Edit",
+                       RoutingStrategy.Bubble,
+                       typeof(RoutedEventHandler),
+                       typeof(RecipesListView));
 
         public event RoutedEventHandler Edit
         {
-            add { AddHandler( EditExistingRecipe , value ); }
-            remove { RemoveHandler( EditExistingRecipe , value ); }
+            add { AddHandler(EditExistingRecipe, value); }
+            remove { RemoveHandler(EditExistingRecipe, value); }
         }
     }
 }

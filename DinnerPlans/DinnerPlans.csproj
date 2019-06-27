@@ -39,6 +39,7 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,13 +63,11 @@
     <Compile Include="IngredientWindow.xaml.cs">
       <DependentUpon>IngredientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ingredient\IIngredient.cs" />
     <Compile Include="Models\Ingredient\IIngredientRepository.cs" />
     <Compile Include="Models\Ingredient\Ingredient.cs" />
     <Compile Include="Models\Ingredient\IngredientID.cs" />
     <Compile Include="Models\Ingredient\IngredientEntry.cs" />
     <Compile Include="Models\NutritionData\NutrtitionDataType.cs" />
-    <Compile Include="Models\Recipe\IRecipe.cs" />
     <Compile Include="Models\Ingredient\MeasureUnits.cs" />
     <Compile Include="Models\NutritionData\NutritionData.cs" />
     <Compile Include="Models\Recipe\IRecipeRpository.cs" />
@@ -76,10 +75,16 @@
     <Compile Include="Models\Recipe\RecipeID.cs" />
     <Compile Include="Models\Recipe\RecipeRepository.cs" />
     <Compile Include="Models\Enums\UnitType.cs" />
-    <Compile Include="Services\DataHandler.cs" />
+    <Compile Include="Services\LibraryUpdaters\ILibraryUpdater.cs" />
+    <Compile Include="Services\IngredientDataHandler.cs" />
+    <Compile Include="Services\LibraryUpdaters\IngredientLibraryUpdater.cs" />
+    <Compile Include="Services\LibraryUpdaters\RecipeLibraryUpdater.cs" />
+    <Compile Include="Services\RecipeDataHandler.cs" />
     <Compile Include="Models\Ingredient\IngredientRepository.cs" />
     <Compile Include="Services\RepositoryData.cs" />
     <Compile Include="Models\Enums\RepositoryType.cs" />
+    <Compile Include="Services\RepositoryFactory.cs" />
+    <Compile Include="Services\RepositoryLoader.cs" />
     <Compile Include="ViewModels\IngredientEntryViewModel.cs" />
     <Compile Include="ViewModels\IngredientViewModel.cs" />
     <Compile Include="ViewModels\MenusViewModel.cs" />

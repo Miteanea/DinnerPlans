@@ -1,7 +1,4 @@
-﻿using DinnerPlans.ViewModels;
-using Newtonsoft.Json;
-using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace DinnerPlans.ViewModels
 {
@@ -9,7 +6,7 @@ namespace DinnerPlans.ViewModels
     {
         public IngredientEntryViewModel()
         {
-            Ingredient = new IngredientViewModel();
+            _ingredient = new IngredientViewModel();
             Ingredient.PropertyChanged += OnIngredientEntryChanged;
         }
 
@@ -28,12 +25,12 @@ namespace DinnerPlans.ViewModels
 
         private void QuantityChanged()
         {
-            PropertyChanged.Invoke( this , new PropertyChangedEventArgs( nameof( Quantity ) ) );
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(nameof(Quantity)));
         }
 
-        private void OnIngredientEntryChanged( object sender , PropertyChangedEventArgs e )
+        private void OnIngredientEntryChanged(object sender, PropertyChangedEventArgs e)
         {
-            PropertyChanged.Invoke( this , null );
+            PropertyChanged.Invoke(this, null);
         }
     }
 }

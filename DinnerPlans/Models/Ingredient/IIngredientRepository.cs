@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using DinnerPlans.Models;
+﻿using DinnerPlans.Models;
+using System.Collections.Generic;
 
 namespace DinnerPlans.Services
 {
     internal interface IIngredientRepository
     {
-        ObservableCollection<Ingredient> Ingredients { get; set; }
+        List<Ingredient> Ingredients { get; set; }
         RepositoryData MetaData { get; }
     }
 }

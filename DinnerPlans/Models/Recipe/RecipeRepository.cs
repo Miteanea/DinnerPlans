@@ -1,5 +1,5 @@
 ﻿using DinnerPlans.Services;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace DinnerPlans.Models
 {
@@ -12,6 +12,6 @@ namespace DinnerPlans.Models
 
         public RepositoryData MetaData { get; private set; }
 
-        public ObservableCollection<Recipe> Recipes { get; set; }
+        public List<Recipe> Recipes { get; set; }
     }
 }

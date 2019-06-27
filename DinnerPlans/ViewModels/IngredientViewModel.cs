@@ -1,7 +1,5 @@
 ﻿using DinnerPlans.Models;
 using DinnerPlans.Services;
-using Newtonsoft.Json;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace DinnerPlans.ViewModels
@@ -11,7 +9,7 @@ namespace DinnerPlans.ViewModels
         public IngredientViewModel()
         {
             ID = GetID();
-            NutritionData = new NutritionData( NutritionDataType.Ingredient );
+            _nutritionData = new NutritionData(NutritionDataType.Ingredient);
         }
 
         // Public
@@ -32,7 +30,7 @@ namespace DinnerPlans.ViewModels
         // Private
         private IngredientID GetID()
         {
-            return new IngredientID( DataHandler.GenerateUniqueRandomID() );
+            return new IngredientID(IngredientDataHandler.GenerateUniqueRandomID());
         }
 
         // Events and Handlers
@@ -40,8 +38,8 @@ namespace DinnerPlans.ViewModels
 
         private void OnNutritionDataChange()
         {
-            PropertyChanged.Invoke( this , null );
-            DataHandler.SaveIngredient( this );
+            PropertyChanged.Invoke(this, null);
+            IngredientDataHandler.SaveIngredient(this);
         }
     }
 }
