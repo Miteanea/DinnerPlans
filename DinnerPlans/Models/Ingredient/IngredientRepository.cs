@@ -8,6 +8,7 @@ namespace DinnerPlans.Services
         public IngredientRepository()
         {
             MetaData = new RepositoryData();
+            Ingredients = new List<Ingredient>();
         }
 
         public List<Ingredient> Ingredients { get; set; }

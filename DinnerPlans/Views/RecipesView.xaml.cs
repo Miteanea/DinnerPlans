@@ -1,4 +1,5 @@
 ﻿using DinnerPlans.Models;
+using DinnerPlans.Services;
 using DinnerPlans.Views.RecipesViews;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,7 +35,7 @@ namespace DinnerPlans.Views
             RecipesViewContent.Content = new EditRecipeView(recipeID);
         }
 
-        private RecipeID GetRecipeFromEventArgs(RoutedEventArgs e)
+        private IId GetRecipeFromEventArgs(RoutedEventArgs e)
         {
             var sourceObject = e.OriginalSource as Button;
             var sourceObjectDataContext = sourceObject.DataContext;

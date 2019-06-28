@@ -41,31 +41,33 @@ namespace DinnerPlans.Services
         {
             var ingredients = Ingredients;
 
-            if (ingredients.Count(ingredient => ingredient.ID == ingredientToSave.ID) == 0)
-            {
-                var ingredient = new Ingredient()
-                {
-                    ID = ingredientToSave.ID,
-                    Name = ingredientToSave.Name,
-                    NutritionData = ingredientToSave.NutritionData,
-                    Unit = ingredientToSave.Unit
-                };
+            //if (ingredients.Count(ingredient => ingredient.ID == ingredientToSave.ID) == 0)
+            //{
+            //    var ingredient = new Ingredient()
+            //    {
+            //        ID = ingredientToSave.ID,
+            //        Name = ingredientToSave.Name,
+            //        NutritionData = ingredientToSave.NutritionData,
+            //        Unit = ingredientToSave.Unit
+            //    };
 
-                ingredients.Add(ingredient);
-            }
-            else
-            {
-                var existingIngr = ingredients.FirstOrDefault(ingredient => ingredient.ID == ingredientToSave.ID);
-                if (
-                    existingIngr.ID != ingredientToSave.ID ||
-                    existingIngr.Name != ingredientToSave.Name ||
-                    existingIngr.NutritionData != ingredientToSave.NutritionData ||
-                    existingIngr.Unit != ingredientToSave.Unit
-                    )
-                {
-                    libraryUpdater.UpdateLibrary(Ingredients);
-                }
-            }
+            //    ingredients.Add(ingredient);
+            //}
+            //else
+            //{
+            //    var existingIngr = ingredients.FirstOrDefault(ingredient => ingredient.ID == ingredientToSave.ID);
+            //    if (
+            //        existingIngr.ID != ingredientToSave.ID ||
+            //        existingIngr.Name != ingredientToSave.Name ||
+            //        existingIngr.NutritionData != ingredientToSave.NutritionData ||
+            //        existingIngr.Unit != ingredientToSave.Unit
+            //        )
+            //    {
+            //        libraryUpdater.UpdateLibrary(Ingredients);
+            //    }
+            //}
+
+            throw new NotImplementedException();
         }
 
         public static void SaveIngredientChanges()

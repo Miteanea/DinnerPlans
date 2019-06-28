@@ -15,13 +15,13 @@ namespace DinnerPlans.Models
         }
 
         [JsonConstructor]
-        public Recipe(List<IngredientEntry> ingredientEntries)
+        public Recipe(RecipeID iD, List<IngredientEntry> ingredientEntries)
         {
             IngredientEntries = ingredientEntries;
+            this.ID = iD;
         }
 
         // Public
-        [JsonProperty]
         public IId ID { get; set; }
 
         [JsonProperty]

@@ -6,9 +6,14 @@ namespace DinnerPlans.ViewModels
 {
     public class IngredientViewModel : INotifyPropertyChanged
     {
-        public IngredientViewModel()
+        public IngredientViewModel(NutritionData nutritionData = null)
         {
             ID = GetID();
+
+            if (nutritionData != null)
+            {
+                _nutritionData = nutritionData;
+            }
             _nutritionData = new NutritionData(NutritionDataType.Ingredient);
         }
 

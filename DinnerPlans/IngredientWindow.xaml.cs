@@ -55,18 +55,19 @@ namespace DinnerPlans
                 && decimal.TryParse(SatFatsNewIngredient.Text, out satfats)
                 && Enum.TryParse(UnitSelector.Text, out unit))
             {
-                return new IngredientViewModel
-                {
-                    Name = NameNewIngredient.Text,
-                    Unit = unit,
-                    NutritionData = new NutritionData(
+                var nutritionData = new NutritionData(
                         NutritionDataType.Ingredient,
                         calories,
                         carbs,
                         proteins,
                         fats,
                         satfats,
-                        sugars)
+                        sugars);
+
+                return new IngredientViewModel(nutritionData)
+                {
+                    Name = NameNewIngredient.Text,
+                    Unit = unit
                 };
             }
             else

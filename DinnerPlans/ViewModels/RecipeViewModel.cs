@@ -11,9 +11,15 @@ namespace DinnerPlans.Models
     {
         private decimal TotalWeight;
 
-        public RecipeViewModel(NutritionData nutrData)
+        public RecipeViewModel(NutritionData nutrData = null)
         {
+            if (nutrData == null)
+            {
+                _nutritionData = new NutritionData(NutritionDataType.Recipe);
+            }
             _nutritionData = nutrData;
+
+            Ingredients = new ObservableCollection<IngredientEntryViewModel>();
             Ingredients.CollectionChanged += this.OnCollectionChanged;
         }
 

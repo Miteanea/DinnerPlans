@@ -23,21 +23,20 @@ namespace DinnerPlans.Services
             return id;
         }
 
-        internal static object GetRecipeViewModelsForListView()
+        internal static ObservableCollection<RecipeViewModel> GetRecipeViewModelsForListView()
         {
-            return MapRecipesToObservableCollectionOfViewModels();
-        }
+            ObservableCollection<RecipeViewModel> viewModels = new ObservableCollection<RecipeViewModel>();
 
-        private static ObservableCollection<RecipeViewModel> MapRecipesToObservableCollectionOfViewModels()
-        {
             foreach (Recipe recipe in Recipes)
             {
+                var recipeVM = MapRecipeToVM(recipe);
+                viewModels.Add(recipeVM);
             }
 
-            throw new NotImplementedException();
+            return viewModels;
         }
 
-        public static RecipeViewModel GetRecipe(RecipeID id)
+        public static RecipeViewModel GetRecipe(IId id)
         {
             var recipe = Recipes.FirstOrDefault(longRecipe => longRecipe.ID == id);
 
@@ -92,16 +91,14 @@ namespace DinnerPlans.Services
                 VM.ID = recipe.ID;
                 VM.Instruction = recipe.Instruction;
                 VM.Title = recipe.Title;
-                var ingredientsColl = recipe.IngredientEntries.Select(entry => new IngredientEntryViewModel
+                var ingredientsColl = recipe.IngredientEntries.Select(entry => new IngredientEntryViewModel(entry.Quantity)
                 {
-                    Ingredient = new IngredientViewModel
+                    Ingredient = new IngredientViewModel(entry.Ingredient.NutritionData)
                     {
                         ID = entry.Ingredient.ID,
                         Name = entry.Ingredient.Name,
-                        NutritionData = entry.Ingredient.NutritionData,
                         Unit = entry.Ingredient.Unit
                     },
-                    Quantity = entry.Quantity
                 }).ToList();
 
                 foreach (var item in ingredientsColl)

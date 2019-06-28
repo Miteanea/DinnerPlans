@@ -8,6 +8,7 @@ namespace DinnerPlans.Models
         public RecipeRpository()
         {
             MetaData = new RepositoryData();
+            Recipes = new List<Recipe>();
         }
 
         public RepositoryData MetaData { get; private set; }

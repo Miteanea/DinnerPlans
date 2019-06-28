@@ -24,9 +24,8 @@ namespace DinnerPlans.Models
         }
 
         [JsonConstructor]
-        public IngredientEntry(Ingredient ingredient)
+        public IngredientEntry()
         {
-            Ingredient = ingredient;
         }
 
         // Public

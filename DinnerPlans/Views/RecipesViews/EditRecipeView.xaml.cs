@@ -11,17 +11,20 @@ namespace DinnerPlans.Views.RecipesViews
     /// </summary>
     public partial class EditRecipeView : UserControl
     {
-        public EditRecipeView(RecipeID recipeID = null)
+        public EditRecipeView(IId recipeID = null)
         {
             InitializeComponent();
 
+            _recipe = new RecipeViewModel();
+
             if (recipeID == null)
             {
-                DataContext = new RecipeViewModel(new NutritionData(NutritionDataType.Recipe));
+                DataContext = _recipe;
             }
             else
             {
-                DataContext = RecipeDataHandler.GetRecipe(recipeID);
+                _recipe = RecipeDataHandler.GetRecipe(recipeID);
+                DataContext = _recipe;
             }
 
             DataContextChanged += new DependencyPropertyChangedEventHandler(EditRecipeView_DataContextChanged);

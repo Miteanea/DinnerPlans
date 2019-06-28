@@ -4,10 +4,13 @@ namespace DinnerPlans.ViewModels
 {
     public class IngredientEntryViewModel : INotifyPropertyChanged
     {
-        public IngredientEntryViewModel()
+        public IngredientEntryViewModel(decimal quantity = 0)
         {
             _ingredient = new IngredientViewModel();
+            _quantity = quantity;
+
             Ingredient.PropertyChanged += OnIngredientEntryChanged;
+
         }
 
         // Public

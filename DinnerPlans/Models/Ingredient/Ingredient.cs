@@ -31,7 +31,7 @@ namespace DinnerPlans.Models
         // Private
         private IngredientID GetID()
         {
-            return new IngredientID(RecipeDataHandler.GenerateUniqueRandomID());
+            return new IngredientID(IngredientDataHandler.GenerateUniqueRandomID());
         }
 
         private NutritionData _nutritionData;
