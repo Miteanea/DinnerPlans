@@ -20,7 +20,7 @@ namespace DinnerPlans
 
         public IngredientViewModel Ingredient { get; set; }
 
-        private ObservableCollection<Ingredient> _ingredients { get; set; }
+        private ObservableCollection<IngredientViewModel> _ingredients { get; set; }
 
         private void Add_Ingredient_Clicked(object sender, RoutedEventArgs e)
         {

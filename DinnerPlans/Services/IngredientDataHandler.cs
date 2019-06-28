@@ -7,6 +7,10 @@ using System.Linq;
 
 namespace DinnerPlans.Services
 {
+    /// <summary>
+    /// Serves as a connection between Data and View;
+    /// Conversion of Model to Viewodels is handled here
+    /// </summary>
     internal static class IngredientDataHandler
     {
         public static int GenerateUniqueRandomID()
@@ -40,6 +44,10 @@ namespace DinnerPlans.Services
         public static void SaveIngredient(IngredientViewModel ingredientToSave)
         {
             var ingredients = Ingredients;
+
+
+
+
 
             //if (ingredients.Count(ingredient => ingredient.ID == ingredientToSave.ID) == 0)
             //{
@@ -85,14 +93,15 @@ namespace DinnerPlans.Services
             throw new NotImplementedException();
         }
 
-        internal static ObservableCollection<Ingredient> GetIngredients()
+        internal static ObservableCollection<IngredientViewModel> GetIngredients()
         {
-            var ingr = new ObservableCollection<Ingredient>();
-            foreach (var ing in Ingredients)
+            ObservableCollection<IngredientViewModel> ingredientsVMs = new ObservableCollection<IngredientViewModel>();
+            foreach (var ingredient in Ingredients)
             {
-                ingr.Add(ing);
+                IngredientViewModel ingredientVM = MapIngredientToVM(ingredient);
+                ingredientsVMs.Add(ingredientVM);
             }
-            return ingr;
+            return ingredientsVMs;
         }
     }
 }

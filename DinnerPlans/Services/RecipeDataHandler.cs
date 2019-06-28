@@ -7,6 +7,10 @@ using System.Linq;
 
 namespace DinnerPlans.Services
 {
+    /// <summary>
+    /// Serves as a connection between Data and View;
+    /// Conversion of Model to Viewodels is handled here
+    /// </summary>
     internal static class RecipeDataHandler
     {
         public static int GenerateUniqueRandomID()
