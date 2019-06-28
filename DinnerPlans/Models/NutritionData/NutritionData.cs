@@ -12,7 +12,8 @@ namespace DinnerPlans.Models
             decimal proteins = 0,
             decimal fats = 0,
             decimal sugars = 0,
-            decimal satfats = 0)
+            decimal satfats = 0,
+            decimal salts = 0)
         {
             Type = nutrtitionDataType;
             _calories = calories;
@@ -21,6 +22,7 @@ namespace DinnerPlans.Models
             _fatsGr = fats;
             _satFatsGr = satfats;
             _sugarsGr = sugars;
+            _saltsGr = salts;
         }
 
         // Public

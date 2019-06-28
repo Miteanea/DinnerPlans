@@ -1,1 +1,65 @@
-[{"ID":{"ID":1},"Name":"Spaghettoni","Unit":1,"NutritionData":{"Calories":350.0,"CarbsGr":73.0,"ProteinsGr":13.0,"SugarsGr":1.0,"FatsGr":3.0,"SaltsGr":0.0,"SatFatsGr":0.0}},{"ID":{"ID":2},"Name":"Uova","Unit":3,"NutritionData":{"Calories":70.0,"CarbsGr":1.0,"ProteinsGr":6.0,"SugarsGr":1.5,"FatsGr":4.5,"SaltsGr":0.0,"SatFatsGr":0.0}},{"ID":{"ID":3},"Name":"Parmigiano","Unit":1,"NutritionData":{"Calories":431.0,"CarbsGr":4.1,"ProteinsGr":38.0,"SugarsGr":17.0,"FatsGr":29.0,"SaltsGr":0.0,"SatFatsGr":0.9}},{"ID":{"ID":4},"Name":"Peperoni","Unit":1,"NutritionData":{"Calories":27.0,"CarbsGr":6.0,"ProteinsGr":1.0,"SugarsGr":0.0,"FatsGr":0.2,"SaltsGr":0.0,"SatFatsGr":0.0}}]
+[{
+        "ID": {
+            "ID": 1
+        },
+        "Name": "Spaghettoni",
+        "Unit": 1,
+        "NutritionData": {
+            "Calories": 350.0,
+            "CarbsGr": 73.0,
+            "ProteinsGr": 13.0,
+            "SugarsGr": 1.0,
+            "FatsGr": 3.0,
+            "SaltsGr": 0.0,
+            "SatFatsGr": 0.0
+        }
+    },
+    {
+        "ID": {
+            "ID": 2
+        },
+        "Name": "Uova",
+        "Unit": 3,
+        "NutritionData": {
+            "Calories": 70.0,
+            "CarbsGr": 1.0,
+            "ProteinsGr": 6.0,
+            "SugarsGr": 1.5,
+            "FatsGr": 4.5,
+            "SaltsGr": 0.0,
+            "SatFatsGr": 0.0
+        }
+    },
+    {
+        "ID": {
+            "ID": 3
+        },
+        "Name": "Parmigiano",
+        "Unit": 1,
+        "NutritionData": {
+            "Calories": 431.0,
+            "CarbsGr": 4.1,
+            "ProteinsGr": 38.0,
+            "SugarsGr": 17.0,
+            "FatsGr": 29.0,
+            "SaltsGr": 0.0,
+            "SatFatsGr": 0.9
+        }
+    },
+    {
+        "ID": {
+            "ID": 4
+        },
+        "Name": "Peperoni",
+        "Unit": 1,
+        "NutritionData": {
+            "Calories": 27.0,
+            "CarbsGr": 6.0,
+            "ProteinsGr": 1.0,
+            "SugarsGr": 0.0,
+            "FatsGr": 0.2,
+            "SaltsGr": 0.0,
+            "SatFatsGr": 0.0
+        }
+    }
+]

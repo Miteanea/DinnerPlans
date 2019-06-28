@@ -51,15 +51,11 @@ namespace DinnerPlans.Services
 
         public static IngredientEntryViewModel CreateEntry(IngredientViewModel ingredient, RecipeViewModel recipeViewModel, int quantity = 0)
         {
-            var entry = new IngredientEntryViewModel();
+            var entry = new IngredientEntryViewModel(quantity);
+
             entry.PropertyChanged += recipeViewModel.IngredientEntryChanges;
+            entry.Ingredient = ingredient;
 
-            entry.Ingredient.ID = ingredient.ID;
-            entry.Ingredient.Name = ingredient.Name;
-            entry.Ingredient.NutritionData = ingredient.NutritionData;
-            entry.Ingredient.Unit = ingredient.Unit;
-
-            entry.Quantity = quantity;
             return entry;
         }
 

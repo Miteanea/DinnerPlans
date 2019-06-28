@@ -79,7 +79,7 @@ namespace DinnerPlans.Views.RecipesViews
             if (window.ShowDialog() == true)
             {
                 ingredient = window.Ingredient;
-                IngredientDataHandler.SaveIngredient(ingredient);
+                // IngredientDataHandler.SaveIngredient(ingredient);
             }
             else
             {

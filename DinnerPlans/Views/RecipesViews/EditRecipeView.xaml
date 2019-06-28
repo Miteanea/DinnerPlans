@@ -60,6 +60,9 @@
                                   AlternatingRowBackground="LightBlue"
                                   AutoGenerateColumns="False">
 
+                            <DataGrid.Resources>
+                            </DataGrid.Resources>
+
                             <DataGrid.Columns>
                                 <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Ingredient.ID.Value}" />
                                 <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Ingredient.Name}" />

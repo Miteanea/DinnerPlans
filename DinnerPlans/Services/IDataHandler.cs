@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DinnerPlans.Services
 {
-    interface IDataHandler<T>
+    internal interface IDataHandler<T>
     {
         List<T> GetAll();
+
         T GetById();
 
         void Save(T viewModel);

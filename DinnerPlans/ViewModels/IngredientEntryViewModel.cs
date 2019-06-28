@@ -10,7 +10,6 @@ namespace DinnerPlans.ViewModels
             _quantity = quantity;
 
             Ingredient.PropertyChanged += OnIngredientEntryChanged;
-
         }
 
         // Public

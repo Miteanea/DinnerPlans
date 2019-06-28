@@ -13,13 +13,12 @@
     <Window.Resources>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="382*" />
+            <ColumnDefinition Width="611*" />
+        </Grid.ColumnDefinitions>
 
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600" />
-            <ColumnDefinition Width="328" />
-        </Grid.ColumnDefinitions>-->
-
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2">
             <Grid x:Name="SelectIngredient" Width="600">
                 <StackPanel HorizontalAlignment="Left">
 
@@ -33,7 +32,7 @@
                           IsReadOnly="False"  AutoGenerateColumns="False" AlternatingRowBackground="LightBlue"
                           IsSynchronizedWithCurrentItem="False"
                           Height="300" Width="512"
-                                  VerticalScrollBarVisibility="Auto">
+                          VerticalScrollBarVisibility="Auto">
 
                         <!--Enter columns in standard label Order-->
                         <DataGrid.Columns>
@@ -43,7 +42,10 @@
                             <DataGridTemplateColumn Header="Actions">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Click="Add_Ingredient_Clicked" Content="Add" />
+                                        <StackPanel Orientation="Vertical">
+                                            <Button Click="Add_Ingredient_Clicked" Content="Add" />
+                                            <Button Click="EditButton_Clicked" Content="Edit" />
+                                        </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -52,6 +54,7 @@
                             <DataGridTextColumn Header="Protein" Binding="{Binding Path=NutritionData.ProteinsGr}" />
                             <DataGridTextColumn Header="Fats" Binding="{Binding Path=NutritionData.FatsGr}" />
                             <DataGridTextColumn Header="Sat Fats" Binding="{Binding Path=NutritionData.SatFatsGr}" />
+                            <DataGridTextColumn Header="Salts" Binding="{Binding Path=NutritionData.SaltsGr}" />
                             <DataGridTextColumn Header="Unit" Binding="{Binding Path=Unit}" />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -141,12 +144,33 @@
                         </StackPanel>
                     </StackPanel>
 
-                    <!-- "Add Button" => closes the window and sends the ingredient to caller.-->
-                    <Button Click="Add_Ingredient_Clicked"
-                        Grid.Column="1" Grid.Row="2"
-                        Grid.ColumnSpan="2"
-                        Content="Add Ingredient"
-                        Width="125" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                                Grid.Column="0" Grid.Row="2"
+                                Grid.ColumnSpan="3">
+
+                        <Button Click="CreateIngredientBtn_Click"
+                        Name="CreateIngredientBtn"
+                        Content="Create"
+                        Width="75" />
+
+                        <Button Click="CancelEditingBtn_Click"
+                        Name="CancelEditingBtn"
+                        Visibility="Collapsed"
+                        Content="Cancel"
+                        Width="75" />
+
+                        <Button Click="SaveButton_Clicked"
+                        Name="SaveChangesIngredientBtn"
+                        Content="Save"
+                        Width="75" />
+
+                        <!-- "Add Button" => closes the window and sends the ingredient to caller.-->
+                        <Button Click="Save_and_Add_Clicked"
+                        Name="AddIngredientBtn"
+                        Content="Save and Add"
+                        Width="100
+                                " />
+                    </StackPanel>
                 </Grid>
             </Grid>
         </StackPanel>

@@ -45,10 +45,6 @@ namespace DinnerPlans.Services
         {
             var ingredients = Ingredients;
 
-
-
-
-
             //if (ingredients.Count(ingredient => ingredient.ID == ingredientToSave.ID) == 0)
             //{
             //    var ingredient = new Ingredient()
@@ -81,6 +77,7 @@ namespace DinnerPlans.Services
         public static void SaveIngredientChanges()
         {
             var ingredients = Ingredients;
+
             throw new NotImplementedException();
         }
 
@@ -90,17 +87,24 @@ namespace DinnerPlans.Services
 
         private static IngredientViewModel MapIngredientToVM(Ingredient ingredient)
         {
-            throw new NotImplementedException();
+            return new IngredientViewModel(ingredient.NutritionData)
+            {
+                ID = ingredient.ID,
+                Name = ingredient.Name,
+                Unit = ingredient.Unit
+            };
         }
 
         internal static ObservableCollection<IngredientViewModel> GetIngredients()
         {
             ObservableCollection<IngredientViewModel> ingredientsVMs = new ObservableCollection<IngredientViewModel>();
+
             foreach (var ingredient in Ingredients)
             {
                 IngredientViewModel ingredientVM = MapIngredientToVM(ingredient);
                 ingredientsVMs.Add(ingredientVM);
             }
+
             return ingredientsVMs;
         }
     }
