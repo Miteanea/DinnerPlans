@@ -1,6 +1,8 @@
 
 Initial Features
 
+Functionality :
+	- Logging
 
 GUI Elements
 1)	Main Window:
@@ -26,3 +28,14 @@ GUI Elements
 
 
 2)	Add Ingredient (Window)
+
+3) Additional features to "delight" the users
+   3.1) GUI
+	- Balloon or tooltip help
+	- Keyboard Shortcuts
+	- quick reference manual	
+	- Colorization
+	- Log file analyzers
+	- Automated Installation 
+	- Customized SPlas Screen
+	
