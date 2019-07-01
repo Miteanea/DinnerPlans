@@ -3,6 +3,7 @@ Initial Features
 
 Functionality :
 	- Logging
+	- Implement repository operations (saving, etc.) as async
 
 GUI Elements
 1)	Main Window:
