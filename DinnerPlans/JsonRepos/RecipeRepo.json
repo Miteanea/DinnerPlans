@@ -1,1 +1,93 @@
-[{"ID":{"ID":1},"Instruction":"Step1;\r\nStep2;\r\nStep3;","NutritionData":{"Calories":654.0,"CarbsGr":111.0,"ProteinsGr":31.0,"SugarsGr":7.0,"FatsGr":13.0,"SaltsGr":0.0,"SatFatsGr":0.0},"TotalWeight":180.0,"Title":"Carbonara","IngredientEntries":[{"Quantity":30.0,"Ingredient":{"ID":{"ID":3},"Name":"Parmigiano","Unit":1,"NutritionData":{"Calories":431.0,"CarbsGr":4.1,"ProteinsGr":38.0,"SugarsGr":17.0,"FatsGr":29.0,"SaltsGr":0.0,"SatFatsGr":0.9}}},{"Quantity":150.0,"Ingredient":{"ID":{"ID":1},"Name":"Spaghettoni","Unit":1,"NutritionData":{"Calories":350.0,"CarbsGr":73.0,"ProteinsGr":13.0,"SugarsGr":1.0,"FatsGr":3.0,"SaltsGr":0.0,"SatFatsGr":0.0}}}]},{"ID":{"ID":2},"Instruction":null,"NutritionData":{"Calories":65.0,"CarbsGr":1.0,"ProteinsGr":6.0,"SugarsGr":3.0,"FatsGr":4.0,"SaltsGr":0.0,"SatFatsGr":0.0},"TotalWeight":0.0,"Title":"Insalata","IngredientEntries":[]},{"ID":{"ID":3},"Instruction":null,"NutritionData":{"Calories":27.0,"CarbsGr":6.0,"ProteinsGr":1.0,"SugarsGr":0.0,"FatsGr":0.0,"SaltsGr":0.0,"SatFatsGr":0.0},"TotalWeight":0.0,"Title":"Pork chops with peppers and onion","IngredientEntries":[]}]
+[{
+        "ID": {
+            "ID": 1
+        },
+        "Instruction": "Step1;\r\nStep2;\r\nStep3;",
+        "NutritionData": {
+            "Calories": 654.0,
+            "CarbsGr": 111.0,
+            "ProteinsGr": 31.0,
+            "SugarsGr": 7.0,
+            "FatsGr": 13.0,
+            "SaltsGr": 0.0,
+            "SatFatsGr": 0.0
+        },
+        "TotalWeight": 180.0,
+        "Title": "Carbonara",
+        "IngredientEntries": [{
+                "Quantity": 30.0,
+                "Ingredient": {
+                    "ID": {
+                        "ID": 3
+                    },
+                    "Name": "Parmigiano",
+                    "Unit": 1,
+                    "NutritionData": {
+                        "Calories": 431.0,
+                        "CarbsGr": 4.1,
+                        "ProteinsGr": 38.0,
+                        "SugarsGr": 17.0,
+                        "FatsGr": 29.0,
+                        "SaltsGr": 0.0,
+                        "SatFatsGr": 0.9
+                    }
+                }
+            },
+            {
+                "Quantity": 150.0,
+                "Ingredient": {
+                    "ID": {
+                        "ID": 1
+                    },
+                    "Name": "Spaghettoni",
+                    "Unit": 1,
+                    "NutritionData": {
+                        "Calories": 350.0,
+                        "CarbsGr": 73.0,
+                        "ProteinsGr": 13.0,
+                        "SugarsGr": 1.0,
+                        "FatsGr": 3.0,
+                        "SaltsGr": 0.0,
+                        "SatFatsGr": 0.0
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "ID": {
+            "ID": 2
+        },
+        "Instruction": null,
+        "NutritionData": {
+            "Calories": 65.0,
+            "CarbsGr": 1.0,
+            "ProteinsGr": 6.0,
+            "SugarsGr": 3.0,
+            "FatsGr": 4.0,
+            "SaltsGr": 0.0,
+            "SatFatsGr": 0.0
+        },
+        "TotalWeight": 0.0,
+        "Title": "Insalata",
+        "IngredientEntries": []
+    },
+    {
+        "ID": {
+            "ID": 3
+        },
+        "Instruction": null,
+        "NutritionData": {
+            "Calories": 27.0,
+            "CarbsGr": 6.0,
+            "ProteinsGr": 1.0,
+            "SugarsGr": 0.0,
+            "FatsGr": 0.0,
+            "SaltsGr": 0.0,
+            "SatFatsGr": 0.0
+        },
+        "TotalWeight": 0.0,
+        "Title": "Pork chops with peppers and onion",
+        "IngredientEntries": []
+    }
+]

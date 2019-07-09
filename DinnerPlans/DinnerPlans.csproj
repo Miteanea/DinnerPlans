@@ -59,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\IngWindowOperationType.cs" />
+    <Compile Include="Models\Enums\IngWindowOperationType.cs" />
     <Compile Include="Models\Ingredient\Ingredients.cs" />
     <Compile Include="IngredientWindow.xaml.cs">
       <DependentUpon>IngredientWindow.xaml</DependentUpon>
@@ -99,6 +99,7 @@
     <Compile Include="Views\RecipesView.xaml.cs">
       <DependentUpon>RecipesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RecipesViews\EditEventArgs.cs" />
     <Compile Include="Views\RecipesViews\EditRecipeView.xaml.cs">
       <DependentUpon>EditRecipeView.xaml</DependentUpon>
     </Compile>
@@ -168,6 +169,8 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

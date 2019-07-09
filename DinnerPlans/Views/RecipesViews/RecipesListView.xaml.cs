@@ -1,4 +1,6 @@
-﻿using DinnerPlans.Services;
+﻿using DinnerPlans.Models;   
+using DinnerPlans.Services;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,22 +19,18 @@ namespace DinnerPlans.Views.RecipesViews
 
         private void EditButton_Clicked(object sender, RoutedEventArgs e)
         {
-            var btn = sender as Button;
-            var data = btn.DataContext;
+            var args = new EditEventArgs(GetRecipeIdFromArgs(e));
 
-            RaiseEvent(new RoutedEventArgs(EditExistingRecipe, btn));
+            Edit.Invoke(sender, args);
         }
 
-        public static readonly RoutedEvent EditExistingRecipe = EventManager.RegisterRoutedEvent(
-                       "Edit",
-                       RoutingStrategy.Bubble,
-                       typeof(RoutedEventHandler),
-                       typeof(RecipesListView));
-
-        public event RoutedEventHandler Edit
+        private IId GetRecipeIdFromArgs(RoutedEventArgs args)
         {
-            add { AddHandler(EditExistingRecipe, value); }
-            remove { RemoveHandler(EditExistingRecipe, value); }
+            var sourceObject = (Button)args.OriginalSource;
+            var sourceObjectDataContext = sourceObject.DataContext;
+            return (sourceObjectDataContext as RecipeViewModel).ID;
         }
+
+        internal event EventHandler<EditEventArgs> Edit;
     }
 }

@@ -17,10 +17,14 @@ namespace DinnerPlans.Models
             {
                 _nutritionData = new NutritionData(NutritionDataType.Recipe);
             }
-            _nutritionData = nutrData;
+            else
+            {
+                _nutritionData = nutrData;
+            }
 
             Ingredients = new ObservableCollection<IngredientEntryViewModel>();
             Ingredients.CollectionChanged += this.OnCollectionChanged;
+
         }
 
         public IId ID { get; set; }
@@ -55,7 +59,7 @@ namespace DinnerPlans.Models
             UpdateRecipe();
         }
 
-        private void UpdateRecipe()
+        public void UpdateRecipe()
         {
             UpdateNutritionData();
             UpdateRecipeWeight();

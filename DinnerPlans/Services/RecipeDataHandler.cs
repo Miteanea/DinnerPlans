@@ -84,32 +84,42 @@ namespace DinnerPlans.Services
 
         private static RecipeViewModel MapRecipeToVM(Recipe recipe)
         {
-            var VM = new RecipeViewModel(recipe.NutritionData);
+            var VM = new RecipeViewModel();
 
             if (recipe != null)
             {
                 VM.ID = recipe.ID;
                 VM.Instruction = recipe.Instruction;
                 VM.Title = recipe.Title;
-                var ingredientsColl = recipe.IngredientEntries.Select(entry => new IngredientEntryViewModel(entry.Quantity)
+
+                var ingredientsColl = recipe.IngredientEntries.Select(entry =>
                 {
-                    Ingredient = new IngredientViewModel(entry.Ingredient.NutritionData)
+                    return new IngredientEntryViewModel(entry.Quantity)
                     {
-                        ID = entry.Ingredient.ID,
-                        Name = entry.Ingredient.Name,
-                        Unit = entry.Ingredient.Unit
-                    },
+                        Ingredient = new IngredientViewModel(
+                          nutritionData: entry.Ingredient.NutritionData)
+                        {
+                            ID = entry.Ingredient.ID,
+                            Name = entry.Ingredient.Name,
+                            Unit = entry.Ingredient.Unit
+                        },
+                    };
                 }).ToList();
 
+                ObservableCollection<IngredientEntryViewModel> ingredientEntryViewModels = new ObservableCollection<IngredientEntryViewModel>();
                 foreach (var item in ingredientsColl)
                 {
-                    VM.Ingredients.Add(item);
+                    ingredientEntryViewModels.Add(item);
                 }
+
+                VM.Ingredients = ingredientEntryViewModels;
 
                 foreach (IngredientEntryViewModel entry in VM.Ingredients)
                 {
                     entry.PropertyChanged += VM.IngredientEntryChanges;
                 }
+
+                VM.UpdateRecipe();
             }
 
             return VM;

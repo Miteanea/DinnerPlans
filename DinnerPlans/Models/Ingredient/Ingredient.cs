@@ -16,7 +16,7 @@ namespace DinnerPlans.Models
         public Ingredient(IngredientID iD, NutritionData nutritionData)
         {
             ID = iD;
-            _nutritionData = nutritionData;
+            NutritionData = nutritionData;
         }
 
         // Public

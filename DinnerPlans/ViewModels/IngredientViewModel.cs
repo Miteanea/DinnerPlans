@@ -14,7 +14,11 @@ namespace DinnerPlans.ViewModels
             {
                 _nutritionData = nutritionData;
             }
-            _nutritionData = new NutritionData(NutritionDataType.Ingredient);
+            else
+            {
+
+                _nutritionData = new NutritionData(NutritionDataType.Ingredient);
+            }
         }
 
         // Public
