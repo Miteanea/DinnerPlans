@@ -9,6 +9,9 @@ namespace DinnerPlans.Models
     {
         public IngredientEntry(IngredientEntryViewModel ingredientViewModel = null)
         {
+            PropertyChanged += OnIngredientEntryChanged;
+            Ingredient = new Ingredient();
+
             if (ingredientViewModel != null)
             {
                 Ingredient = new Ingredient
@@ -20,7 +23,7 @@ namespace DinnerPlans.Models
                 };
                 Quantity = ingredientViewModel.Quantity;
             }
-            Ingredient = new Ingredient();
+
         }
 
         [JsonConstructor]
@@ -31,7 +34,9 @@ namespace DinnerPlans.Models
         // Public
 
         public Ingredient Ingredient { get { return _ingredient; } set { _ingredient = value; } }
-        public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged(); } }
+        public decimal Quantity { get { return _quantity; } set {
+                _quantity = value;
+                QuantityChanged(); } }
 
         // Private
         [JsonProperty(nameof(Quantity))]
@@ -50,7 +55,7 @@ namespace DinnerPlans.Models
 
         private void OnIngredientEntryChanged(object sender, PropertyChangedEventArgs e)
         {
-            PropertyChanged.Invoke(this, null);
+            // PropertyChanged.Invoke(this, null);
         }
     }
 }

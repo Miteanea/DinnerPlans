@@ -26,7 +26,7 @@
             <Button x:Name="SaveRecipeBtn" Click="SaveRecipeBtn_Click">
                 <AccessText>_Save</AccessText>
             </Button>
-            <Button x:Name="ResetRecipeBtn" Content="Reset" />
+            <!--<Button x:Name="ResetRecipeBtn" Content="Reset" />-->
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">

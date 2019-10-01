@@ -17,7 +17,7 @@ namespace DinnerPlans
 
         private void Menus_Clicked(object sender, RoutedEventArgs e)
         {
-            DataContext = new MenusView();
+            MainContent.Content = new MenusView();
         }
     }
 }

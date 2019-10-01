@@ -13,10 +13,11 @@ namespace DinnerPlans.Services.LibraryUpdaters
             _repositoryPath = ingredientRepoPath;
         }
 
-        public List<Recipe> Repo { get; set; }
+        private List<Recipe> _updatedRecipes;
 
-        public void UpdateLibrary(object repo)
+        public void UpdateLibrary(List<Recipe> repo)
         {
+            _updatedRecipes = repo;
             UpdateRecipes();
         }
 

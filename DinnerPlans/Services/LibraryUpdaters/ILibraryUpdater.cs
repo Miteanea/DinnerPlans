@@ -4,8 +4,6 @@ namespace DinnerPlans.Services
 {
     public interface ILibraryUpdater<T>
     {
-        void UpdateLibrary(object repo);
-
-        List<T> Repo { get; set; }
+        void UpdateLibrary(List<T> repo);
     }
 }

@@ -63,19 +63,36 @@ namespace DinnerPlans.Services
         {
             var recipes = Recipes;
 
-            if (recipes.Count(recipe => recipe.ID == recipeToSave.ID) == 0)
+            Recipe recipe = new Recipe()
             {
-                var recipe = new Recipe()
-                {
-                    ID = recipeToSave.ID,
-                    IngredientEntries = recipeToSave.Ingredients.Select(ingredient =>
-                       new IngredientEntry(ingredient)).ToList(),
-                    Instruction = recipeToSave.Instruction,
-                    NutritionData = recipeToSave.NutritionData,
-                    Title = recipeToSave.Title
-                };
+                ID = recipeToSave.ID,
+                IngredientEntries = recipeToSave.Ingredients.Select(ingredient =>
+                   new IngredientEntry(ingredient)).ToList(),
+                Instruction = recipeToSave.Instruction,
+                NutritionData = recipeToSave.NutritionData,
+                Title = recipeToSave.Title
+            };
+
+
+            int idCountInRepository = recipes.Count(presentRecipe => presentRecipe.ID == recipeToSave.ID);
+            bool recipeExists = idCountInRepository == 1;
+            bool recipeIdIsDoubled = idCountInRepository > 1;
+
+            if (recipeIdIsDoubled)
+            {
+                throw new Exception("DataSource is corrupt, doubled IDs");
+            }
+            else if (recipeExists && !recipeIdIsDoubled)
+            {
+                // Update Recipe
+            }
+            else if (!recipeExists && !recipeIdIsDoubled)
+            {
                 recipes.Add(recipe);
             }
+
+            libraryUpdater.UpdateLibrary(recipes);
+
         }
 
         public static List<Recipe> Recipes { get; set; }
