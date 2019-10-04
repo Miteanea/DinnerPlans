@@ -1,21 +1,27 @@
 
 Tasks
-	GUI Changes:
+GUI Changes:
 -	Replace Labels with text Blocks
 -	Add Images to the Recipe (optional)
+
 -	Create Recipe Management View:
--	Take input: Daily calories allowance
-•	Ingredient Quantities depend on calories allowance
--	Take input: Time span for menu ( # days, # weeks, month)
--	Generate and display the menu 
-•	Menu is displayed for a week with pagination
-•	Allow to re-generate the whole menu
-•	Allow to re-generate separate meals
+	.	Take input: Daily calories allowance
+	.	Take input: Time span for menu ( # days, # weeks, month)
+	.	Display the menu 
+	.	Menu is displayed for a week with pagination
+	.	re-generate the whole menu option
+	.	re-generate separate meals option
 
 -	Print shopping lists ( a separate shopping list for each 2 days ) in pdf and send to e-mail
-•	Don’t allow to print the first shopping list until menu is confirmed by the user
+ï¿½	Donï¿½t allow to print the first shopping list until menu is confirmed by the user
 -	Print Recipe (pdf) to e-mail
 -	Multiple user support
 
+Data Changes:
+	- Add meal type: breakfast, dinner, supper.
+	.	Ingredient Quantities depend on calories allowance
+	. Generate the menu 
+	. Regenerate the menu 
+	. Partial menu regeneration
 
 
