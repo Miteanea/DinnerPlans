@@ -93,10 +93,10 @@
     <Compile Include="ViewModels\MenusViewModel.cs" />
     <Compile Include="ViewModels\RecipesListViewModel.cs" />
     <Compile Include="ViewModels\RecipeViewModel.cs" />
-    <Compile Include="Views\MenusView.xaml.cs">
+    <Compile Include="Views\MenuViews\MenusView.xaml.cs">
       <DependentUpon>MenusView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RecipesView.xaml.cs">
+    <Compile Include="Views\RecipesViews\RecipesView.xaml.cs">
       <DependentUpon>RecipesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RecipesViews\EditEventArgs.cs" />
@@ -122,11 +122,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\MenusView.xaml">
+    <Page Include="Views\MenuViews\MenusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RecipesView.xaml">
+    <Page Include="Views\RecipesViews\RecipesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

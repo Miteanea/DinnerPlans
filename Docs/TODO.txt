@@ -4,7 +4,7 @@ GUI Changes:
 -	Replace Labels with text Blocks
 -	Add Images to the Recipe (optional)
 
--	Create Recipe Management View:
+	.	Create Recipe Management View Layout
 	.	Take input: Daily calories allowance
 	.	Take input: Time span for menu ( # days, # weeks, month)
 	.	Display the menu 
