@@ -1,32 +1,29 @@
-﻿using DinnerPlans.Services;
-using DinnerPlans.Services.LibraryUpdaters;
+﻿using DinnerPlans.Services.DataService;
 using System.Windows;
+using Unity;
 
 namespace DinnerPlans
 {
     public partial class App : Application
     {
-        public App()
+        protected override void OnStartup(StartupEventArgs e)
         {
-            LoadRepositories();
-        }
+            base.OnStartup(e);
 
-        private void LoadRepositories()
-        {
-            var factory = new RepositoryFactory();
-            var recipeRepo = factory.GetRecipeRepository();
-            var ingredientRepo = factory.GetIngredientRepository();
+            var container = new UnityContainer();
 
-            var repoLoader = new RepositoryLoader();
+            container.RegisterType<IDataService, DataService>();
+            container.RegisterType<MainViewModel>();
+            // container.RegisterType<RecipesViewModel>();
 
-            recipeRepo = repoLoader.CheckRecipeLibrary(recipeRepo);
-            ingredientRepo = repoLoader.CheckIngredientsLibrary(ingredientRepo);
+            var vm = container.Resolve<MainViewModel>();
 
-            RecipeDataHandler.Recipes = recipeRepo.Recipes;
-            RecipeDataHandler.libraryUpdater = new RecipeLibraryUpdater(recipeRepo.MetaData.FullPath);
+            var window = new MainWindow()
+            {
+                DataContext = vm
+            };
 
-            IngredientDataHandler.Ingredients = ingredientRepo.Ingredients;
-            IngredientDataHandler.libraryUpdater = new IngredientLibraryUpdater(ingredientRepo.MetaData.FullPath);
+            window.Show();
         }
     }
 }

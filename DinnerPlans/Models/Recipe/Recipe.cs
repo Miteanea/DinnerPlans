@@ -1,40 +1,162 @@
-﻿using DinnerPlans.Services;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
-    [JsonObject]
-    public class Recipe
+    [JsonObject(MemberSerialization.OptIn)]
+    public class Recipe : INotifyPropertyChanged
     {
+        [JsonConstructor]
         public Recipe()
         {
-            ID = new RecipeID(RecipeDataHandler.GenerateUniqueRandomID());
-            NutritionData = new NutritionData(NutritionDataType.Recipe);
-            IngredientEntries = new List<IngredientEntry>();
         }
 
-        [JsonConstructor]
-        public Recipe(RecipeID iD, List<IngredientEntry> ingredientEntries)
+        public Recipe(NutritionData nutrData = null)
         {
-            IngredientEntries = ingredientEntries;
-            this.ID = iD;
+            _nutritionData = (nutrData == null)
+                ? new NutritionData(NutritionDataType.Recipe)
+                : nutrData;
+
+            Ingredients = new ObservableCollection<IngredientEntry>();
+            Ingredients.CollectionChanged += this.OnCollectionChanged;
         }
 
         // Public
-        public IId ID { get; set; }
+        public int ID { get { return _id; } set { _id = value; } }
 
-        [JsonProperty]
-        public string Instruction { get; set; }
+        public string Instruction { get { return _instruction; } set { _instruction = value; } }
 
-        [JsonProperty]
-        public NutritionData NutritionData { get; set; }
+        public NutritionData NutritionData
+        {
+            get { return _nutritionData; }
+            set
+            {
+                _nutritionData = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NutritionData)));
+            }
+        }
 
-        public decimal TotalWeight { get; private set; }
+        public decimal TotalWeight { get { return _totalWeight; } private set { _totalWeight = value; } }
+        public string Title { get { return _title; } set { _title = value; } }
 
-        [JsonProperty]
-        public string Title { get; set; }
+        public ObservableCollection<IngredientEntry> Ingredients
+        {
+            get { return _ingredients; }
+            set
+            {
+                _ingredients = value;
+            }
+        }
 
-        public List<IngredientEntry> IngredientEntries { get; set; }
+        //Private
+        [JsonProperty(nameof(ID))]
+        private int _id;
+
+        [JsonProperty(nameof(Instruction))]
+        private string _instruction;
+
+        [JsonProperty(nameof(NutritionData))]
+        private NutritionData _nutritionData;
+
+        [JsonProperty(nameof(TotalWeight))]
+        private decimal _totalWeight;
+
+        [JsonProperty(nameof(Title))]
+        private string _title;
+
+        [JsonProperty(nameof(Ingredients))]
+        private ObservableCollection<IngredientEntry> _ingredients;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void IngredientEntryChanges(object sender, PropertyChangedEventArgs e)
+        {
+            UpdateRecipe();
+        }
+
+        public void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            UpdateRecipe();
+        }
+
+        public void UpdateRecipe()
+        {
+            UpdateNutritionData();
+            UpdateRecipeWeight();
+        }
+
+        private void UpdateNutritionData()
+        {
+            // calculate and assign a value to _nutritionData (kcalx100g)
+            NutritionData nutritionData = new NutritionData(NutritionDataType.Recipe);
+            if (Ingredients != null)
+            {
+                foreach (var entry in Ingredients)
+                {
+                    NutritionData ingredientData = entry.Ingredient.NutritionData;
+                    if (ingredientData != null)
+                    {
+                        decimal quantityMultiplier = 0;
+
+                        switch (entry.Ingredient.Unit)
+                        {
+                            case UnitType.None:
+                                throw new Exception("Unit Type missing from Ingredient");
+                            case UnitType.Grams:
+                            case UnitType.Milliliters:
+                                quantityMultiplier = entry.Quantity / 100;
+                                break;
+
+                            case UnitType.Pieces:
+                                quantityMultiplier = entry.Quantity;
+                                break;
+                        }
+
+                        nutritionData.Calories += (int)Math.Round(ingredientData.Calories * quantityMultiplier);
+                        nutritionData.CarbsGr += (int)Math.Round(ingredientData.CarbsGr * quantityMultiplier);
+                        nutritionData.FatsGr += (int)Math.Round(ingredientData.FatsGr * quantityMultiplier);
+                        nutritionData.ProteinsGr += (int)Math.Round(ingredientData.ProteinsGr * quantityMultiplier);
+                        nutritionData.SaltsGr += (int)Math.Round(ingredientData.SaltsGr * quantityMultiplier);
+                        nutritionData.SugarsGr += (int)Math.Round(ingredientData.SugarsGr * quantityMultiplier);
+                    }
+                }
+            }
+            NutritionData = nutritionData;
+        }
+
+        private void UpdateRecipeWeight()
+        {
+            TotalWeight = 0;
+            if (Ingredients != null)
+            {
+                foreach (var entry in Ingredients)
+                {
+                    // For each type of ingredient
+                    switch (entry.Ingredient.Unit)
+                    {
+                        case UnitType.None:
+                            break;
+
+                        case UnitType.Grams:
+                            TotalWeight += entry.Quantity;
+                            break;
+
+                        case UnitType.Milliliters:
+                            break;
+
+                        case UnitType.Pieces:
+                            break;
+
+                        default:
+                            break;
+                    }
+                    // calculate the weight
+                    //add to recipe weight
+                }
+            }
+        }
     }
 }

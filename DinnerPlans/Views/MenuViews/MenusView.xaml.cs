@@ -7,7 +7,7 @@ namespace DinnerPlans.Views
     /// </summary>
     public partial class MenusView : UserControl
     {
-        public MenusView()
+        public MenusView(Services.DataService.IDataService data)
         {
             InitializeComponent();
         }

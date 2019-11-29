@@ -28,19 +28,20 @@
                         Background="LightGray"
                         Orientation="Horizontal">
                 <Button Style="{StaticResource navigationButton}"
-                        Click="AllRecipes_Clicked">
+                        Command="{Binding Path=SwitchFeatureCommand}"
+                        CommandParameter="AllRecipes">
                     <AccessText>_All Recipes</AccessText>
                 </Button>
                 <Button Style="{StaticResource navigationButton}"
-                        Click="AddRecipe_Click">
+                        Command="{Binding Path=SwitchFeatureCommand}"
+                        CommandParameter="NewRecipe">
                     <AccessText>Add _New Recipe</AccessText>
                 </Button>
             </StackPanel>
         </DockPanel>
 
         <!--View for recipe Header-->
-        <ContentControl x:Name="RecipesViewContent"
-                        Grid.Row="1"
-                        Content="{Binding}" />
+        <ContentControl Grid.Row="1"
+                      Content="{Binding Path=Contents}" />
     </Grid>
 </UserControl>

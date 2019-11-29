@@ -36,11 +36,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -49,6 +52,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -59,6 +68,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\DataService\UiMessages.cs" />
+    <Compile Include="ViewModels\Commands\RelayCommand.cs" />
+    <Compile Include="ViewModels\IngredientVMs\IngredientCreateViewModel.cs" />
+    <Compile Include="ViewModels\IngredientVMs\IngredientsDisplayViewModel.cs" />
+    <Compile Include="ViewModels\RecipeVMs\EditRecipeViewModel.cs" />
+    <Compile Include="ViewModels\IngredientVMs\IngredientWindowViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Services\DataService\DataService.cs" />
+    <Compile Include="Services\DataService\IDataService.cs" />
     <Compile Include="Models\Enums\IngWindowOperationType.cs" />
     <Compile Include="Models\Ingredient\Ingredients.cs" />
     <Compile Include="IngredientWindow.xaml.cs">
@@ -66,33 +84,30 @@
     </Compile>
     <Compile Include="Models\Ingredient\IIngredientRepository.cs" />
     <Compile Include="Models\Ingredient\Ingredient.cs" />
-    <Compile Include="Models\ID\IngredientID.cs" />
     <Compile Include="Models\Ingredient\IngredientEntry.cs" />
     <Compile Include="Models\NutritionData\NutrtitionDataType.cs" />
     <Compile Include="Models\Ingredient\MeasureUnits.cs" />
     <Compile Include="Models\NutritionData\NutritionData.cs" />
     <Compile Include="Models\Recipe\IRecipeRpository.cs" />
     <Compile Include="Models\Recipe\Recipe.cs" />
-    <Compile Include="Models\ID\RecipeID.cs" />
     <Compile Include="Models\Recipe\RecipeRepository.cs" />
     <Compile Include="Models\Enums\UnitType.cs" />
-    <Compile Include="Services\IDataHandler.cs" />
-    <Compile Include="Models\ID\IId.cs" />
     <Compile Include="Services\LibraryUpdaters\ILibraryUpdater.cs" />
-    <Compile Include="Services\IngredientDataHandler.cs" />
     <Compile Include="Services\LibraryUpdaters\IngredientLibraryUpdater.cs" />
-    <Compile Include="Services\LibraryUpdaters\RecipeLibraryUpdater.cs" />
-    <Compile Include="Services\RecipeDataHandler.cs" />
     <Compile Include="Models\Ingredient\IngredientRepository.cs" />
     <Compile Include="Services\RepositoryData.cs" />
     <Compile Include="Models\Enums\RepositoryType.cs" />
     <Compile Include="Services\RepositoryFactory.cs" />
     <Compile Include="Services\RepositoryLoader.cs" />
-    <Compile Include="ViewModels\IngredientEntryViewModel.cs" />
-    <Compile Include="ViewModels\IngredientViewModel.cs" />
-    <Compile Include="ViewModels\MenusViewModel.cs" />
-    <Compile Include="ViewModels\RecipesListViewModel.cs" />
-    <Compile Include="ViewModels\RecipeViewModel.cs" />
+    <Compile Include="ViewModels\RecipeVMs\RecipesListViewModel.cs" />
+    <Compile Include="ViewModels\RecipeVMs\RecipesViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\IngredientViews\IngredientCreateView.xaml.cs">
+      <DependentUpon>IngredientCreateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IngredientViews\IngredientsDisplayView.xaml.cs">
+      <DependentUpon>IngredientsDisplayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuViews\MenusView.xaml.cs">
       <DependentUpon>MenusView.xaml</DependentUpon>
     </Compile>
@@ -122,6 +137,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\IngredientViews\IngredientCreateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IngredientViews\IngredientsDisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MenuViews\MenusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Interfaces\" />
+    <Folder Include="ViewModels\MenuVMs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

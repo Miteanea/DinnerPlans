@@ -4,62 +4,74 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DinnerPlans"
-        xmlns:viewmodels="clr-namespace:DinnerPlans.ViewModels"
         xmlns:views="clr-namespace:DinnerPlans.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
     <Window.Resources>
-
         <Style x:Key="navigationButtons" TargetType="Button">
             <Setter Property="Margin" Value="10" />
             <Setter Property="Padding" Value="10" />
         </Style>
-
         <Style TargetType="Grid">
             <Setter Property="Background" Value="WhiteSmoke" />
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <DockPanel Grid.Column="0"
-                   Grid.ColumnSpan="2"
-                   Grid.Row="0"
-                   Grid.RowSpan="6">
-
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Recipe">
+                    <MenuItem Header="New">
+                    </MenuItem>
+                    <MenuItem Header="All">
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Menu">
+                    <MenuItem Header="Command 1">
+                    </MenuItem>
+                    <MenuItem Header="Command 2">
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Left">
             <StackPanel DockPanel.Dock="Left" Background="Black">
                 <Button Style="{StaticResource navigationButtons}"
-                        Click="Recipes_Clicked">
+                     Command="{Binding SwitchFeatureCommand}"
+                     CommandParameter="Recipes">
                     <AccessText>Manage _Recipes</AccessText>
                 </Button>
                 <Button Style="{StaticResource navigationButtons}"
-                        Click="Menus_Clicked">
+                     Command="{Binding Path=SwitchFeatureCommand}"
+                     CommandParameter="Menus">
                     <AccessText>Manage _Menus</AccessText>
                 </Button>
             </StackPanel>
         </DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <ContentControl x:Name="MainContent"
-                        Grid.Row="0"
-                        Grid.RowSpan="6"
-                        Grid.Column="2"
-                        Grid.ColumnSpan="4" />
-    </Grid>
+            <ContentControl Content="{Binding Path=Contents}"
+                    Grid.Row="0"
+                    Grid.RowSpan="6"
+                    Grid.Column="2"
+                    Grid.ColumnSpan="4" />
+        </Grid>
+    </DockPanel>
 </Window>

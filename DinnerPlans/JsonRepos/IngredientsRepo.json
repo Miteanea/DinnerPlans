@@ -1,7 +1,5 @@
 [{
-        "ID": {
-            "ID": 1
-        },
+        "ID": 1,
         "Name": "Spaghettoni",
         "Unit": 1,
         "NutritionData": {
@@ -15,9 +13,7 @@
         }
     },
     {
-        "ID": {
-            "ID": 2
-        },
+        "ID":2,
         "Name": "Uova",
         "Unit": 3,
         "NutritionData": {
@@ -31,9 +27,7 @@
         }
     },
     {
-        "ID": {
-            "ID": 3
-        },
+        "ID": 3,
         "Name": "Parmigiano",
         "Unit": 1,
         "NutritionData": {
@@ -47,9 +41,7 @@
         }
     },
     {
-        "ID": {
-            "ID": 4
-        },
+        "ID": 4,
         "Name": "Peperoni",
         "Unit": 1,
         "NutritionData": {

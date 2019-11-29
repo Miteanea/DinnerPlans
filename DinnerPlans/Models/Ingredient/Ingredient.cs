@@ -1,39 +1,62 @@
-﻿using DinnerPlans.Services;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
+using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
-    [JsonObject]
-    public class Ingredient
+    [JsonObject(MemberSerialization.OptIn)]
+    public class Ingredient : INotifyPropertyChanged
     {
+        [JsonConstructor]
         public Ingredient()
         {
-            ID = GetID();
-            _nutritionData = new NutritionData(NutritionDataType.Ingredient);
         }
 
-        [JsonConstructor]
-        public Ingredient(IngredientID iD, NutritionData nutritionData)
+        public Ingredient(NutritionData nutritionData = null)
         {
-            ID = iD;
-            NutritionData = nutritionData;
+            ID = (_id == 0) ? CreateNewId() : _id;
+
+            _nutritionData = (nutritionData != null)
+                ? nutritionData
+                : new NutritionData(NutritionDataType.Ingredient);
         }
 
-        // Public
-        public IId ID { get; set; }
+        public int ID { get { return _id; } set { _id = value; } }
 
-        public string Name { get; set; }
+        public string Name { get { return _name; } set { _name = value; } }
 
-        public UnitType Unit { get; set; }
+        public UnitType Unit { get { return _unit; } set { _unit = value; } }
 
-        public NutritionData NutritionData { get; set; }
-
-        // Private
-        private IngredientID GetID()
+        public NutritionData NutritionData
         {
-            return new IngredientID(IngredientDataHandler.GenerateUniqueRandomID());
+            get { return _nutritionData; }
+            set { _nutritionData = value; OnNutritionDataChange(); }
         }
 
+        [JsonProperty(nameof(ID))]
+        private int _id;
+
+        [JsonProperty(nameof(Name))]
+        private string _name;
+
+        [JsonProperty(nameof(Unit))]
+        private UnitType _unit;
+
+        [JsonProperty(nameof(NutritionData))]
         private NutritionData _nutritionData;
+
+        private int CreateNewId()
+        {
+            // create random ID for a new instance of recipe
+            throw new NotImplementedException();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnNutritionDataChange()
+        {
+            PropertyChanged.Invoke(this, null);
+            throw new NotImplementedException();
+        }
     }
 }

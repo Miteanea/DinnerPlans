@@ -14,6 +14,7 @@ namespace DinnerPlans.Services.LibraryUpdaters
         }
 
         private List<Ingredient> _updatedIngredients;
+
         public void UpdateLibrary(List<Ingredient> repo)
         {
             _updatedIngredients = repo;

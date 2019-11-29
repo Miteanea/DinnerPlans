@@ -1,15 +1,12 @@
-﻿using DinnerPlans.Services;
-
-namespace DinnerPlans.Views.RecipesViews
+﻿namespace DinnerPlans.Views.RecipesViews
 {
     internal class EditEventArgs
     {
-        public EditEventArgs(IId id)
+        public EditEventArgs(int id)
         {
             RecipeId = id;
         }
 
-        public IId RecipeId { get; set; }
-
+        public int RecipeId { get; set; }
     }
 }

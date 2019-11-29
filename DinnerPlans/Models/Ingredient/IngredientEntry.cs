@@ -1,42 +1,29 @@
-﻿using DinnerPlans.ViewModels;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class IngredientEntry
+    public class IngredientEntry : INotifyPropertyChanged
     {
-        public IngredientEntry(IngredientEntryViewModel ingredientViewModel = null)
-        {
-            PropertyChanged += OnIngredientEntryChanged;
-            Ingredient = new Ingredient();
-
-            if (ingredientViewModel != null)
-            {
-                Ingredient = new Ingredient
-                {
-                    ID = ingredientViewModel.Ingredient.ID,
-                    Name = ingredientViewModel.Ingredient.Name,
-                    NutritionData = ingredientViewModel.Ingredient.NutritionData,
-                    Unit = ingredientViewModel.Ingredient.Unit
-                };
-                Quantity = ingredientViewModel.Quantity;
-            }
-
-        }
-
         [JsonConstructor]
         public IngredientEntry()
         {
         }
 
+        public IngredientEntry(decimal quantity = 0)
+        {
+            _ingredient = new Ingredient();
+            _quantity = quantity;
+
+            Ingredient.PropertyChanged += OnIngredientEntryChanged;
+        }
+
         // Public
 
         public Ingredient Ingredient { get { return _ingredient; } set { _ingredient = value; } }
-        public decimal Quantity { get { return _quantity; } set {
-                _quantity = value;
-                QuantityChanged(); } }
+
+        public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged(); } }
 
         // Private
         [JsonProperty(nameof(Quantity))]
@@ -55,7 +42,7 @@ namespace DinnerPlans.Models
 
         private void OnIngredientEntryChanged(object sender, PropertyChangedEventArgs e)
         {
-            // PropertyChanged.Invoke(this, null);
+            PropertyChanged.Invoke(this, null);
         }
     }
 }
