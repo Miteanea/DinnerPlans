@@ -17,7 +17,7 @@ namespace DinnerPlans.Services.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = @"Server =.\SQLEXPRESS; Database = DinnerPlansDB; Trusted_Connection = True; ";
+            string connectionString = @"Server =.\MSSQLSERVER01; Database = DinnerPlansDB; Trusted_Connection = True; ";
             optionsBuilder.UseSqlServer(connectionString);
         }
 

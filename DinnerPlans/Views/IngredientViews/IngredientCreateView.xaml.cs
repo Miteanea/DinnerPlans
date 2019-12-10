@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using DinnerPlans.Models;
+using System;
+using System.Linq;
+using System.Windows.Controls;
 
 namespace DinnerPlans.Views.IngredientViews
 {
@@ -10,6 +13,7 @@ namespace DinnerPlans.Views.IngredientViews
         public IngredientCreateView()
         {
             InitializeComponent();
+            UnitSelector.ItemsSource = Enum.GetValues(typeof(UnitType)).Cast<UnitType>();
         }
     }
 }

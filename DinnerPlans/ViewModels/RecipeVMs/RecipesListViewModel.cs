@@ -65,16 +65,8 @@ namespace DinnerPlans
               deleteRecipeMessage.DefaultResult,
               deleteRecipeMessage.Options) == MessageBoxResult.Yes)
             {
-                Recipes.Remove(recipe);
-                _data.DeleteRecipe(recipe);
+                _data.DeleteRecipeAsync(recipe);
             }
         }
-
-        //private int GetRecipeIdFromArgs(RoutedEventArgs args)
-        //{
-        //    var sourceObject = (Button)args.OriginalSource;
-        //    var sourceObjectDataContext = sourceObject.DataContext;
-        //    return (sourceObjectDataContext as Recipe).ID;
-        //}
     }
 }

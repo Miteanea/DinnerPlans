@@ -1,4 +1,5 @@
-﻿using DinnerPlans.Services.DataService;
+﻿using DinnerPlans.Services.Database;
+using DinnerPlans.Services.DataService;
 using System.Windows;
 using Unity;
 
@@ -12,9 +13,9 @@ namespace DinnerPlans
 
             var container = new UnityContainer();
 
+            container.RegisterType<DinnerPlansContext>();
             container.RegisterType<IDataService, DataService>();
-            container.RegisterType<MainViewModel>();
-            // container.RegisterType<RecipesViewModel>();
+//            container.RegisterType<MainViewModel>();
 
             var vm = container.Resolve<MainViewModel>();
 

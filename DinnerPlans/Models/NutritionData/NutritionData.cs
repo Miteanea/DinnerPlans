@@ -3,9 +3,12 @@ using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class NutritionData : INotifyPropertyChanged
     {
+        public NutritionData()
+        {
+
+        }
         public NutritionData(NutritionDataType nutrtitionDataType,
             decimal calories = 0,
             decimal carbs = 0,
@@ -26,6 +29,8 @@ namespace DinnerPlans.Models
         }
 
         // Public
+        public int NutritionDataId { get; set; }
+
         public decimal Calories { get { return _calories; } set { _calories = value; OnPropertyChanged("Calories"); } }
 
         public decimal CarbsGr { get { return _carbsGr; } set { _carbsGr = value; OnPropertyChanged("CarbsGr"); } }
@@ -43,25 +48,18 @@ namespace DinnerPlans.Models
         public NutritionDataType Type { get; set; }
 
         // Private
-        [JsonProperty(nameof(Calories))]
         private decimal _calories;
 
-        [JsonProperty(nameof(CarbsGr))]
         private decimal _carbsGr;
 
-        [JsonProperty(nameof(ProteinsGr))]
         private decimal _proteinsGr;
 
-        [JsonProperty(nameof(SugarsGr))]
         private decimal _sugarsGr;
 
-        [JsonProperty(nameof(FatsGr))]
         private decimal _fatsGr;
 
-        [JsonProperty(nameof(SaltsGr))]
         private decimal _saltsGr;
 
-        [JsonProperty(nameof(SatFatsGr))]
         private decimal _satFatsGr;
 
         // Events and Handlers

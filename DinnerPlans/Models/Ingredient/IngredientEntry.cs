@@ -3,33 +3,32 @@ using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class IngredientEntry : INotifyPropertyChanged
     {
-        [JsonConstructor]
         public IngredientEntry()
         {
+            _ingredient = new Ingredient();
+            Ingredient.PropertyChanged += OnIngredientEntryChanged;
         }
-
         public IngredientEntry(decimal quantity = 0)
         {
             _ingredient = new Ingredient();
-            _quantity = quantity;
-
             Ingredient.PropertyChanged += OnIngredientEntryChanged;
+
+            _quantity = quantity;
         }
 
         // Public
+
+        public int IngredientEntryId { get; set; }
 
         public Ingredient Ingredient { get { return _ingredient; } set { _ingredient = value; } }
 
         public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged(); } }
 
         // Private
-        [JsonProperty(nameof(Quantity))]
         private decimal _quantity;
 
-        [JsonProperty(nameof(Ingredient))]
         private Ingredient _ingredient;
 
         // Events and handlers

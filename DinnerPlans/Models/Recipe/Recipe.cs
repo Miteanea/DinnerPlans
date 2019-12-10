@@ -6,14 +6,14 @@ using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
-    [JsonObject(MemberSerialization.OptIn)]
     public class Recipe : INotifyPropertyChanged
     {
-        [JsonConstructor]
         public Recipe()
         {
+            // Ingredients = new ObservableCollection<IngredientEntry>();
+            // Ingredients.CollectionChanged += this.OnCollectionChanged;
+            // _nutritionData = new NutritionData(NutritionDataType.Recipe);
         }
-
         public Recipe(NutritionData nutrData = null)
         {
             _nutritionData = (nutrData == null)
@@ -25,9 +25,20 @@ namespace DinnerPlans.Models
         }
 
         // Public
-        public int ID { get { return _id; } set { _id = value; } }
+        public int RecipeId { get; set; }
 
-        public string Instruction { get { return _instruction; } set { _instruction = value; } }
+        public string Instruction
+        {
+            get
+            {
+                return _instruction;
+            }
+            set
+            {
+                _instruction = value;
+            }
+        }
+        private string _instruction;
 
         public NutritionData NutritionData
         {
@@ -39,36 +50,44 @@ namespace DinnerPlans.Models
             }
         }
 
-        public decimal TotalWeight { get { return _totalWeight; } private set { _totalWeight = value; } }
-        public string Title { get { return _title; } set { _title = value; } }
-
-        public ObservableCollection<IngredientEntry> Ingredients
+        public decimal TotalWeight
         {
-            get { return _ingredients; }
+            get
+            {
+                return _totalWeight;
+            }
+            private set
+            {
+                _totalWeight = value;
+            }
+        }
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
             set
             {
-                _ingredients = value;
+                _title = value;
             }
         }
 
+        public ObservableCollection<IngredientEntry> Ingredients
+        {
+            get;
+            set;
+        }
+
         //Private
-        [JsonProperty(nameof(ID))]
-        private int _id;
 
-        [JsonProperty(nameof(Instruction))]
-        private string _instruction;
 
-        [JsonProperty(nameof(NutritionData))]
         private NutritionData _nutritionData;
 
-        [JsonProperty(nameof(TotalWeight))]
         private decimal _totalWeight;
 
-        [JsonProperty(nameof(Title))]
         private string _title;
 
-        [JsonProperty(nameof(Ingredients))]
-        private ObservableCollection<IngredientEntry> _ingredients;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

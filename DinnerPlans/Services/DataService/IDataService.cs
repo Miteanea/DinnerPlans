@@ -1,17 +1,19 @@
 ﻿using DinnerPlans.Models;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace DinnerPlans.Services.DataService
 {
     public interface IDataService
     {
-        void SaveRecipe(Recipe recipeToSave);
+        Task SaveRecipeAsync(Recipe recipeToSave);
 
-        void SaveIngredient(Ingredient ingredient);
+        Task SaveIngredientAsync(Ingredient ingredient);
 
-        ObservableCollection<Recipe> Recipes { get; }
-        ObservableCollection<Ingredient> Ingredients { get; }
+        ObservableCollection<Recipe> Recipes { get; set; }
+        ObservableCollection<Ingredient> Ingredients { get; set; }
 
-        void DeleteRecipe(Recipe recipe);
+        Task DeleteRecipeAsync(Recipe recipe);
+        Task DeleteIngredientAsync(Ingredient Ingredient);
     }
 }

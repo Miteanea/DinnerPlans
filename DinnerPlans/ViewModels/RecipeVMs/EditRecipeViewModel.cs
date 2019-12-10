@@ -3,6 +3,7 @@ using DinnerPlans.Services.DataService;
 using DinnerPlans.ViewModels;
 using DinnerPlans.ViewModels.Commands;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DinnerPlans
@@ -40,58 +41,56 @@ namespace DinnerPlans
         {
             get { return new RelayCommand(RemoveIngredient); }
         }
-
+        /// <summary>
+        /// Wrapper method for async saving
+        /// </summary>
+        /// <param name="obj"></param>
         private void SaveRecipe(object obj)
         {
-            _data.SaveRecipe(Recipe);
+            SaveRecipeAsync();
+
+        }
+        private async Task SaveRecipeAsync()
+        {
+            await _data.SaveRecipeAsync(Recipe);
             DoneEditing.Invoke();
         }
 
         private void AddIngredient(object obj)
         {
-            Ingredient ingredient = GetIngredientFromUser();
+            IngredientEntry ingredient = GetIngredientFromUser();
 
-            //    if (ingredient != null)
-            //    {
-            //        // _recipe.Ingredients.Add(ingredient);
-            //        throw new NotImplementedException();
-            //    }
+            if (ingredient != null)
+            {
+                Recipe.Ingredients.Add(ingredient);
+            }
         }
 
-        private void RemoveIngredient(object sender)
+        private void RemoveIngredient(object obj)
         {
-            //    var selectedIngredientEntry = RecipesDataGrid.SelectedItem as IngredientEntry;
-            //    if (selectedIngredientEntry == null)
-            //    {
-            //        MessageBox.Show("No Item is Selected");
-            //    }
-            //    else
-            //    {
-            //        _recipe.Ingredients.Remove(selectedIngredientEntry);
-            //    }
-            throw new NotImplementedException();
+            Recipe.Ingredients.Remove(obj as IngredientEntry);
         }
 
-        private Ingredient GetIngredientFromUser()
+        private IngredientEntry GetIngredientFromUser()
         {
             IngredientWindow window = new IngredientWindow()
             {
                 DataContext = new IngredientWindowViewModel(_data)
             };
 
-            var ingredient = new Ingredient();
+            var ingredient = new IngredientEntry();
+
             if (window.ShowDialog() == true)
             {
-                throw new NotImplementedException();
-                //var vm = (IngredientWindowViewModel)window.DataContext;
-                //ingredient = vm.Contents as ;
-                //_data.SaveIngredient(ingredient);
+                var vm = (IngredientWindowViewModel)window.DataContext;
+                ingredient.Ingredient = vm.Ingredient;
+                // _data.SaveIngredientAsync(ingredient.Ingredient);
             }
             else
             {
                 return null;
             }
-            //return null;
+            return ingredient;
 
             //throw new NotImplementedException();
         }

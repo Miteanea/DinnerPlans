@@ -1,4 +1,5 @@
-﻿using DinnerPlans.Services.DataService;
+﻿using DinnerPlans.Models;
+using DinnerPlans.Services.DataService;
 using DinnerPlans.ViewModels;
 using DinnerPlans.ViewModels.IngredientVMs;
 using DinnerPlans.Views.IngredientViews;
@@ -21,11 +22,35 @@ namespace DinnerPlans
                 DataContext = new IngredientsDisplayViewModel(_data)
             };
 
+            var createVM = new IngredientCreateViewModel(_data);
+            createVM.DoneEditing += GoToFirstTab;
             CreateNewContents = new IngredientCreateView()
             {
-                DataContext = new IngredientCreateViewModel(_data)
+                DataContext = createVM
             };
         }
+
+        private void GoToFirstTab()
+        {
+            SelectedIndex = 0;
+        }
+
+        private int _selectedIndex = 0; // Set the field to whichever tab you want to start on
+
+        public int SelectedIndex {
+            get { return _selectedIndex; }
+            set
+            {
+                if (value != this._selectedIndex)
+                {
+                    _selectedIndex = value;
+                    NotifyPropertyChanged();
+                };
+            }
+        }
+
+
+        public Ingredient Ingredient { get; set; }
 
         public object AllRecipesContents
         {

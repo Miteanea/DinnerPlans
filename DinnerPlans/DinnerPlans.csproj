@@ -162,6 +162,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\20191205161620_DinnerPlansDbCreation.cs" />
+    <Compile Include="Migrations\20191205161620_DinnerPlansDbCreation.designer.cs">
+      <DependentUpon>20191205161620_DinnerPlansDbCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\DinnerPlansContextModelSnapshot.cs" />
     <Compile Include="Services\Database\DinnerPlansContext.cs" />
     <Compile Include="Services\DataService\UiMessages.cs" />
     <Compile Include="ViewModels\Commands\RelayCommand.cs" />
@@ -173,27 +178,17 @@
     <Compile Include="Services\DataService\DataService.cs" />
     <Compile Include="Services\DataService\IDataService.cs" />
     <Compile Include="Models\Enums\IngWindowOperationType.cs" />
-    <Compile Include="Models\Ingredient\Ingredients.cs" />
     <Compile Include="IngredientWindow.xaml.cs">
       <DependentUpon>IngredientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Ingredient\IIngredientRepository.cs" />
     <Compile Include="Models\Ingredient\Ingredient.cs" />
     <Compile Include="Models\Ingredient\IngredientEntry.cs" />
-    <Compile Include="Models\NutritionData\NutrtitionDataType.cs" />
+    <Compile Include="Models\Enums\NutrtitionDataType.cs" />
     <Compile Include="Models\Ingredient\MeasureUnits.cs" />
     <Compile Include="Models\NutritionData\NutritionData.cs" />
-    <Compile Include="Models\Recipe\IRecipeRpository.cs" />
     <Compile Include="Models\Recipe\Recipe.cs" />
-    <Compile Include="Models\Recipe\RecipeRepository.cs" />
     <Compile Include="Models\Enums\UnitType.cs" />
-    <Compile Include="Services\LibraryUpdaters\ILibraryUpdater.cs" />
-    <Compile Include="Services\LibraryUpdaters\IngredientLibraryUpdater.cs" />
-    <Compile Include="Models\Ingredient\IngredientRepository.cs" />
-    <Compile Include="Services\RepositoryData.cs" />
     <Compile Include="Models\Enums\RepositoryType.cs" />
-    <Compile Include="Services\RepositoryFactory.cs" />
-    <Compile Include="Services\RepositoryLoader.cs" />
     <Compile Include="ViewModels\RecipeVMs\RecipesListViewModel.cs" />
     <Compile Include="ViewModels\RecipeVMs\RecipesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -288,7 +283,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Interfaces\" />
     <Folder Include="ViewModels\MenuVMs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

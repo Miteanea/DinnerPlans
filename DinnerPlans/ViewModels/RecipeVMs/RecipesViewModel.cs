@@ -20,7 +20,7 @@ namespace DinnerPlans
             get { return _content; }
             set
             {
-                if (value != this._content)
+                if (value != _content)
                 {
                     _content = value;
                     NotifyPropertyChanged();

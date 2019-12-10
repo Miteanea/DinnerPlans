@@ -1,144 +1,75 @@
 ﻿using DinnerPlans.Models;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+using DinnerPlans.Services.Database;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace DinnerPlans.Services.DataService
 
 {
     internal class DataService : IDataService
     {
-        public DataService()
+        public DataService(DinnerPlansContext dinnerPlansContext)
         {
-            var factory = new RepositoryFactory();
-            var recipeRepo = factory.GetRecipeRepository();
-            var ingredientRepo = factory.GetIngredientRepository();
+            _db = dinnerPlansContext;
 
-            var repoLoader = new RepositoryLoader();
+            var recipes = _db.Recipes.Include(r => r.Ingredients).ToList();
 
-            recipeRepo = repoLoader.CheckRecipeLibrary(recipeRepo);
-            ingredientRepo = repoLoader.CheckIngredientsLibrary(ingredientRepo);
-
-            Recipes = recipeRepo.Recipes;
-            Ingredients = ingredientRepo.Ingredients;
-
-            _recipeRepositoryPath = recipeRepo.MetaData.FullPath;
-            _ingredientRepositoryPath = ingredientRepo.MetaData.FullPath;
+            Recipes = new ObservableCollection<Recipe>(recipes);
+            Ingredients = new ObservableCollection<Ingredient>(_db.Ingredients);
         }
 
-        private string _recipeRepositoryPath;
-        private string _ingredientRepositoryPath;
+        private readonly DinnerPlansContext _db;
 
-        ObservableCollection<Recipe> IDataService.Recipes { get { return new ObservableCollection<Recipe>(Recipes); } }
-        ObservableCollection<Ingredient> IDataService.Ingredients { get { return new ObservableCollection<Ingredient>(Ingredients); } }
+        public ObservableCollection<Recipe> Recipes { get; set; }
 
-        void IDataService.SaveRecipe(Recipe recipeToSave)
+        public ObservableCollection<Ingredient> Ingredients { get; set; }
+
+        async Task IDataService.SaveRecipeAsync(Recipe recipeToSave)
         {
-            int idCountInRepository = Recipes.Count(presentRecipe => presentRecipe.ID == recipeToSave.ID);
-            bool recipeExists = (idCountInRepository == 1) && recipeToSave.ID != 0;
-            bool recipeIdIsDoubled = idCountInRepository > 1;
+            bool existingRecipe = Recipes.
+                    Where(recipe => recipe.RecipeId == recipeToSave.RecipeId).
+                    Count() > 0 ? true : false;
 
-            if (recipeIdIsDoubled)
+            if (!existingRecipe)
             {
-                throw new Exception("DataSource is corrupt, doubled IDs");
-            }
-            else if (recipeExists && !recipeIdIsDoubled)
-            {
-                Recipes.Remove(Recipes[recipeToSave.ID - 1]);
                 Recipes.Add(recipeToSave);
-            }
-            else if (!recipeExists && !recipeIdIsDoubled)
-            {
-                recipeToSave.ID = Recipes.Count + 1;
-                Recipes.Add(recipeToSave);
+                _db.Recipes.Add(recipeToSave);
+                _db.Entry(recipeToSave).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             }
 
-            UpdateRecipeRepoFile();
+            _db.Entry(recipeToSave).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            await _db.SaveChangesAsync();
         }
 
-        private void UpdateRecipeRepoFile()
+        async Task IDataService.SaveIngredientAsync(Ingredient ingredientToSave)
         {
-            string serializedRepo = JsonConvert.SerializeObject(Recipes, Formatting.Indented);
+            bool existingIngredient = _db.Ingredients.
+                       Where(ingredient => ingredient.IngredientId == ingredientToSave.IngredientId).
+                       Count() > 0 ? true : false;
 
-            File.WriteAllText(_recipeRepositoryPath, serializedRepo, Encoding.UTF8);
-        }
-
-        void IDataService.SaveIngredient(Ingredient ingredientToSave)
-        {
-            int idCountInRepository = Recipes.Count(presentRecipe => presentRecipe.ID == ingredientToSave.ID);
-            bool ingredientExists = (idCountInRepository == 1) && ingredientToSave.ID != 0;
-            bool ingredientIdIsDoubled = idCountInRepository > 1;
-
-            if (ingredientIdIsDoubled)
+            if (!existingIngredient)
             {
-                throw new Exception("DataSource is corrupt, doubled IDs");
-            }
-            else if (ingredientExists && !ingredientIdIsDoubled)
-            {
-                Ingredients.Remove(Ingredients[ingredientToSave.ID - 1]);
                 Ingredients.Add(ingredientToSave);
-            }
-            else if (!ingredientExists && !ingredientIdIsDoubled)
-            {
-                ingredientToSave.ID = Ingredients.Count + 1;
-                Ingredients.Add(ingredientToSave);
+                _db.Ingredients.Add(ingredientToSave);
             }
 
-            //if (ingredients.Count(ingredient => ingredient.ID == ingredientToSave.ID) == 0)
-            //{
-            //    var ingredient = new Ingredient()
-            //    {
-            //        ID = ingredientToSave.ID,
-            //        Name = ingredientToSave.Name,
-            //        NutritionData = ingredientToSave.NutritionData,
-            //        Unit = ingredientToSave.Unit
-            //    };
-
-            //    ingredients.Add(ingredient);
-            //}
-            //else
-            //{
-            //    var existingIngr = ingredients.FirstOrDefault(ingredient => ingredient.ID == ingredientToSave.ID);
-            //    if (
-            //        existingIngr.ID != ingredientToSave.ID ||
-            //        existingIngr.Name != ingredientToSave.Name ||
-            //        existingIngr.NutritionData != ingredientToSave.NutritionData ||
-            //        existingIngr.Unit != ingredientToSave.Unit
-            //        )
-            //    {
-            //        libraryUpdater.UpdateLibrary(Ingredients);
-            //    }
-            //}
-
-            UpdateIngredientRepoFile();
-            throw new NotImplementedException();
+            await _db.SaveChangesAsync();
         }
 
-        private void UpdateIngredientRepoFile()
-        {
-            string serializedRepo = JsonConvert.SerializeObject(Ingredients, Formatting.Indented);
-
-            File.WriteAllText(_ingredientRepositoryPath, serializedRepo, Encoding.UTF8);
-        }
-
-        public static List<Recipe> Recipes { get; set; }
-        public static List<Ingredient> Ingredients { get; set; }
-
-        public static void SaveIngredientChanges()
-        {
-            var ingredients = Ingredients;
-
-            throw new NotImplementedException();
-        }
-
-        void IDataService.DeleteRecipe(Recipe recipe)
+        async Task IDataService.DeleteRecipeAsync(Recipe recipe)
         {
             Recipes.Remove(recipe);
-            UpdateRecipeRepoFile();
+            _db.Recipes.Remove(recipe);
+            await _db.SaveChangesAsync();
+        }
+
+        async Task IDataService.DeleteIngredientAsync(Ingredient ingredient)
+        {
+            Ingredients.Remove(ingredient);
+            _db.Ingredients.Remove(ingredient);
+            await _db.SaveChangesAsync();
         }
     }
 }
