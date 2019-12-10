@@ -39,19 +39,19 @@
             <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Name" />
-                    <TextBox Text="{Binding Path=Ingredient.Name}"  Width="175"/>
+                    <TextBox Text="{Binding Path=Ingredient.Name}"  Width="175" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
 
                     <StackPanel Orientation="Horizontal">
                         <Label>Unit</Label>
-                        <ComboBox Name="UnitSelector" SelectedItem="{Binding Path=Ingredient.Unit}"/>
+                        <ComboBox Name="UnitSelector" SelectedItem="{Binding Path=Ingredient.Unit}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Calories" />
-                        <TextBox Text="{Binding Path=Ingredient.NutritionData.Calories}"  />
+                        <TextBox Text="{Binding Path=Ingredient.NutritionData.Calories}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -60,7 +60,7 @@
                             Grid.RowSpan="2">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Proteins" />
-                    <TextBox Text="{Binding Path=Ingredient.NutritionData.ProteinsGr}"/>
+                    <TextBox Text="{Binding Path=Ingredient.NutritionData.ProteinsGr}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -99,7 +99,6 @@
                 <Button    Command="{Binding Path=SaveIngredientCommand}"
                         Content="Save"
                         Width="75" />
-
             </StackPanel>
         </Grid>
     </Grid>

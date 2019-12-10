@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
@@ -7,8 +6,8 @@ namespace DinnerPlans.Models
     {
         public NutritionData()
         {
-
         }
+
         public NutritionData(NutritionDataType nutrtitionDataType,
             decimal calories = 0,
             decimal carbs = 0,

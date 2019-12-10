@@ -15,7 +15,7 @@ namespace DinnerPlans
 
             container.RegisterType<DinnerPlansContext>();
             container.RegisterType<IDataService, DataService>();
-//            container.RegisterType<MainViewModel>();
+            //            container.RegisterType<MainViewModel>();
 
             var vm = container.Resolve<MainViewModel>();
 

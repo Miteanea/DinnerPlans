@@ -14,6 +14,7 @@ namespace DinnerPlans.Services.DataService
         ObservableCollection<Ingredient> Ingredients { get; set; }
 
         Task DeleteRecipeAsync(Recipe recipe);
+
         Task DeleteIngredientAsync(Ingredient Ingredient);
     }
 }

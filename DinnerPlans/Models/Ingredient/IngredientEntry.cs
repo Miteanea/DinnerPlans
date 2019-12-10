@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace DinnerPlans.Models
 {
@@ -10,6 +9,7 @@ namespace DinnerPlans.Models
             _ingredient = new Ingredient();
             Ingredient.PropertyChanged += OnIngredientEntryChanged;
         }
+
         public IngredientEntry(decimal quantity = 0)
         {
             _ingredient = new Ingredient();

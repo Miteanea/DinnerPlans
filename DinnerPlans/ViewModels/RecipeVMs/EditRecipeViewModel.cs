@@ -2,7 +2,6 @@
 using DinnerPlans.Services.DataService;
 using DinnerPlans.ViewModels;
 using DinnerPlans.ViewModels.Commands;
-using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -41,6 +40,7 @@ namespace DinnerPlans
         {
             get { return new RelayCommand(RemoveIngredient); }
         }
+
         /// <summary>
         /// Wrapper method for async saving
         /// </summary>
@@ -48,8 +48,8 @@ namespace DinnerPlans
         private void SaveRecipe(object obj)
         {
             SaveRecipeAsync();
-
         }
+
         private async Task SaveRecipeAsync()
         {
             await _data.SaveRecipeAsync(Recipe);

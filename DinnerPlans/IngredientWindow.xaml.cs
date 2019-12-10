@@ -15,7 +15,6 @@ namespace DinnerPlans
             _buttons = new List<Button>();
             _textBoxes = new List<TextBox>();
 
-
             //AddButtonsToList();
             //AddTextBoxesToList();
 
@@ -25,7 +24,6 @@ namespace DinnerPlans
         private List<Button> _buttons;
         private List<TextBox> _textBoxes;
 
-        
         ///UI Logic
 
         #region UI Logic

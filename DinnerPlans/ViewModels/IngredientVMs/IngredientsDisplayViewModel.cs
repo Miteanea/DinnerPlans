@@ -1,7 +1,6 @@
 ﻿using DinnerPlans.Models;
 using DinnerPlans.Services.DataService;
 using DinnerPlans.ViewModels.Commands;
-using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -26,6 +25,7 @@ namespace DinnerPlans.ViewModels.IngredientVMs
                 return new RelayCommand(ReturnIngredient);
             }
         }
+
         public ICommand DeleteIngredientCommand
         {
             get
@@ -44,7 +44,7 @@ namespace DinnerPlans.ViewModels.IngredientVMs
         private void DeleteIngredient(object obj)
         {
             var ingredient = obj as Ingredient;
-            
+
             _data.DeleteIngredientAsync(ingredient);
         }
     }

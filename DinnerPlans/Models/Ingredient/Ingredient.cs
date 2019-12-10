@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel;
 
 namespace DinnerPlans.Models
@@ -10,6 +9,7 @@ namespace DinnerPlans.Models
         {
             _nutritionData = new NutritionData(NutritionDataType.Ingredient);
         }
+
         public Ingredient(NutritionData nutritionData = null)
         {
             _nutritionData = (nutritionData != null)
@@ -28,7 +28,6 @@ namespace DinnerPlans.Models
             get { return _nutritionData; }
             set { _nutritionData = value; OnNutritionDataChange(); }
         }
-
 
         private string _name;
 

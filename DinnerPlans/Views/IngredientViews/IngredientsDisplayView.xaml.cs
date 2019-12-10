@@ -1,5 +1,4 @@
-﻿using DinnerPlans.ViewModels.IngredientVMs;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace DinnerPlans.Views.IngredientViews
 {

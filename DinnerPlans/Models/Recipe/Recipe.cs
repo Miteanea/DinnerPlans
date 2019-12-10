@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -14,6 +13,7 @@ namespace DinnerPlans.Models
             // Ingredients.CollectionChanged += this.OnCollectionChanged;
             // _nutritionData = new NutritionData(NutritionDataType.Recipe);
         }
+
         public Recipe(NutritionData nutrData = null)
         {
             _nutritionData = (nutrData == null)
@@ -38,6 +38,7 @@ namespace DinnerPlans.Models
                 _instruction = value;
             }
         }
+
         private string _instruction;
 
         public NutritionData NutritionData
@@ -61,6 +62,7 @@ namespace DinnerPlans.Models
                 _totalWeight = value;
             }
         }
+
         public string Title
         {
             get
@@ -81,13 +83,11 @@ namespace DinnerPlans.Models
 
         //Private
 
-
         private NutritionData _nutritionData;
 
         private decimal _totalWeight;
 
         private string _title;
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

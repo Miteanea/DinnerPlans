@@ -3,7 +3,6 @@ using DinnerPlans.Services.DataService;
 using DinnerPlans.ViewModels;
 using DinnerPlans.ViewModels.IngredientVMs;
 using DinnerPlans.Views.IngredientViews;
-using System;
 
 namespace DinnerPlans
 {
@@ -37,7 +36,8 @@ namespace DinnerPlans
 
         private int _selectedIndex = 0; // Set the field to whichever tab you want to start on
 
-        public int SelectedIndex {
+        public int SelectedIndex
+        {
             get { return _selectedIndex; }
             set
             {
@@ -48,7 +48,6 @@ namespace DinnerPlans
                 };
             }
         }
-
 
         public Ingredient Ingredient { get; set; }
 
@@ -77,6 +76,5 @@ namespace DinnerPlans
                 };
             }
         }
-
     }
 }
