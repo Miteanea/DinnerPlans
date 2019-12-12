@@ -12,7 +12,7 @@ namespace DinnerPlans
         public EditRecipeViewModel(IDataService data, Recipe recipe = null)
         {
             this._data = data;
-            Recipe = recipe != null ? recipe : new Recipe();
+            Recipe = recipe != null ? recipe : new Recipe(null);
         }
 
         private IDataService _data;
@@ -52,8 +52,8 @@ namespace DinnerPlans
 
         private async Task SaveRecipeAsync()
         {
-            await _data.SaveRecipeAsync(Recipe);
             DoneEditing.Invoke();
+            await _data.SaveRecipeAsync(Recipe);
         }
 
         private void AddIngredient(object obj)
@@ -62,13 +62,13 @@ namespace DinnerPlans
 
             if (ingredient != null)
             {
-                Recipe.Ingredients.Add(ingredient);
+                Recipe.IngredientEntries.Add(ingredient);
             }
         }
 
         private void RemoveIngredient(object obj)
         {
-            Recipe.Ingredients.Remove(obj as IngredientEntry);
+            Recipe.IngredientEntries.Remove(obj as IngredientEntry);
         }
 
         private IngredientEntry GetIngredientFromUser()

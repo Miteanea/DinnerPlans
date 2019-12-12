@@ -2,7 +2,7 @@
 
 namespace DinnerPlans.Migrations
 {
-    public partial class DinnerPlansDbCreation : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,7 +70,7 @@ namespace DinnerPlans.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IngredientEntry",
+                name: "IngredientEntries",
                 columns: table => new
                 {
                     IngredientEntryId = table.Column<int>(nullable: false)
@@ -81,15 +81,15 @@ namespace DinnerPlans.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IngredientEntry", x => x.IngredientEntryId);
+                    table.PrimaryKey("PK_IngredientEntries", x => x.IngredientEntryId);
                     table.ForeignKey(
-                        name: "FK_IngredientEntry_Ingredients_IngredientId",
+                        name: "FK_IngredientEntries_Ingredients_IngredientId",
                         column: x => x.IngredientId,
                         principalTable: "Ingredients",
                         principalColumn: "IngredientId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_IngredientEntry_Recipes_RecipeId",
+                        name: "FK_IngredientEntries_Recipes_RecipeId",
                         column: x => x.RecipeId,
                         principalTable: "Recipes",
                         principalColumn: "RecipeId",
@@ -97,13 +97,13 @@ namespace DinnerPlans.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_IngredientEntry_IngredientId",
-                table: "IngredientEntry",
+                name: "IX_IngredientEntries_IngredientId",
+                table: "IngredientEntries",
                 column: "IngredientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IngredientEntry_RecipeId",
-                table: "IngredientEntry",
+                name: "IX_IngredientEntries_RecipeId",
+                table: "IngredientEntries",
                 column: "RecipeId");
 
             migrationBuilder.CreateIndex(
@@ -120,7 +120,7 @@ namespace DinnerPlans.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "IngredientEntry");
+                name: "IngredientEntries");
 
             migrationBuilder.DropTable(
                 name: "Ingredients");

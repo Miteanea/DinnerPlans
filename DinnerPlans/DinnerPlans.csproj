@@ -162,9 +162,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\20191205161620_DinnerPlansDbCreation.cs" />
-    <Compile Include="Migrations\20191205161620_DinnerPlansDbCreation.designer.cs">
-      <DependentUpon>20191205161620_DinnerPlansDbCreation.cs</DependentUpon>
+    <Compile Include="Migrations\20191212123619_FirstMigration.cs" />
+    <Compile Include="Migrations\20191212123619_FirstMigration.designer.cs">
+      <DependentUpon>20191212123619_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DinnerPlansContextModelSnapshot.cs" />
     <Compile Include="Services\Database\DinnerPlansContext.cs" />

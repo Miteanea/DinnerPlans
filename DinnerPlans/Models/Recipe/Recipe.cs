@@ -9,9 +9,9 @@ namespace DinnerPlans.Models
     {
         public Recipe()
         {
-            // Ingredients = new ObservableCollection<IngredientEntry>();
-            // Ingredients.CollectionChanged += this.OnCollectionChanged;
-            // _nutritionData = new NutritionData(NutritionDataType.Recipe);
+            //Ingredients = new ObservableCollection<IngredientEntry>();
+            //Ingredients.CollectionChanged += this.OnCollectionChanged;
+            //_nutritionData = new NutritionData(NutritionDataType.Recipe);
         }
 
         public Recipe(NutritionData nutrData = null)
@@ -20,8 +20,8 @@ namespace DinnerPlans.Models
                 ? new NutritionData(NutritionDataType.Recipe)
                 : nutrData;
 
-            Ingredients = new ObservableCollection<IngredientEntry>();
-            Ingredients.CollectionChanged += this.OnCollectionChanged;
+            IngredientEntries = new ObservableCollection<IngredientEntry>();
+            IngredientEntries.CollectionChanged += this.OnCollectionChanged;
         }
 
         // Public
@@ -75,11 +75,7 @@ namespace DinnerPlans.Models
             }
         }
 
-        public ObservableCollection<IngredientEntry> Ingredients
-        {
-            get;
-            set;
-        }
+        public ObservableCollection<IngredientEntry> IngredientEntries { get; set; }
 
         //Private
 
@@ -111,9 +107,9 @@ namespace DinnerPlans.Models
         {
             // calculate and assign a value to _nutritionData (kcalx100g)
             NutritionData nutritionData = new NutritionData(NutritionDataType.Recipe);
-            if (Ingredients != null)
+            if (IngredientEntries != null)
             {
-                foreach (var entry in Ingredients)
+                foreach (var entry in IngredientEntries)
                 {
                     NutritionData ingredientData = entry.Ingredient.NutritionData;
                     if (ingredientData != null)
@@ -149,9 +145,9 @@ namespace DinnerPlans.Models
         private void UpdateRecipeWeight()
         {
             TotalWeight = 0;
-            if (Ingredients != null)
+            if (IngredientEntries != null)
             {
-                foreach (var entry in Ingredients)
+                foreach (var entry in IngredientEntries)
                 {
                     // For each type of ingredient
                     switch (entry.Ingredient.Unit)

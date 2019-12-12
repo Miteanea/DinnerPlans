@@ -53,7 +53,7 @@
                     <StackPanel Orientation="Vertical">
 
                         <DataGrid x:Name="RecipesDataGrid"
-                                  ItemsSource="{Binding Path=Recipe.Ingredients}"
+                                  ItemsSource="{Binding Path=Recipe.IngredientEntries}"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   IsReadOnly="False"

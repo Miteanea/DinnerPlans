@@ -64,7 +64,7 @@ namespace DinnerPlans.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("IngredientEntry");
+                    b.ToTable("IngredientEntries");
                 });
 
             modelBuilder.Entity("DinnerPlans.Models.NutritionData", b =>
@@ -143,7 +143,7 @@ namespace DinnerPlans.Migrations
                         .HasForeignKey("IngredientId");
 
                     b.HasOne("DinnerPlans.Models.Recipe", null)
-                        .WithMany("Ingredients")
+                        .WithMany("IngredientEntries")
                         .HasForeignKey("RecipeId");
                 });
 

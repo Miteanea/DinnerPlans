@@ -2,6 +2,7 @@
 using DinnerPlans.Services.DataService;
 using DinnerPlans.ViewModels.Commands;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace DinnerPlans.ViewModels.IngredientVMs
 {
@@ -39,7 +40,12 @@ namespace DinnerPlans.ViewModels.IngredientVMs
 
         private void SaveIngredient(object obj)
         {
-            _data.SaveIngredientAsync(Ingredient);
+            SaveIngredientAsync();
+        }
+
+        private async Task SaveIngredientAsync()
+        {
+            await _data.SaveIngredientAsync(Ingredient);
             Ingredient = new Ingredient();
             DoneEditing.Invoke();
         }

@@ -13,11 +13,12 @@ namespace DinnerPlans.Services.DataService
         public DataService(DinnerPlansContext dinnerPlansContext)
         {
             _db = dinnerPlansContext;
+            var ingredients = _db.Ingredients.Include(i => i.NutritionData).ToList();
+            var recipes = _db.Recipes.Include(en => en.IngredientEntries).ToList();
 
-            var recipes = _db.Recipes.Include(r => r.Ingredients).ToList();
 
             Recipes = new ObservableCollection<Recipe>(recipes);
-            Ingredients = new ObservableCollection<Ingredient>(_db.Ingredients);
+            Ingredients = new ObservableCollection<Ingredient>(ingredients);
         }
 
         private readonly DinnerPlansContext _db;
@@ -36,10 +37,8 @@ namespace DinnerPlans.Services.DataService
             {
                 Recipes.Add(recipeToSave);
                 _db.Recipes.Add(recipeToSave);
-                _db.Entry(recipeToSave).State = Microsoft.EntityFrameworkCore.EntityState.Added;
             }
 
-            _db.Entry(recipeToSave).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             await _db.SaveChangesAsync();
         }
 

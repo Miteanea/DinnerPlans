@@ -24,7 +24,7 @@
                    SelectedItem="{Binding DataContext.Ingredient, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}">
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Path=ID}" />
+                    <DataGridTextColumn Header="ID" Binding="{Binding Path=IngredientId}" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                     <DataGridTextColumn Header="Calories" Binding="{Binding Path=NutritionData.Calories}" />
                     <DataGridTemplateColumn Header="Actions">

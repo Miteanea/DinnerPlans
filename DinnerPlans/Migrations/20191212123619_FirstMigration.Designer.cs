@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DinnerPlans.Migrations
 {
     [DbContext(typeof(DinnerPlansContext))]
-    [Migration("20191205161620_DinnerPlansDbCreation")]
-    partial class DinnerPlansDbCreation
+    [Migration("20191212123619_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,7 +66,7 @@ namespace DinnerPlans.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("IngredientEntry");
+                    b.ToTable("IngredientEntries");
                 });
 
             modelBuilder.Entity("DinnerPlans.Models.NutritionData", b =>
@@ -145,7 +145,7 @@ namespace DinnerPlans.Migrations
                         .HasForeignKey("IngredientId");
 
                     b.HasOne("DinnerPlans.Models.Recipe", null)
-                        .WithMany("Ingredients")
+                        .WithMany("IngredientEntries")
                         .HasForeignKey("RecipeId");
                 });
 

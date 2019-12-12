@@ -17,11 +17,14 @@ namespace DinnerPlans.Services.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Recipe>().HasMany(rec => rec.IngredientEntries).WithOne();
+            modelBuilder.Entity<IngredientEntry>().HasOne(ingEnt => ingEnt.Ingredient);
         }
 
         //entities
         public DbSet<Recipe> Recipes { get; set; }
 
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<IngredientEntry> IngredientEntries { get; set; }
     }
 }
