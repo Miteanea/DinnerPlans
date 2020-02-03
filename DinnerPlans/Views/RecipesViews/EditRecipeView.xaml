@@ -36,6 +36,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
+                
                 <StackPanel Orientation="Vertical" Margin="5,15,5,5" Grid.Row="0">
 
                     <StackPanel Orientation="Horizontal">
@@ -53,7 +54,7 @@
                     <StackPanel Orientation="Vertical">
 
                         <DataGrid x:Name="RecipesDataGrid"
-                                  ItemsSource="{Binding Path=Recipe.IngredientEntries}"
+                                  ItemsSource="{Binding Path=Ingredients}"
                                   SelectionMode="Single"
                                   SelectionUnit="FullRow"
                                   IsReadOnly="False"
@@ -65,10 +66,11 @@
                             </DataGrid.Resources>
 
                             <DataGrid.Columns>
-                                <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding Path=Ingredient.IngredientId}" />
-                                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Ingredient.Name}" />
-                                <DataGridTextColumn Header="Quantity"  Binding="{Binding Path=Quantity}" />
-                                <DataGridTextColumn IsReadOnly="True" Header="Unit" Binding="{Binding Path=Ingredient.Unit}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="ID" Binding="{Binding Path=IngredientId}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Name" Binding="{Binding Path=Name}" />
+                                <!--Bind quantity to ingredient entry-->
+                                <DataGridTextColumn IsReadOnly="False" Header="Quantity"  Binding="{Binding Path=Quantity}" />
+                                <DataGridTextColumn IsReadOnly="True" Header="Unit" Binding="{Binding Path=Unit}" />
                                 <DataGridTemplateColumn Header="Actions">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -85,6 +87,7 @@
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
+                
                 <StackPanel Grid.Row="1">
 
                     <Label>Instructions</Label>

@@ -15,11 +15,11 @@ namespace DinnerPlans.Services.Database
             optionsBuilder.UseSqlServer(connectionString);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Recipe>().HasMany(rec => rec.IngredientEntries).WithOne();
-            modelBuilder.Entity<IngredientEntry>().HasOne(ingEnt => ingEnt.Ingredient);
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Recipe>().HasMany(rec => rec.IngredientEntries).WithOne();
+        //    modelBuilder.Entity<IngredientEntry>().HasOne(ingEnt => ingEnt.Ingredient);
+        //}
 
         //entities
         public DbSet<Recipe> Recipes { get; set; }
