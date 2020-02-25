@@ -21,7 +21,7 @@ namespace DinnerPlans.Models
         // Public
 
         public int IngredientEntryId { get; set; }
-
+        public int IngredientId { get; set; }
         public Ingredient Ingredient { get { return _ingredient; } set { _ingredient = value; } }
 
         public decimal Quantity { get { return _quantity; } set { _quantity = value; QuantityChanged(); } }

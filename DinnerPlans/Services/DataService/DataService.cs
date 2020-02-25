@@ -16,6 +16,14 @@ namespace DinnerPlans.Services.DataService
             var ingredients = _db.Ingredients.Include(i => i.NutritionData).ToList();
             var recipes = _db.Recipes.Include(en => en.IngredientEntries).ToList();
 
+            // add ingredients to IngredientEntries
+            foreach (Recipe recipe in recipes)
+            {
+                foreach (IngredientEntry ingredientEntry in recipe.IngredientEntries)
+                {
+                    ingredientEntry.Ingredient = ingredients.Where(x => x.IngredientId == ingredientEntry.IngredientId).FirstOrDefault();
+                }
+            }
 
             Recipes = new ObservableCollection<Recipe>(recipes);
             Ingredients = new ObservableCollection<Ingredient>(ingredients);
