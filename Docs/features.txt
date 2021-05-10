@@ -1,3 +1,5 @@
+*? - Try use Trello for management.
+
 
 Initial Features
 
@@ -6,14 +8,15 @@ Initial Features
    - Insert/Modify Recipes
    - Delete Recipes
    
-2) Menu Formation
+2) Menu/Shopping List Generation
    - Form a random menu for the weeks
    - Set shopping days
    - Create shopping list for nearest shopping day as a text file
+
+3) Localization: Russian; Romanian; Italian; English; Turkish;
 
 Feature Backlog:
    - export list to anyDo; mail; other?
    - calories tracking for Recipes
    - scale recipe quantity based on user calories input
-   
-
+   - recipe Tag system for possible algorythms
