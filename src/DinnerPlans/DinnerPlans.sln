@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinnerPlans.API", "DinnerPlans.API\DinnerPlans.API.csproj", "{9C071895-DD10-4681-8DF2-DE408B21CE98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerPlans.Logic", "DinnerPlans.Logic\DinnerPlans.Logic.csproj", "{2DE647D1-E832-44DE-9DD2-D205D538FC9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinnerPlans.Logic", "DinnerPlans.Logic\DinnerPlans.Logic.csproj", "{2DE647D1-E832-44DE-9DD2-D205D538FC9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerPlans.Data", "DinnerPlans.Data\DinnerPlans.Data.csproj", "{6D8D1231-EAD9-4B5C-96C4-0990E0AF040A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinnerPlans.Data", "DinnerPlans.Data\DinnerPlans.Data.csproj", "{6D8D1231-EAD9-4B5C-96C4-0990E0AF040A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerPlans.Models", "DinnerPlans.Models\DinnerPlans.Models.csproj", "{B6C3929C-F291-49C4-AC10-25936D5B984A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DinnerPlans.Models", "DinnerPlans.Models\DinnerPlans.Models.csproj", "{B6C3929C-F291-49C4-AC10-25936D5B984A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinnerPlans.Tests", "DinnerPlans.Tests\DinnerPlans.Tests.csproj", "{D886C31E-DB08-49A5-86A6-342AE40561CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B6C3929C-F291-49C4-AC10-25936D5B984A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6C3929C-F291-49C4-AC10-25936D5B984A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6C3929C-F291-49C4-AC10-25936D5B984A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D886C31E-DB08-49A5-86A6-342AE40561CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D886C31E-DB08-49A5-86A6-342AE40561CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D886C31E-DB08-49A5-86A6-342AE40561CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D886C31E-DB08-49A5-86A6-342AE40561CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

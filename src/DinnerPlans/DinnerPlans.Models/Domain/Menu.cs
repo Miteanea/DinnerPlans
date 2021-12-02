@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DinnerPlans.Models.Domain
 {
-    class Menu
+    public class Menu
     {
     }
 }

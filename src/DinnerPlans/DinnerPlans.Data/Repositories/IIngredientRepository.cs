@@ -1,6 +1,6 @@
 ﻿namespace DinnerPlans.Data.Repositories
 {
-    interface IIngredientRepository
+    public interface IIngredientRepository
     {
     }
 }

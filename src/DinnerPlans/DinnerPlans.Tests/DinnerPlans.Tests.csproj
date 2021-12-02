@@ -2,10 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DinnerPlans.API\DinnerPlans.API.csproj" />
     <ProjectReference Include="..\DinnerPlans.Data\DinnerPlans.Data.csproj" />
+    <ProjectReference Include="..\DinnerPlans.Logic\DinnerPlans.Logic.csproj" />
     <ProjectReference Include="..\DinnerPlans.Models\DinnerPlans.Models.csproj" />
   </ItemGroup>
 
