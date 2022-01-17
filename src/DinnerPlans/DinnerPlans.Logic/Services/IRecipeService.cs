@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using DinnerPlans.Data.Repositories;
+﻿using DinnerPlans.Data.Repositories;
 using DinnerPlans.Models.Domain;
 
 namespace DinnerPlans.Logic.Services

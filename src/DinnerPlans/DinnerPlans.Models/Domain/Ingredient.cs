@@ -1,6 +1,7 @@
 ﻿namespace DinnerPlans.Models.Domain
 {
-    class Ingredient
+    public class Ingredient
     {
+
     }
 }

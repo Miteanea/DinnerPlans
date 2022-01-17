@@ -5,7 +5,7 @@ namespace DinnerPlans.Logic.Services
 {
     public interface IMenuService
     {
-        Menu RandomDailyMenu();
+        Menu RandomDailyMenu(Guid userId);
     }
 
     class MenuService : IMenuService
@@ -16,7 +16,7 @@ namespace DinnerPlans.Logic.Services
         {
             _recipeService = recipeService;
         }
-        public Menu RandomDailyMenu()
+        public Menu RandomDailyMenu(Guid userId)
         {
             throw new NotImplementedException();
         }

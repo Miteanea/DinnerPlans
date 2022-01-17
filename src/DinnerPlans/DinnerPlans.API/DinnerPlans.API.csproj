@@ -4,5 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DinnerPlans.Data\DinnerPlans.Data.csproj" />
+    <ProjectReference Include="..\DinnerPlans.Logic\DinnerPlans.Logic.csproj" />
+  </ItemGroup>
+
 
 </Project>

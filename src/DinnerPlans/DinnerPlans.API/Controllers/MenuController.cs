@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using DinnerPlans.Logic.Services;
+using DinnerPlans.Models.Domain;
 
 namespace DinnerPlans.API.Controllers
 {
@@ -11,21 +11,17 @@ namespace DinnerPlans.API.Controllers
     public class MenuController : ControllerBase
     {
         private readonly ILogger<MenuController> _logger;
-
-        public MenuController(ILogger<MenuController> logger)
+        private readonly IMenuService _menuService;
+        public MenuController(ILogger<MenuController> logger,
+            IMenuService _menuService)
         {
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<object> Get()
+        public Menu GetDailyMenu(Guid userId)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new object
-            {
-               
-            })
-            .ToArray();
+            return _menuService.RandomDailyMenu(userId);
         }
     }
 }

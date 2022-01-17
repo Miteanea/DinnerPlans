@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DinnerPlans.Models.Domain
 {
-    class ShoppingList
+    public class ShoppingList : List<ShoppingListEntry>
     {
+    }
+
+    public class ShoppingListEntry
+    {
+        public Ingredient Ingredient { get; set; }
+
+        public int Quantity { get; set; }
     }
 }
