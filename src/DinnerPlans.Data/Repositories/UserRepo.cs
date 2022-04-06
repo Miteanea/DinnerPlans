@@ -6,11 +6,16 @@ using DinnerPlans.Data.Repositories.Interfaces;
 
 namespace DinnerPlans.Data.Repositories
 {
-    public class UserDummyRepo : IUserRepository
+    public class UserRepo : IRepository<UserDocument>
     {
-        public IEnumerable<UserDocument> GetUser(Guid userId)
+        public UserDocument Get(Guid id)
         {
-            return UserDummyRepoStorage.Users.Where(_ => _.Id == userId);
+            return UserDummyRepoStorage.Users.FirstOrDefault(_ => _.Equals(id));
+        }
+
+        public IEnumerable<UserDocument> Get(List<Guid> ids)
+        {
+            return UserDummyRepoStorage.Users.Where(_ => ids.Contains(_.Id));
         }
     }
 
@@ -26,4 +31,4 @@ namespace DinnerPlans.Data.Repositories
             }
         };
     }
-}
+}   

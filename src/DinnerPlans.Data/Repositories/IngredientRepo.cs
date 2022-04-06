@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using DinnerPlans.Data.DataObjects;
+using DinnerPlans.Data.Repositories.Interfaces;
 
 namespace DinnerPlans.Data.Repositories
 {
-    public class IngredientDummyRepo : IIngredientRepository
+    public class IngredientRepo : IRepository<IngredientDocument>
     {
-        public IEnumerable<IngredientDocument> GetIngredients(List<Guid> ingredients)
+        public IngredientDocument Get(Guid ingredient)
+        {
+            return IngredientDummyRepoStorage.IngredientDocuments.FirstOrDefault(_ => _.Id.Equals(ingredient));
+        }
+        public IEnumerable<IngredientDocument> Get(List<Guid> ingredients)
         {
             return IngredientDummyRepoStorage.IngredientDocuments.Where(_ => ingredients.Contains(_.Id));
         }

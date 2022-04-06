@@ -21,8 +21,8 @@ namespace DinnerPlans.API
         {
             services.AddControllers();
 
-            services.AddScoped<IRecipeRepository, RecipeDummyRepo>();
-            services.AddScoped<IIngredientRepository, IngredientDummyRepo>();
+            services.AddScoped<IRecipeRepository, RecipeRepo>();
+            services.AddScoped<IIngredientRepository, IngredientRepo>();
 
         }
 

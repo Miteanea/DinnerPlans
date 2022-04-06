@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using DinnerPlans.Data.DataObjects;
+using DinnerPlans.Data.Repositories.Interfaces;
 
 namespace DinnerPlans.Data.Repositories
 {
-    public class RecipeDummyRepo : IRecipeRepository
+    public class RecipeRepo : IRepository<RecipeDocument>
     {
-        public IEnumerable<RecipeDocument> GetUserRecipes(List<Guid> recipes)
+        public RecipeDocument Get(Guid id)
         {
-            return RecipeDummyRepoStorage.Recipes.Where(_ => recipes.Contains(_.Id));
+            return RecipeDummyRepoStorage.Recipes.FirstOrDefault(_ => _.Equals(id));
+        }
+
+        public IEnumerable<RecipeDocument> Get(List<Guid> ids)
+        {
+            return RecipeDummyRepoStorage.Recipes.Where(_ => ids.Contains(_.Id));
         }
     }
 
