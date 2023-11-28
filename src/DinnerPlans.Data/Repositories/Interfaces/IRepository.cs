@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace DinnerPlans.Data.Repositories.Interfaces;
 
-namespace DinnerPlans.Data.Repositories.Interfaces
+interface IRepository<T>
 {
-    interface IRepository<T>
-    {
-        T Get(Guid id);
-        IEnumerable<T> Get(List<Guid> ids);
-    }
+    T Get(int id);
+    T Update(T entity);
+    T Delete(int id);
+    T Create(T entity);
 }
